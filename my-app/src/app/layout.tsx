@@ -5,7 +5,8 @@ import { Inter as FontSans } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { ClerkProvider } from '@clerk/nextjs'
 import NavBar from '@/components/NavBar'
-
+import { ThemeProvider } from "@/components/themeProvider"
+ 
  
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -31,7 +32,15 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
            )}>
-            <NavBar/>
+            
+            <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+           <NavBar/>
+          </ThemeProvider>
           {children}
         </body>
        </html>

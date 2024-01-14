@@ -7,11 +7,12 @@ import {
   } from "@/components/ui/carousel"
   
   import React from 'react'
+import ChallengeCard from "./ChallengeCard"
   
   const CardComponent = () => {
     return (
       <div className=" pl-44">
-        <Carousel className="w-full max-w-xs">
+        <Carousel className="w-full max-w-xs items-center ">
           <CarouselContent>
             {/* {Array.from({ length: 5 }).map((_, index) => (
               <CarouselItem key={index}>
@@ -20,7 +21,7 @@ import {
                 </div>
               </CarouselItem>
             ))} */}
-            <CarouselItem> this</CarouselItem>
+            <CarouselItem  className=" rounded-md" > <ChallengeCard></ChallengeCard></CarouselItem>
             <CarouselItem> is</CarouselItem>
             <CarouselItem> for</CarouselItem>
             <CarouselItem> displaying</CarouselItem>

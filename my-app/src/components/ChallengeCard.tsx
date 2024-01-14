@@ -11,8 +11,8 @@ import {
   
   const ChallengeCard = () => {
     return (
-      <div>
-        <Card>
+      <div className=" ">
+        <Card className=" ">
         <CardHeader>
             <CardTitle>Card Title</CardTitle>
             <CardDescription>Card Description</CardDescription>
