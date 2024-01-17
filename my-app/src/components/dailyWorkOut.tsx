@@ -4,7 +4,11 @@ import React, { useState } from 'react'
 import { Button } from './ui/button'
 import DailyWorkOutForm from './dailyWorkOutForm'
 
-const DailyWorkOut = () => {
+type props = {
+  dailyWorkoutFormState : boolean,
+  setDailyWorkoutFormState : Function
+}
+const DailyWorkOut = ({dailyWorkoutFormState , setDailyWorkoutFormState} : props) => {
 
   const [date , setDate] = useState(new Date())
   return (
@@ -14,7 +18,7 @@ const DailyWorkOut = () => {
       <p>what did you do today?</p>
       <Button 
       className=''
-     // onClick={() => console.log('i was clicked')}
+     onClick={() => setDailyWorkoutFormState(!dailyWorkoutFormState) }
       >Click me to enter workout</Button>
      
     </div>

@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
- 
+import { Switch } from "@/components/ui/switch"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -43,40 +43,22 @@ import {
     const [value, setValue] = React.useState('');
 
     type useformfields = {
-        username: string;
-        frameworks: {
-          value: string;
-          label: string;
-        }[];
-        workoutArray: string[];
+        run : boolean,
+        runningDuration : number,
+        runningDistance : number,
+        workout : string[],
+        todayWorkout : string[]
+        caloriesBurnt: number
+
       };
   
     const form = useForm<useformfields>({
       defaultValues: {
-        username: '',
-        frameworks: [
-          {
-            value: 'next.js',
-            label: 'Next.js',
-          },
-          {
-            value: 'sveltekit',
-            label: 'SvelteKit',
-          },
-          {
-            value: 'nuxt.js',
-            label: 'Nuxt.js',
-          },
-          {
-            value: 'remix',
-            label: 'Remix',
-          },
-          {
-            value: 'astro',
-            label: 'Astro',
-          },
+        run: false,
+        workout: [
+        ' Chest' ,' Bisceps' ,' Triceps' ,' Back' , 'Shoulders' , 'Legs '
         ],
-        workoutArray: [],
+        todayWorkout : []
       },
     });
   
@@ -88,7 +70,7 @@ import {
       const handleSelectChange = (selectedValue: string) => {
         console.log(selectedValue);
         
-        form.setValue('workoutArray', [...form.getValues('workoutArray'), selectedValue]);
+        form.setValue('todayWorkout', [...form.getValues('todayWorkout'), selectedValue]);
       };
     
       return (
@@ -99,17 +81,80 @@ import {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
                 control={form.control}
-                name="username"
+                name="run"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-center justify-between rounded-lg  p-4">
+                  <div className="space-y-0.5">
+                    <FormLabel className="text-base">did u run today?</FormLabel>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+                )}
+              />
+            { form.getValues('run')? 
+            <div className="  rounded-xl shadow-lg">
+              <FormField
+                control={form.control}
+                name="runningDuration"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-center justify-between rounded-lg  p-4">
+                  <div className="space-y-0.5">
+                    <FormLabel className="text-base">duration</FormLabel>
+                  </div>
+                  <FormControl>
+                   <div className="flex items-center justify-between gap-1"> <Input className=" w-fit max-w-5" {...field}/><p>mins</p></div>
+                  </FormControl>
+                </FormItem>
+                )}
+              /> 
+              <FormField
+                control={form.control}
+                name="runningDistance"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-center justify-between rounded-lg  p-4">
+                  <div className="space-y-0.5">
+                    <FormLabel className="text-base">Distance</FormLabel>
+                  </div>
+                  <FormControl>
+                   <div className="flex items-center gap-1"> <Input className=" w-fit max-w-5 max-h-8 rounded-md" {...field}/><p>km</p></div>
+                  </FormControl>
+                </FormItem>
+                )}
+              /> 
+              <FormField
+                control={form.control}
+                name="caloriesBurnt"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-center justify-between rounded-lg  p-4">
+                  <div className="space-y-0.5">
+                    <FormLabel className="text-base pr-8"> Calories Burnt</FormLabel>
+                  </div>
+                  <FormControl>
+                   <div className="flex items-center gap-1 pl-4"> <Input className=" w-fit max-w-5" {...field}/><p>CAL/Kcal</p></div>
+                  </FormControl>
+                </FormItem>
+                )}
+              /> 
+            </div>
+              : null }
+              <FormField
+                control={form.control}
+                name="todayWorkout"
                 render={({ field }) => (
                   <FormControl>
                     <Select onValueChange={field.onChange}>
                       <SelectTrigger>
                         {value || 'Select Workout'}
                       </SelectTrigger>
-                      <SelectContent>
-                        {form.getValues('frameworks').map((item) => (
-                          <SelectItem key={item.value} value={item.value} onClick={() => handleSelectChange(item.value)}>
-                            {item.label}
+                      <SelectContent className=" bg-gray rounded-xl">
+                        {form.getValues('workout').map((item) => (
+                          <SelectItem key={item} value={item} onClick={() => handleSelectChange(item)}>
+                            {item}
                           </SelectItem>
                         ))}
                       </SelectContent>
