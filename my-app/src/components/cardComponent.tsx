@@ -20,24 +20,24 @@ import {
 import CardInputComponent from "./ChallengeCard"
 import { challegnArray } from "./arrayofchallenges"
   
-  const CardComponent = () => {
+  const ChallengesComponent = () => {
     return (
-      <div className=" pl-44">
+      <div className="">
         <h1>Explore Challenges</h1>
-        <Carousel className="w-full max-w-xs items-center rounded-lg">
+        <Carousel className="w-full max-w-xs items-center rounded-lg dark:shadow-amber-50 dark:shadow-lg">
           <CarouselContent>
           {challegnArray.map( (obj , index) => (
             <CarouselItem 
             key={index}
-            className=" p-10 flex justify-center "
+            className=" p-4 flex justify-center dark:shadow-lg dark:shadow-amber-50"
             >
              {obj}
             </CarouselItem>
           ))}
            
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          {/* <CarouselPrevious />
+          <CarouselNext /> */}
         </Carousel>
         <TooltipProvider>
           <Tooltip>
@@ -55,7 +55,7 @@ import { challegnArray } from "./arrayofchallenges"
     )
   }
   
-  export default CardComponent
+  export default ChallengesComponent
 
 
    {/* {Array.from({ length: 5 }).map((_, index) => (
