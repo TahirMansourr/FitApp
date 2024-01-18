@@ -29,25 +29,26 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-  } from "@/components/ui/select"
+
+import ExcersiseTable from "./excersiseTable"
+import { fromJSON } from "postcss"
   
+  type props = {
+    dailyWorkoutFormState : boolean,
+    setDailyWorkoutFormState : Function
+  }
 
 
-  const DailyWorkOutForm: React.FC = () => {
+  const DailyWorkOutForm = ({dailyWorkoutFormState , setDailyWorkoutFormState} : props) => {
     const [value, setValue] = React.useState('');
+    const [open, setOpen] = React.useState(false)
 
     type useformfields = {
         run : boolean,
         runningDuration : number,
         runningDistance : number,
         workout : string[],
-        todayWorkout : string[]
+        todayWorkout : (string | number)[]
         caloriesBurnt: number
 
       };
@@ -55,6 +56,9 @@ import {
     const form = useForm<useformfields>({
       defaultValues: {
         run: false,
+        runningDuration: 0,
+        runningDistance : 0,
+        caloriesBurnt : 0,
         workout: [
         ' Chest' ,' Bisceps' ,' Triceps' ,' Back' , 'Shoulders' , 'Legs '
         ],
@@ -63,19 +67,27 @@ import {
     });
   
     const onSubmit= (values : any) => {
-        // Add additional logic here if needed
         console.log(values);
       };
     
+    const handleDelete = ( indextodelete : number) => {
+      const newtodayworkout = form.getValues('todayWorkout').filter((_ ,index) => index !== indextodelete)
+      form.setValue('todayWorkout', newtodayworkout);
+    }
+    
       const handleSelectChange = (selectedValue: string) => {
-        console.log(selectedValue);
+        console.log('i was clicked');
         
-        form.setValue('todayWorkout', [...form.getValues('todayWorkout'), selectedValue]);
+        console.log(selectedValue);
+        form.setValue('todayWorkout', [
+          ...form.getValues('todayWorkout'),
+          selectedValue,
+        ]);
       };
     
       return (
         <div>
-          <div>DailyWorkOutForm</div>
+          <div className=" text-center">Today's Workout</div>
     
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -83,7 +95,7 @@ import {
                 control={form.control}
                 name="run"
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-center justify-between rounded-lg  p-4">
+                  <FormItem className="flex flex-row items-center justify-between rounded-lg gap-3  px-4 pt-2">
                   <div className="space-y-0.5">
                     <FormLabel className="text-base">did u run today?</FormLabel>
                   </div>
@@ -102,16 +114,22 @@ import {
                 control={form.control}
                 name="runningDuration"
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-center justify-between rounded-lg  p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">duration</FormLabel>
-                  </div>
-                  <FormControl>
-                   <div className="flex items-center justify-between gap-1"> <Input className=" w-fit max-w-5" {...field}/><p>mins</p></div>
-                  </FormControl>
-                </FormItem>
+                  <FormItem className="flex flex-row items-center justify-between rounded-lg p-4">
+                    <div className="space-y-0.5">
+                      <FormLabel className="text-base">Duration</FormLabel>
+                    </div>
+                    <FormControl>
+                      <div className="flex items-center justify-between gap-1">
+                        <Input
+                         className="w-fit max-w-5" {...field} 
+                         type="number"
+                         />
+                        <p>mins</p>
+                      </div>
+                    </FormControl>
+                  </FormItem>
                 )}
-              /> 
+              />
               <FormField
                 control={form.control}
                 name="runningDistance"
@@ -121,7 +139,7 @@ import {
                     <FormLabel className="text-base">Distance</FormLabel>
                   </div>
                   <FormControl>
-                   <div className="flex items-center gap-1"> <Input className=" w-fit max-w-5 max-h-8 rounded-md" {...field}/><p>km</p></div>
+                   <div className="flex items-center gap-1"> <Input className=" w-fit max-w-5 max-h-8  text-black" {...field}/><p>km</p></div>
                   </FormControl>
                 </FormItem>
                 )}
@@ -142,73 +160,65 @@ import {
               /> 
             </div>
               : null }
-              <FormField
-                control={form.control}
-                name="todayWorkout"
-                render={({ field }) => (
-                  <FormControl>
-                    <Select onValueChange={field.onChange}>
-                      <SelectTrigger>
-                        {value || 'Select Workout'}
-                      </SelectTrigger>
-                      <SelectContent className=" bg-gray rounded-xl">
-                        {form.getValues('workout').map((item) => (
-                          <SelectItem key={item} value={item} onClick={() => handleSelectChange(item)}>
-                            {item}
-                          </SelectItem>
+             
+                <label className=" pr-3">choose excersises</label>
+                  <Popover open={open} onOpenChange={setOpen} >
+                  <PopoverTrigger asChild >
+                    <Button
+                      // variant="outline"
+                      role="combobox"
+                      aria-expanded={open}
+                      className="w-[200px] justify-between border-b  "
+                    >
+                      {value
+                        ? value
+                        : "Select excersise..."}
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50 hover:scale-110" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-[200px] p-0">
+                    <Command>
+                      <CommandInput placeholder="Search framework..." />
+                      <CommandEmpty>No framework found.</CommandEmpty>
+                      <CommandGroup>
+                        {form.getValues('workout').map((framework) => (
+                          <CommandItem
+                            key={framework}
+                            value={framework}
+                            onSelect={(currentValue) => {
+                              setValue(currentValue === value ? "" : currentValue)
+                              handleSelectChange(currentValue)
+                             
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                value === framework ? "opacity-100" : "opacity-0"
+                              )}
+                            />
+                            {framework}
+                          </CommandItem>
                         ))}
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                )}
-              />
-              <Button type="submit">Submit</Button>
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+
+                  <ExcersiseTable 
+                  obj = {form.getValues('todayWorkout')}
+                  deleteItem = {handleDelete}
+                  run = {form.getValues('run')}
+                  duration = {form.getValues('runningDuration')}
+                  distance = {form.getValues('runningDistance')}
+                  calories = {form.getValues('caloriesBurnt')}                  />
+              <Button variant={"secondary"} type="submit" className=" flex">Submit</Button>
             </form>
           </Form>
+         
         </div>
       );
   };
   
   export default DailyWorkOutForm;
 
-{/* <Popover open={open} onOpenChange={setOpen}>
-<PopoverTrigger asChild>
-    <Button
-    variant="outline"
-    role="combobox"
-    aria-expanded={open}
-    className="w-[200px] justify-between"
-   // onClick={() => ()}
-    >
-    {form.control._defaultValues.frameworks?.find((framework) => framework?.value === value)?.label}
-    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-    </Button>
-</PopoverTrigger>
-<PopoverContent className="w-[200px] p-0">
-    <Command>
-    <CommandInput placeholder="Search framework..." />
-    <CommandEmpty>No framework found.</CommandEmpty>
-    <CommandGroup>
-        {form.control._defaultValues.frameworks?.map((framework : any) => (
-        <CommandItem
-            key={framework.value}
-            value={framework.value}
-            onSelect={(currentValue) => {
-            setValue(currentValue === value ? "" : currentValue)
-            form.control._defaultValues.workoutArray?.push(currentValue)
-            setOpen(false)
-            }}
-        >
-            <Check
-            className={cn(
-                "mr-2 h-4 w-4",
-                value === framework.value ? "opacity-100" : "opacity-0"
-            )}
-            />
-            {framework.label}
-        </CommandItem>
-        ))}
-    </CommandGroup>
-    </Command>
-</PopoverContent>
-</Popover> */}
