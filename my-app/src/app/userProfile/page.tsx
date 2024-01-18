@@ -34,14 +34,14 @@ const UserProfile = () => {
               setDailyWorkoutFormState = {setDailyWorkOutFormState}
               />
               <Diet/>
-                <div className=' bg-gray bg-opacity-10 p-3 rounded-lg shadow-md mt-3 h-fit'>
+                <div className=' bg-gray bg-opacity-10 p-3  shadow-md mt-3 h-fit rounded-xl flex flex-col items-center'>
 
                 <Link href = ''>want to see your training history??</Link> 
                 <WorkOutHistory/>
                 </div>
            
             </div> : 
-            <div className=' bg-gray bg-opacity-10 p-5 shadow-lg rounded-xl w-96 max-h-fit'>
+            <div className=' bg-gray bg-opacity-10 p-5 shadow-lg rounded-xl w-96 max-h-fit '>
 
               {dailyWorkOutFormState ? 
               <div 

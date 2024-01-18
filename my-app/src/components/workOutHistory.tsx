@@ -20,9 +20,9 @@ const WorkOutHistory = () => {
          <Popover>
             <PopoverTrigger asChild>
                 <Button
-                variant={"secondary"}
+                variant={"outline"}
                 className={cn(
-                    "w-[280px] justify-start text-left font-normal",
+                    "w-[280px] justify-start text-left font-normal rounded-full mt-3 shadow-md",
                     !date && "text-muted-foreground"
                 )}
                 >

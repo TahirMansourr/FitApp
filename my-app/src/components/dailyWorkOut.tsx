@@ -12,14 +12,13 @@ const DailyWorkOut = ({dailyWorkoutFormState , setDailyWorkoutFormState} : props
 
   const [date , setDate] = useState(new Date())
   return (
-    <div className=' bg-gray bg-opacity-10 p-3 rounded-lg shadow-md mt-3 h-fit'>
+    <div className=' bg-gray bg-opacity-10 p-3 rounded-xl shadow-md mt-3 h-fit flex flex-col items-center'>
       {/* <h2>{date.toDateString()}</h2> */}
-      <h1>Enter your daily work out</h1>
-      <p>what did you do today?</p>
+      <h1 className=' text-center'>what work out did you do today?</h1>
       <Button 
-      className=''
+      className=' bg-gray rounded-xl mt-3 text-white hover:scale-105 hover:bg-gray shadow-md '
      onClick={() => setDailyWorkoutFormState(!dailyWorkoutFormState) }
-      >Click me to enter workout</Button>
+      > Enter today's workout</Button>
      
     </div>
     
