@@ -10,6 +10,7 @@ import Link from 'next/link';
 import PersonalRecordsComponent from '@/components/personalRecordsComponent';
 import WorkOutHistory from '@/components/workOutHistory';
 import { IoIosArrowBack } from "react-icons/io";
+import RenderBarChart from '@/components/barChart';
 
 const UserProfile = () => {
 
@@ -36,7 +37,7 @@ const UserProfile = () => {
               <Diet/>
                 <div className=' bg-gray bg-opacity-10 p-3  shadow-md mt-3 h-fit rounded-xl flex flex-col items-center'>
 
-                <Link href = ''>want to see your training history??</Link> 
+                <Link href = '/workoutHistory' >want to see your training history??</Link> 
                 <WorkOutHistory/>
                 </div>
            
@@ -63,6 +64,7 @@ const UserProfile = () => {
          
           <PersonalRecordsComponent/>
           <ChallengesComponent />
+          <RenderBarChart/>
           </div>
         </div>
     </div>
