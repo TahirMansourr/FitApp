@@ -21,13 +21,27 @@ import {
     DialogTitle,
     DialogTrigger,
   } from "@/components/ui/dialog"
+
+  import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+  } from "@/components/ui/drawer"
+import { Button } from '@/components/ui/button'
+  
   
 
 const WorkOutHistory = () => {
     const [date, setDate] = useState<Date | undefined>(new Date())
+    const [isDrawer , setIsDrawer] = useState(false)
 
   return (
-    <div className=' flex flex-col justify-center items-center align-middle p-5 '>
+    <div className={ isDrawer ? 'blur-lg' : 'flex flex-col justify-center items-center align-middle p-5 '}>
         <div className=' flex justify-between bg-opacity-10'>
         <div>
             {/* <h1>Work Out History Page</h1> */}
@@ -84,7 +98,29 @@ const WorkOutHistory = () => {
         </div>
         
         <div>
-            <RenderBarChart/>
+        <Drawer>
+            <DrawerTrigger>
+                <Button onClick={() => setIsDrawer(!isDrawer)}>
+                    See Training days and burnt Calories
+                </Button>
+            </DrawerTrigger>
+            <DrawerContent>
+                <DrawerHeader>
+                <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+                <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                </DrawerHeader>
+                     <div className=' flex justify-center items-center'>
+                <RenderBarChart/>
+                </div>
+                <DrawerFooter>
+                <Button>Submit</Button>
+                <DrawerClose>
+                    <Button variant="outline">Cancel</Button>
+                </DrawerClose>
+                </DrawerFooter>
+            </DrawerContent>
+        </Drawer>
+           
         </div>
     </div>
   )
