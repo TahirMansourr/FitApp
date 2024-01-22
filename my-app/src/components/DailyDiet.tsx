@@ -69,7 +69,7 @@ const DailyDiet = () => {
                   </div>
                   <FormControl>
                   <Input
-                         className="w-fit max-w-5 " {...field} 
+                         className="w-fit border-b " {...field} 
                          />
                   </FormControl>
                 </FormItem>
@@ -84,8 +84,8 @@ const DailyDiet = () => {
                 </div>
                 <FormControl>
                 <Input
-                         className="w-fit max-w-5" {...field} 
-                         type="number"
+                         className="w-fit border-b" {...field} 
+                         
                          />
                 </FormControl>
               </FormItem>

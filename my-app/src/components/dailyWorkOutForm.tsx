@@ -121,8 +121,9 @@ import { fromJSON } from "postcss"
                     <FormControl>
                       <div className="flex items-center justify-between gap-1">
                         <Input
-                         className="w-fit max-w-5" {...field} 
-                         type="number"
+                         className="w-12 text-center border-b  " 
+                         {...field} 
+                         
                          />
                         <p>mins</p>
                       </div>
@@ -139,7 +140,8 @@ import { fromJSON } from "postcss"
                     <FormLabel className="text-base">Distance</FormLabel>
                   </div>
                   <FormControl>
-                   <div className="flex items-center gap-1"> <Input className=" w-fit max-w-5 max-h-8  text-black" {...field}/><p>km</p></div>
+                   <div className="flex items-center gap-1">
+                     <Input  className="w-12 text-center border-b  "  {...field}/><p>km</p></div>
                   </FormControl>
                 </FormItem>
                 )}
@@ -153,7 +155,8 @@ import { fromJSON } from "postcss"
                     <FormLabel className="text-base pr-8"> Calories Burnt</FormLabel>
                   </div>
                   <FormControl>
-                   <div className="flex items-center gap-1 pl-4"> <Input className=" w-fit max-w-5" {...field}/><p>CAL/Kcal</p></div>
+                   <div className="flex items-center gap-1 pl-4">
+                     <Input  className="w-12 text-center border-b  "  {...field}/><p>CAL/Kcal</p></div>
                   </FormControl>
                 </FormItem>
                 )}

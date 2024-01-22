@@ -34,8 +34,8 @@ type Props = {
                 </TableHeader>
             <TableBody>
                 {run ? <TableRow>
-                    <TableCell className="font-medium" >Ran {distance} in {duration} mins </TableCell>
-                         </TableRow> : null}
+                    <TableCell className="font-medium" >Ran <b>{distance}</b> KM in <b>{duration} </b>mins </TableCell>
+                         </TableRow> : null} 
                     {obj.map( (item , index) => (
                         <TableRow className=" flex justify-between items-center" key={index}>
                          <TableCell className="font-medium" >{item}</TableCell>
