@@ -41,28 +41,19 @@ const WorkOutHistory = () => {
     const [isDrawer , setIsDrawer] = useState(false)
 
   return (
-    <div className={ isDrawer ? 'blur-lg' : 'flex flex-col justify-center items-center align-middle p-5 '}>
-        <div className=' flex justify-between bg-opacity-10'>
-        <div>
+    <div className={ isDrawer ? 'blur-lg flex  justify-around items-center mt-6 p-5' 
+    : 'flex  justify-around items-center mt-6 p-5 '}>
+        <div className=' flex justify-center bg-opacity-10'>
             {/* <h1>Work Out History Page</h1> */}
-            <div className=' h-96 w-96  rounded-xl'>
-            <Carousel
-                    opts={{
-                        align: "start",
-                    }}
-                    orientation="vertical"
-                    className="w-full max-w-xs h-96"
-                    >
-                    <CarouselContent className="-mt-1 h-[300px]">
-                        {Array.from({ length: 5 }).map((_, index) => (
-                        <CarouselItem key={index} className="pt-1 md:basis-1/2">
+            <div className=' h-96 w-96  rounded-xl grid grid-cols-2 gap-4 '>
+            {Array.from({ length: 7 }).map((_, index) => (
                             
-                            <Dialog>
+                            <Dialog  >
                             <DialogTrigger>
                             <div className="p-1">
                             <Card>
-                                <CardContent className="flex items-center justify-center p-6 ">
-                                <span className="text-3xl font-semibold"> Tahit{index + 1}</span>
+                                <CardContent className="flex items-center justify-center p-6  ">
+                                <span className="text-3xl font-semibold "> Day{index + 1}</span>
                                 </CardContent>
                             </Card>
                             </div>
@@ -79,24 +70,19 @@ const WorkOutHistory = () => {
                             </Dialog>
                             
                             
-                        </CarouselItem>
                         ))}
-                    </CarouselContent>
-                    {/* <CarouselPrevious />
-                    <CarouselNext /> */}
-                    </Carousel>
-            </div>
-        </div>
-        <div className=''>
-        <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            className="rounded-xl bg-gray bg-opacity-10 "
-        />
-        </div>
+              </div>
+        
         </div>
         
+        <div className='flex flex-col gap-6'>
+        <div className=''>
+                <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    className="rounded-xl bg-gray bg-opacity-10 "
+                />
         <div>
         <Drawer>
             <DrawerTrigger>
@@ -122,8 +108,52 @@ const WorkOutHistory = () => {
         </Drawer>
            
         </div>
+        </div>
+        </div>
+        
     </div>
   )
 }
 
 export default WorkOutHistory
+
+{/* <Carousel
+                    opts={{
+                        align: "start",
+                    }}
+                    orientation="vertical"
+                    className="w-full max-w-xs overflow-hidden h-full "
+                    >
+                <CarouselContent className="-mt-1 h-[200px]">
+                        {Array.from({ length: 30 }).map((_, index) => (
+                        <CarouselItem key={index} className="pt-1 md:basis-1/2 -mt-0">
+                            
+                            <Dialog>
+                            <DialogTrigger>
+                            <div className="p-1">
+                            <Card>
+                                <CardContent className="flex items-center justify-center p-6 w-72 ">
+                                <span className="text-3xl font-semibold "> Day{index + 1}</span>
+                                </CardContent>
+                            </Card>
+                            </div>
+                            </DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                <DialogTitle>Are you absolutely sure?</DialogTitle>
+                                <DialogDescription>
+                                    This action cannot be undone. This will permanently delete your account
+                                    and remove your data from our servers.
+                                </DialogDescription>
+                                </DialogHeader>
+                            </DialogContent>
+                            </Dialog>
+                            
+                            
+                        </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    {/* <CarouselPrevious />
+                    <CarouselNext /> 
+                    </Carousel>
+            */}

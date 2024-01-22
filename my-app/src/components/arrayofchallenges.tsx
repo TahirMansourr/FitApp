@@ -11,7 +11,7 @@ import {
 
   
  export const challegnArray = [
-    <Card>
+    <Card className=" shadow-xl dark:shadow-md dark:shadow-white">
         <CardHeader>
             <CardTitle>challenge 1</CardTitle>
             <CardDescription>Core challenge</CardDescription>

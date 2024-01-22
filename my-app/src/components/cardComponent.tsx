@@ -24,12 +24,12 @@ import { challegnArray } from "./arrayofchallenges"
     return (
       <div className="">
         <h1>Explore Challenges</h1>
-        <Carousel className="w-full max-w-xs items-center rounded-lg dark:shadow-amber-50 dark:shadow-lg">
+        <Carousel className="w-full max-w-xs items-center rounded-lg  dark:shadow-lg">
           <CarouselContent>
           {challegnArray.map( (obj , index) => (
             <CarouselItem 
             key={index}
-            className=" p-4 flex justify-center dark:shadow-lg dark:shadow-amber-50"
+            className=" p-4 flex justify-center dark:shadow-lg"
             >
              {obj}
             </CarouselItem>

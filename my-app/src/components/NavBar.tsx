@@ -39,10 +39,13 @@ const NavBar = () => {
             <NavigationMenuLink>Link</NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <NavigationMenuLink>Link</NavigationMenuLink>
+        <NavigationMenuItem >
+          <NavigationMenuTrigger>My profile</NavigationMenuTrigger>
+          
+          <NavigationMenuContent className=' bg-gray flex flex-col p-5 w-fit   '>
+            <NavigationMenuLink>My acheivments</NavigationMenuLink>
+            <Link href = '/userProfile'>Profile</Link>
+            <NavigationMenu>My Personal Records</NavigationMenu>
           </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
