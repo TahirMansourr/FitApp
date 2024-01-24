@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/popover"
 
 import ExcersiseTable from "./excersiseTable"
+import { Controller } from "react-hook-form"
 import { fromJSON } from "postcss"
   
   type props = {
@@ -66,6 +67,12 @@ import { fromJSON } from "postcss"
       },
     });
   
+    React.useEffect(() => {
+      form.trigger();
+  }, [form.getValues('runningDuration'), form.getValues('runningDistance')]);
+
+  
+
     const onSubmit= (values : any) => {
         console.log(values);
       };
@@ -120,11 +127,16 @@ import { fromJSON } from "postcss"
                     </div>
                     <FormControl>
                       <div className="flex items-center justify-between gap-1">
-                        <Input
-                         className="w-12 text-center border-b  " 
-                         {...field} 
-                         
-                         />
+                      <Controller
+                                    render={({ field }) => (
+                                        <Input
+                                            className="w-12 text-center border-b  "
+                                            {...field}
+                                        />
+                                    )}
+                                    name="runningDuration"
+                                    control={form.control}
+                                />
                         <p>mins</p>
                       </div>
                     </FormControl>
@@ -141,7 +153,18 @@ import { fromJSON } from "postcss"
                   </div>
                   <FormControl>
                    <div className="flex items-center gap-1">
-                     <Input  className="w-12 text-center border-b  "  {...field}/><p>km</p></div>
+                   {/* The Controller component is designed to integrate external inputs (like your custom Input component) with react-hook-form. */}
+                   <Controller
+                                    render={({ field }) => (
+                                        <Input
+                                            className="w-12 text-center border-b  "
+                                            {...field}
+                                        />
+                                    )}
+                                    name="runningDistance"
+                                    control={form.control}
+                                />
+                                </div>
                   </FormControl>
                 </FormItem>
                 )}

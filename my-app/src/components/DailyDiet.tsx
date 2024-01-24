@@ -20,13 +20,27 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+  import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+  } from "@/components/ui/drawer"
+              
   
   import { Input } from "@/components/ui/input"
 import { Button } from './ui/button'
+import RenderBarChart from './barChart';
 
   
 
 const DailyDiet = () => {
+
+    const date = new Date()
 
     type useformfeild = {
         calories : number ,
@@ -53,6 +67,7 @@ const DailyDiet = () => {
         const mealstotable = form.getValues('meal')
         const newItem = { meal : mealstotable , calories : caloriestotable}
         form.setValue('tableContent' , [ ...form.getValues('tableContent') , newItem])
+        form.trigger()
     }
     
 
@@ -112,7 +127,7 @@ const DailyDiet = () => {
                             <TableRow key={index}>
                             <TableCell className="font-medium">{obj.meal}</TableCell>
                             <TableCell>{obj.calories}</TableCell>
-                            <TableCell className="text-right">8 am</TableCell>
+                            <TableCell className="text-right">{`${date.getHours()} ${date.getHours() >= 12 ? 'PM' : 'AM'}`}</TableCell>
                             </TableRow>
                         ))
                     }
@@ -120,7 +135,33 @@ const DailyDiet = () => {
                 </TableBody>
                 </Table>
             </div>
+            <div>
             <Button variant={"secondary"} type="submit" className=" flex">Submit</Button>
+            <Drawer>
+                <DrawerTrigger>
+                <Button>See my calorie in and out</Button>
+                </DrawerTrigger>
+                <DrawerContent >
+                    <DrawerHeader>
+                    <DrawerTitle ></DrawerTitle>
+                    <DrawerDescription>T</DrawerDescription>
+                    </DrawerHeader>
+                    <div className=' flex justify-center items-center'>
+                    <RenderBarChart/>
+                    </div>
+                    
+                    <DrawerFooter>
+                    <Button>Submit</Button>
+                    <DrawerClose>
+                        <Button variant="outline">Close</Button>
+                    </DrawerClose>
+                    </DrawerFooter>
+                </DrawerContent>
+                </Drawer>
+
+           
+            </div>
+           
             </form>
     </Form>
   )

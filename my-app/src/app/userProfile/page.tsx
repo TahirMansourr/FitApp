@@ -20,6 +20,7 @@ const UserProfile = () => {
 
   const [dailyWorkOutFormState , setDailyWorkOutFormState] = useState<boolean>(false)
   const [dailyDietState , setDailyDietState] = useState<boolean>(false)
+  
   const trophyArray = [ trophy3 , trophy3 , trophy3  ]
 
   return (
