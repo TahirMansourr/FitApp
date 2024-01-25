@@ -67,6 +67,7 @@ const DailyDiet = () => {
         const mealstotable = form.getValues('meal')
         const newItem = { meal : mealstotable , calories : caloriestotable}
         form.setValue('tableContent' , [ ...form.getValues('tableContent') , newItem])
+        // this is causing it to rerender everytime i click on the button
         form.trigger()
     }
     
