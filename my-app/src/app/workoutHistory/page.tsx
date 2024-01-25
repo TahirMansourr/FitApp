@@ -1,54 +1,40 @@
 'use client'
 import RenderBarChart from '@/components/barChart'
-
 import { Card, CardContent } from "@/components/ui/card"
 import { useState } from 'react'
 import { Calendar } from "@/components/ui/calendar"
-
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-  } from "@/components/ui/dialog"
-
-  import {
-    Drawer,
-    DrawerClose,
-    DrawerContent,
-    DrawerDescription,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerTitle,
-    DrawerTrigger,
-  } from "@/components/ui/drawer"
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
 import { Button } from '@/components/ui/button'
-  
-  
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+//import './WorkOutHistory.css'; // Import the CSS file for styling
 
 const WorkOutHistory = () => {
     const [date, setDate] = useState<Date | undefined>(new Date())
     const [isDrawer , setIsDrawer] = useState(false)
+    const [isBlurred, setIsBlurred] = useState(false); // State to manage blur effect
+
+  const toggleDrawer = () => {
+    setIsDrawer(!isDrawer);
+    setIsBlurred(!isBlurred); // Toggle blur effect when drawer is opened/closed
+  }
 
   return (
-    <div className={ isDrawer ? 'blur-lg flex  justify-around items-center mt-6 p-5' 
-    : 'flex  justify-around items-center mt-6 p-5 '}>
+    <div className={ isBlurred ? 'blur-xl flex justify-around items-center mt-6 p-5' 
+    : 'flex justify-around items-center mt-6 p-5 '}>
         <div className=' flex justify-center bg-opacity-10'>
-            {/* <h1>Work Out History Page</h1> */}
             <div className=' h-96 w-96  rounded-xl grid grid-cols-2 gap-4 '>
             {Array.from({ length: 7 }).map((_, index) => (
                             
-                            <Dialog  >
+                            <Dialog className = ' ' >
                             <DialogTrigger>
                             <div className="p-1">
                             <Card>
@@ -58,7 +44,7 @@ const WorkOutHistory = () => {
                             </Card>
                             </div>
                             </DialogTrigger>
-                            <DialogContent>
+                            <DialogContent className = 'bg-slate-500/100 '>
                                 <DialogHeader>
                                 <DialogTitle>Are you absolutely sure?</DialogTitle>
                                 <DialogDescription>
@@ -68,11 +54,8 @@ const WorkOutHistory = () => {
                                 </DialogHeader>
                             </DialogContent>
                             </Dialog>
-                            
-                            
                         ))}
               </div>
-        
         </div>
         
         <div className='flex flex-col gap-6'>
@@ -84,9 +67,9 @@ const WorkOutHistory = () => {
                     className="rounded-xl bg-gray bg-opacity-10 "
                 />
         <div>
-        <Drawer>
+        <Drawer onClose={() => setIsBlurred(false)}> {/* Update state when drawer is closed */}
             <DrawerTrigger>
-                <Button onClick={() => setIsDrawer(!isDrawer)}>
+                <Button onClick={toggleDrawer}>
                     See Training days and burnt Calories
                 </Button>
             </DrawerTrigger>
@@ -106,7 +89,6 @@ const WorkOutHistory = () => {
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>
-           
         </div>
         </div>
         </div>
@@ -116,7 +98,6 @@ const WorkOutHistory = () => {
 }
 
 export default WorkOutHistory
-
 {/* <Carousel
                     opts={{
                         align: "start",

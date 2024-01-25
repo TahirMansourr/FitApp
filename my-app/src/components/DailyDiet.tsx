@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { MdAddBox } from "react-icons/md";
 import { useForm } from "react-hook-form"
 import {
@@ -33,14 +33,16 @@ import {
               
   
   import { Input } from "@/components/ui/input"
-import { Button } from './ui/button'
-import RenderBarChart from './barChart';
+  import { Button } from './ui/button'
+  import RenderBarChart from './barChart';
 
   
 
-const DailyDiet = () => {
+const DailyDiet = ({setIsBlurred} : {setIsBlurred : Function}) => {
 
     const date = new Date()
+   
+    
 
     type useformfeild = {
         calories : number ,
@@ -138,9 +140,9 @@ const DailyDiet = () => {
             </div>
             <div>
             <Button variant={"secondary"} type="submit" className=" flex">Submit</Button>
-            <Drawer>
+            <Drawer onClose={()=>setIsBlurred(false)}>
                 <DrawerTrigger>
-                <Button>See my calorie in and out</Button>
+                <Button onClick={() => setIsBlurred(true)}>See my calorie in and out</Button>
                 </DrawerTrigger>
                 <DrawerContent >
                     <DrawerHeader>

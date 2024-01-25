@@ -15,6 +15,7 @@ import RenderBarChart from '@/components/barChart';
 import DailyDiet from '@/components/DailyDiet';
 import trophy3 from '../.././../public/trophy3.jpeg'
 import ProgressChart from '@/components/progressChart';
+import Example from '@/components/progressChart';
 
 const UserProfile = () => {
 
@@ -22,9 +23,10 @@ const UserProfile = () => {
   const [dailyDietState , setDailyDietState] = useState<boolean>(false)
   
   const trophyArray = [ trophy3 , trophy3 , trophy3  ]
+  const [isBlurred , setIsBlurred] = useState<boolean>(false)
 
   return (
-    <div className=' flex flex-col justify-center '>
+    <div className={isBlurred ?'blur-xl flex flex-col justify-center ' : 'flex flex-col justify-center'}>
 
       <div className=' flex'>
 
@@ -86,7 +88,7 @@ const UserProfile = () => {
                 </div> 
               : null
               }
-               <DailyDiet />
+               <DailyDiet setIsBlurred = {setIsBlurred}/>
               </div>
          
              : null }
@@ -96,6 +98,7 @@ const UserProfile = () => {
           <PersonalRecordsComponent/>
           <ChallengesComponent />
           {/* <RenderBarChart/> */}
+          
           </div>
         </div>
        
