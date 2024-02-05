@@ -1,4 +1,15 @@
  type PersonalRecord = Object[]
+
+ type traininghistory = {
+    run : boolean,
+    runningDuration : number,
+    runningDistance : number,
+    workout : string[],
+    todayWorkout : (string | number)[]
+    caloriesBurnt: number,
+    date : Date
+
+  }
  
  export const PersonalRecordsArray : PersonalRecord = [
     { Chest  : '110 KG'},
@@ -31,6 +42,5 @@
     } ,
 ]
 
-export const TrainingHistory : Object[] = [
-    {}
+export const TrainingHistory :traininghistory[] = [
 ]

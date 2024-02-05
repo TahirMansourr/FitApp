@@ -34,6 +34,7 @@ import ExcersiseTable from "./excersiseTable"
 import { Controller } from "react-hook-form"
 import { fromJSON } from "postcss"
 import { TrainingHistory } from "@/DTO"
+import {format} from 'date-fns'
   
   type props = {
     dailyWorkoutFormState : boolean,
@@ -42,6 +43,7 @@ import { TrainingHistory } from "@/DTO"
 
 
   const DailyWorkOutForm = ({dailyWorkoutFormState , setDailyWorkoutFormState} : props) => {
+
     const [value, setValue] = React.useState('');
     const [open, setOpen] = React.useState(false)
     const date = new Date()
@@ -53,7 +55,7 @@ import { TrainingHistory } from "@/DTO"
         workout : string[],
         todayWorkout : (string | number)[]
         caloriesBurnt: number,
-        date : string
+        date : Date
 
       };
   
@@ -67,7 +69,7 @@ import { TrainingHistory } from "@/DTO"
         ' Chest' ,' Bisceps' ,' Triceps' ,' Back' , 'Shoulders' , 'Legs '
         ],
         todayWorkout : [],
-        date : date.toDateString()
+        date : date
       },
     });
   

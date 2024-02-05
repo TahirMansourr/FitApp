@@ -17,6 +17,9 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { getDaysOfTheWeek } from './dateComponent'
 import {format} from 'date-fns'
+import { TrainingHistory } from '@/DTO'
+import { areDatesEqual } from './dateComponent'
+import { SiH3 } from 'react-icons/si'
 
 const WorkOutHistory = () => {
 
@@ -54,11 +57,17 @@ const WorkOutHistory = () => {
                 </DialogTrigger>
                 <DialogContent className = 'bg-slate-500/0 dark:bg-background rounded-3xl shadow-xl border-none'>
                     <DialogHeader>
-                    <DialogTitle className = " text-center">{`${format(day , 'EEEE')} ${format(day , 'dd/MM/YYY')}`}</DialogTitle>
+                    <DialogTitle className = " text-center">{`${format(day , 'EEEE')} ${format(day , 'dd/MM/yyy')}`}</DialogTitle>
                     <DialogDescription>
                     <Card className=' m-4'>
                         <CardContent className="flex items-center justify-center p-6 m-4">
-                        <span className="text-3xl font-semibold "></span>
+                        <span className="text-3xl font-semibold ">{TrainingHistory.filter( obj => areDatesEqual(obj.date , day)).map(
+                            obj => <div>
+                            {obj.run ? <h1>{`Ran ${obj.runningDistance} KM in ${obj.runningDuration} MINS`}</h1>: null} 
+                            {obj.todayWorkout.map( obj => <h3>{obj}</h3>)}
+                            
+                            </div>
+                        )}</span>
                         </CardContent>
                     </Card>
                         This action cannot be undone. This will permanently delete your account
@@ -103,10 +112,9 @@ const WorkOutHistory = () => {
             </DrawerContent>
         </Drawer>
         </div>
-        </div>
-        </div>
-        
     </div>
+  </div>
+</div>
   )
 }
 
