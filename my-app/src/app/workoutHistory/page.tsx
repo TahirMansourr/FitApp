@@ -33,28 +33,33 @@ const WorkOutHistory = () => {
         <div className=' flex justify-center bg-opacity-10'>
             <div className=' h-96 w-96  rounded-xl grid grid-cols-2 gap-4 '>
             {Array.from({ length: 7 }).map((_, index) => (
-                            
-                            <Dialog className = ' ' >
-                            <DialogTrigger>
-                            <div className="p-1">
-                            <Card>
-                                <CardContent className="flex items-center justify-center p-6  ">
-                                <span className="text-3xl font-semibold "> Day{index + 1}</span>
-                                </CardContent>
-                            </Card>
-                            </div>
-                            </DialogTrigger>
-                            <DialogContent className = 'bg-slate-500/100 '>
-                                <DialogHeader>
-                                <DialogTitle>Are you absolutely sure?</DialogTitle>
-                                <DialogDescription>
-                                    This action cannot be undone. This will permanently delete your account
-                                    and remove your data from our servers.
-                                </DialogDescription>
-                                </DialogHeader>
-                            </DialogContent>
-                            </Dialog>
-                        ))}
+                
+                <Dialog className = ' ' >
+                <DialogTrigger >
+                <div className="p-1">
+                <Card >
+                    <CardContent className="flex items-center justify-center p-6  ">
+                    <span className="text-3xl font-semibold "> Day{index + 1}</span>
+                    </CardContent>
+                </Card>
+                </div>
+                </DialogTrigger>
+                <DialogContent className = 'bg-slate-500/0 dark:bg-background rounded-3xl shadow-xl border-none'>
+                    <DialogHeader>
+                    <DialogTitle className = " text-center">date is to be here</DialogTitle>
+                    <DialogDescription>
+                    <Card className=' m-4'>
+                        <CardContent className="flex items-center justify-center p-6 m-4">
+                        <span className="text-3xl font-semibold "> Day {index + 1}</span>
+                        </CardContent>
+                    </Card>
+                        This action cannot be undone. This will permanently delete your account
+                        and remove your data from our servers.
+                    </DialogDescription>
+                    </DialogHeader>
+                </DialogContent>
+                </Dialog>
+            ))}
               </div>
         </div>
         
@@ -98,43 +103,3 @@ const WorkOutHistory = () => {
 }
 
 export default WorkOutHistory
-{/* <Carousel
-                    opts={{
-                        align: "start",
-                    }}
-                    orientation="vertical"
-                    className="w-full max-w-xs overflow-hidden h-full "
-                    >
-                <CarouselContent className="-mt-1 h-[200px]">
-                        {Array.from({ length: 30 }).map((_, index) => (
-                        <CarouselItem key={index} className="pt-1 md:basis-1/2 -mt-0">
-                            
-                            <Dialog>
-                            <DialogTrigger>
-                            <div className="p-1">
-                            <Card>
-                                <CardContent className="flex items-center justify-center p-6 w-72 ">
-                                <span className="text-3xl font-semibold "> Day{index + 1}</span>
-                                </CardContent>
-                            </Card>
-                            </div>
-                            </DialogTrigger>
-                            <DialogContent>
-                                <DialogHeader>
-                                <DialogTitle>Are you absolutely sure?</DialogTitle>
-                                <DialogDescription>
-                                    This action cannot be undone. This will permanently delete your account
-                                    and remove your data from our servers.
-                                </DialogDescription>
-                                </DialogHeader>
-                            </DialogContent>
-                            </Dialog>
-                            
-                            
-                        </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    {/* <CarouselPrevious />
-                    <CarouselNext /> 
-                    </Carousel>
-            */}

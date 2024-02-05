@@ -9,52 +9,19 @@ import {
     CardTitle,
   } from "@/components/ui/card"
 
-  
- export const challegnArray = [
+  import { ChallengesArray } from "@/DTO"
+
+ export const challegnArray = ChallengesArray.map( (obj , index) => (
     <Card className=" shadow-xl dark:shadow-md dark:shadow-white">
         <CardHeader>
-            <CardTitle>challenge 1</CardTitle>
-            <CardDescription>Core challenge</CardDescription>
+            <CardTitle>{obj.title}</CardTitle>
+            <CardDescription>{obj.description}</CardDescription>
         </CardHeader>
         <CardContent>
-            <p>100 day core challenge</p>
+            <p>{obj.content}</p>
         </CardContent>
-    </Card>,
-    <Card>
-        <CardHeader>
-            <CardTitle>challenge 2</CardTitle>
-            <CardDescription>back challenge</CardDescription>
-        </CardHeader>
-        <CardContent>
-            <p>100 day core challenge</p>
-        </CardContent>
-        {/* <CardFooter>
-            <p>Card Footer</p>
-        </CardFooter> */}
-    </Card>,
-    <Card>
-        <CardHeader>
-            <CardTitle>challenge 3</CardTitle>
-            <CardDescription>chest challenge</CardDescription>
-        </CardHeader>
-        <CardContent>
-            <p>100 day chest challenge</p>
-        </CardContent>
-        {/* <CardFooter>
-            <p>Card Footer</p>
-        </CardFooter> */}
-    </Card>,
-    <Card>
-        <CardHeader>
-            <CardTitle>Challenge 4</CardTitle>
-            <CardDescription>leg challege</CardDescription>
-        </CardHeader>
-        <CardContent>
-            <p>100 day leg challenge</p>
-        </CardContent>
-        {/* <CardFooter>
-            <p>Card Footer</p>
-        </CardFooter> */}
-    </Card>,
+    </Card>
+ ))
 
-  ]
+    
+    

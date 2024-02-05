@@ -8,10 +8,12 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 
+import { PersonalRecordsArray } from "@/DTO"
+
 const PersonalRecordsComponent = () => {
   return (
     <div className=" w-full">
-        <h1>Personal records</h1>
+        <h1>My Personal records</h1>
          <Carousel
       opts={{
         align: "start",
@@ -19,13 +21,15 @@ const PersonalRecordsComponent = () => {
       orientation="vertical"
       className="w-full max-w-xs"
     >
-      <CarouselContent className="-mt-1 h-24 rounded-lg shadow-lg">
-        {Array.from({ length: 5 }).map((_, index) => (
+      <CarouselContent className="-mt-1 h-28 rounded-lg shadow-lg">
+        {PersonalRecordsArray.map(( obj , index) => (
+          
           <CarouselItem key={index} className="pt-1 md:basis-1/2">
             <div className="p-1">
               <Card>
-                <CardContent className="flex items-center justify-center p-6">
-                  <span className="text-3xl font-semibold">{index + 1}</span>
+                <CardContent className="flex items-center justify-center p-6 flex-col">
+                  <span className=" font-semibold"><h3>{Object.keys(obj)}</h3></span>
+                  <span className="text-xl font-bold"><h1>{Object.values(obj)}</h1></span>
                 </CardContent>
               </Card>
             </div>

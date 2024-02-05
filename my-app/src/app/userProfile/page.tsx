@@ -13,7 +13,7 @@ import WorkOutHistory from '@/components/workOutHistory';
 import { IoIosArrowBack } from "react-icons/io";
 import RenderBarChart from '@/components/barChart';
 import DailyDiet from '@/components/DailyDiet';
-import trophy3 from '../.././../public/trophy3.jpeg'
+import transparent from '../.././../public/transparent.jpg'
 import ProgressChart from '@/components/progressChart';
 import Example from '@/components/progressChart';
 
@@ -22,7 +22,7 @@ const UserProfile = () => {
   const [dailyWorkOutFormState , setDailyWorkOutFormState] = useState<boolean>(false)
   const [dailyDietState , setDailyDietState] = useState<boolean>(false)
   
-  const trophyArray = [ trophy3 , trophy3 , trophy3  ]
+  const trophyArray = [transparent ,transparent ,transparent  ]
   const [isBlurred , setIsBlurred] = useState<boolean>(false)
 
   return (
@@ -36,7 +36,7 @@ const UserProfile = () => {
       items-center shadow-xl rounded-2xl mt-3
       hover:scale-110 transition ease-in-out duration-100
       bg-opacity-5 dark:shadow-slate-500 dark:shadow-md'>
-          <Image src={obj} alt = 'Our trophies' height={100} width={100} key={index} className=''/>
+          <Image src={obj} alt = 'Our trophies' height={100} width={100} key={index} className='bg-none'/>
         </div>
 
       ))}
@@ -93,7 +93,7 @@ const UserProfile = () => {
          
              : null }
 
-          <div className='flex flex-col items-center gap-3 justify-center '>
+          <div className='flex flex-col items-center gap-5 justify-center '>
          
           <PersonalRecordsComponent/>
           <ChallengesComponent />

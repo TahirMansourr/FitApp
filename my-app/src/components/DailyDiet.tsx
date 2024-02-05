@@ -146,8 +146,8 @@ const DailyDiet = ({setIsBlurred} : {setIsBlurred : Function}) => {
                 </DrawerTrigger>
                 <DrawerContent >
                     <DrawerHeader>
-                    <DrawerTitle ></DrawerTitle>
-                    <DrawerDescription>T</DrawerDescription>
+                    <DrawerTitle >Diet History</DrawerTitle>
+                    <DrawerDescription>This chart shows your cals in and out and soon the protien</DrawerDescription>
                     </DrawerHeader>
                     <div className=' flex justify-center items-center'>
                     <RenderBarChart/>

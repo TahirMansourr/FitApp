@@ -33,6 +33,7 @@ import {
 import ExcersiseTable from "./excersiseTable"
 import { Controller } from "react-hook-form"
 import { fromJSON } from "postcss"
+import { TrainingHistory } from "@/DTO"
   
   type props = {
     dailyWorkoutFormState : boolean,
@@ -43,6 +44,7 @@ import { fromJSON } from "postcss"
   const DailyWorkOutForm = ({dailyWorkoutFormState , setDailyWorkoutFormState} : props) => {
     const [value, setValue] = React.useState('');
     const [open, setOpen] = React.useState(false)
+    const date = new Date()
 
     type useformfields = {
         run : boolean,
@@ -50,7 +52,8 @@ import { fromJSON } from "postcss"
         runningDistance : number,
         workout : string[],
         todayWorkout : (string | number)[]
-        caloriesBurnt: number
+        caloriesBurnt: number,
+        date : string
 
       };
   
@@ -63,7 +66,8 @@ import { fromJSON } from "postcss"
         workout: [
         ' Chest' ,' Bisceps' ,' Triceps' ,' Back' , 'Shoulders' , 'Legs '
         ],
-        todayWorkout : []
+        todayWorkout : [],
+        date : date.toDateString()
       },
     });
   
@@ -75,6 +79,9 @@ import { fromJSON } from "postcss"
 
     const onSubmit= (values : any) => {
         console.log(values);
+        TrainingHistory.push(values)
+        console.log(TrainingHistory);
+        
       };
     
     const handleDelete = ( indextodelete : number) => {
