@@ -47,7 +47,7 @@ const WorkOutHistory = () => {
                 <Dialog className = ' ' >
                 <DialogTrigger >
                 <div className="p-1">
-                <Card className=' hover:scale-110 hover:shadow-2xl'>
+                <Card className=' hover:scale-110 hover:shadow-2xl shadow-xl bg-[#190482] text-white dark:shadow-md dark:shadow-white'>
                     <CardContent className="flex items-center justify-center p-6 flex-col ">
                     <span className="text-3xl font-semibold ">{format(day, 'EEEE')}</span>
                     <span className=' font-bold'><p>{format(day, 'dd/MM')}</p></span> 
@@ -59,7 +59,7 @@ const WorkOutHistory = () => {
                     <DialogHeader>
                     <DialogTitle className = " text-center">{`${format(day , 'EEEE')} ${format(day , 'dd/MM/yyy')}`}</DialogTitle>
                     <DialogDescription>
-                    <Card className=' m-4'>
+                    <Card className=' m-4 shadow-xl bg-[#31304D] text-white dark:shadow-md dark:shadow-white'>
                         <CardContent className="flex items-center justify-center p-6 m-4">
                         <span className="text-3xl font-semibold ">{TrainingHistory.filter( obj => areDatesEqual(obj.date , day)).map(
                             obj => <div>
@@ -86,7 +86,7 @@ const WorkOutHistory = () => {
                     mode="single"
                     selected={date}
                     onSelect={setDate}
-                    className="rounded-xl bg-gray bg-opacity-10 "
+                    className="rounded-xl bg-[#190482] text-white"
                 />
         <div>
         <Drawer onClose={() => setIsBlurred(false)}> {/* Update state when drawer is closed */}

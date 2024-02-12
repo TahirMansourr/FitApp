@@ -30,7 +30,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-import ExcersiseTable from "./excersiseTable"
+import ExcersiseTable from "../excersiseTable"
 import { Controller } from "react-hook-form"
 import { fromJSON } from "postcss"
 import { TrainingHistory } from "@/DTO"

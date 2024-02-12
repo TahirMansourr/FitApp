@@ -26,7 +26,7 @@ import {
   import { SiAddthis } from "react-icons/si";
   
   import React from 'react'
-import CardInputComponent from "./ChallengeCard"
+import CardInputComponent from "./forms/ChallengeCard"
 import { challegnArray } from "./arrayofchallenges"
   
   const ChallengesComponent = () => {

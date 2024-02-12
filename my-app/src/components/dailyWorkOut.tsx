@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react'
 import { Button } from './ui/button'
-import DailyWorkOutForm from './dailyWorkOutForm'
+import DailyWorkOutForm from './forms/dailyWorkOutForm'
+import { connectToDB } from '@/lib/mongoose'
 
 type props = {
   dailyWorkoutFormState : boolean,
@@ -16,8 +17,9 @@ const DailyWorkOut = ({dailyWorkoutFormState , setDailyWorkoutFormState} : props
       {/* <h2>{date.toDateString()}</h2> */}
       <h1 className=' text-center'>what work out did you do today?</h1>
       <Button 
-      className=' bg-gray rounded-xl mt-3 text-white hover:scale-105 hover:bg-gray shadow-md '
-     onClick={() => setDailyWorkoutFormState(!dailyWorkoutFormState) }
+      className=' bg-[#164863] rounded-xl mt-3 text-white hover:scale-105 hover:bg-gray shadow-md '
+     onClick={() => {setDailyWorkoutFormState(!dailyWorkoutFormState) 
+    connectToDB()}}
       > Enter today's workout</Button>
      
     </div>

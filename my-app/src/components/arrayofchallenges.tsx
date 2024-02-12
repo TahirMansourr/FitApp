@@ -12,7 +12,7 @@ import {
   import { ChallengesArray } from "@/DTO"
 
  export const challegnArray = ChallengesArray.map( (obj , index) => (
-    <Card className=" shadow-xl dark:shadow-md dark:shadow-white">
+    <Card className=" shadow-xl bg-[#31304D] text-white dark:shadow-md dark:shadow-white">
         <CardHeader>
             <CardTitle>{obj.title}</CardTitle>
             <CardDescription>{obj.description}</CardDescription>

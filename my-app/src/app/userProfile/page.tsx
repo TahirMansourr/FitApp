@@ -2,17 +2,17 @@
 import React, { useState } from 'react'
 import Image from 'next/image';
 import { UserButton } from "@clerk/nextjs";
-import CardInputComponent from '@/components/ChallengeCard';
+import CardInputComponent from '@/components/forms/ChallengeCard';
 import ChallengesComponent from '@/components/cardComponent';
 import DailyWorkOut from '@/components/dailyWorkOut';
 import Diet from '@/components/diet';
-import DailyWorkOutForm from '@/components/dailyWorkOutForm';
+import DailyWorkOutForm from '@/components/forms/dailyWorkOutForm';
 import Link from 'next/link';
 import PersonalRecordsComponent from '@/components/personalRecordsComponent';
 import WorkOutHistory from '@/components/workOutHistory';
 import { IoIosArrowBack } from "react-icons/io";
 import RenderBarChart from '@/components/barChart';
-import DailyDiet from '@/components/DailyDiet';
+import DailyDiet from '@/components/forms/DailyDiet';
 import transparent from '../.././../public/transparent.jpg'
 import ProgressChart from '@/components/progressChart';
 import Example from '@/components/progressChart';
@@ -35,7 +35,7 @@ const UserProfile = () => {
       <div className=' mx-auto flex justify-between
       items-center shadow-xl rounded-2xl mt-3
       hover:scale-110 transition ease-in-out duration-100
-      bg-opacity-5 dark:shadow-slate-500 dark:shadow-md'>
+      bg-transparent dark:shadow-slate-500 dark:shadow-md'>
           <Image src={obj} alt = 'Our trophies' height={100} width={100} key={index} className='bg-none'/>
         </div>
 
@@ -54,7 +54,7 @@ const UserProfile = () => {
               <Diet 
               dailyDietState = {dailyDietState}
              setDailyDietState={setDailyDietState}/>
-                <div className=' bg-gray bg-opacity-10 p-3  shadow-md mt-3 h-fit rounded-xl flex flex-col items-center'>
+                <div className=' bg-[#B6BBC4] bg-opacity-10 p-3  shadow-md mt-3 h-fit rounded-xl flex flex-col items-center'>
                 <Link href = '/workoutHistory' >want to see your training history??</Link> 
                 <WorkOutHistory/>
                 </div>
@@ -77,7 +77,7 @@ const UserProfile = () => {
                />
             </div>
             : dailyDietState ? 
-            <div className=' bg-gray bg-opacity-10 p-5 shadow-lg rounded-xl w-96 max-h-fit '>
+            <div className='  bg-[#B6BBC4] bg-opacity-10 p-5 shadow-lg rounded-xl w-96 max-h-fit '>
               
               {dailyDietState ? 
               <div 

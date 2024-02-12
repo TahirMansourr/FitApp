@@ -19,7 +19,7 @@ const NavBar = () => {
   return (
    <div className='flex justify-between px-6 pt-5 pb-3 
    align-baseline mx-6 shadow-md rounded-2xl mt-3 
-   bg-gray dark:bg
+   bg-[#161A30] text-white dark:bg-gray
     dark:shadow-slate-500 dark:shadow-md '>
     <div className=' text-xl'>
         FITNESS APP

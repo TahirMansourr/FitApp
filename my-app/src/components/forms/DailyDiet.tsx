@@ -33,8 +33,8 @@ import {
               
   
   import { Input } from "@/components/ui/input"
-  import { Button } from './ui/button'
-  import RenderBarChart from './barChart';
+  import { Button } from '../ui/button'
+  import RenderBarChart from '../barChart';
 
   
 

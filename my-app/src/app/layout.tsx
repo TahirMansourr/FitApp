@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import {dark} from "@clerk/themes"
 import './globals.css'
 import { Inter as FontSans } from "next/font/google"
 import { cn } from "@/lib/utils"
@@ -26,7 +27,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme : dark
+      }}
+    >
        <html lang="en">
           <body className={cn(
           "min-h-screen bg-background font-sans antialiased ",
