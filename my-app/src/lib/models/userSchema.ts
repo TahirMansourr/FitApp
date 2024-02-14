@@ -1,5 +1,5 @@
-import mongoose , { Schema } from 'mongoose'
 
+import mongoose , { Schema } from 'mongoose'
 
 const userSchema = new mongoose.Schema({
     id : {
@@ -15,17 +15,25 @@ const userSchema = new mongoose.Schema({
     image : String,
     age : Number,
     Weight : Number,
+    Height : Number,
     communities : [
         {
-            type : String //mongoose.Schema.types.objectId
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'Communities'
         }
     ],
     challenges : [{
-        type : String //mongoose.Schema.types.objectId
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'Challenges'
     }],
     trophies : [{
-        type : String
-    }]
+        type : String,
+        ref : 'Trophy'
+    }],
+    onBoarded : {
+        type : Boolean,
+        default : false
+    }
 
 })
 

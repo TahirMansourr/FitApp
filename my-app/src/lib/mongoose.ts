@@ -1,42 +1,44 @@
-import mongoose from 'mongoose';
+"use server"
 
-const MONGODB_URL = 'mongodb+srv://tahirelmag:auENAPfIqrMxcuaP@cluster0.umwgazw.mongodb.net/';
+import mongoose from 'mongoose'
+
+
+// const MONGODB_URL = 'mongodb+srv://tahirelmag:auENAPfIqrMxcuaP@cluster0.umwgazw.mongodb.net/'
+
+// export const connectToDB = async ()=>{
+//  try {
+//     await mongoose.connect(MONGODB_URL)
+//     console.log('connected to db')
+//  } catch (error) {
+//     console.log(error)
+    
+//  }
+// }
 
 let isConnected = false;
 
 export const connectToDB = async () => {
-    if (isConnected) { 
-        console.log("Connection already established");
-        return;
-    }
+    // mongoose.set("strictQuery" , true)
+
+    // if (!process.env.MONGODB_URL) {
+    //     return console.log('Missing MongoDB URL');
+    // }
+
+    if (isConnected){ 
+         console.log("Connection already established");
+         return;
+        }
 
     try {
-        await mongoose.connect(MONGODB_URL);
+        await mongoose.connect("mongodb+srv://tahirelmag:auENAPfIqrMxcuaP@cluster0.umwgazw.mongodb.net")
         isConnected = true;
         console.log('MongoDb connected');
+        
     } catch (error) {
         console.log(error);
+        
     }
+
+    
 }
 
-// const {MongoClient} = require('mongodb')
-
-// let dbConnection : any;
-
-// module.exports = {
-//     connectToDb : (cb : Function) => {
-//         MongoClient.connect(MONGODB_URL)
-//          .then( 
-//             (client : any) => {
-//                 dbConnection = client.db()
-//                 return cb()
-//                 }
-//              )
-//           .catch( (err: any) => {
-//             console.log(err)
-//             return cb(err)
-//         })
-         
-//     },
-//     getDb : () => dbConnection
-// }
