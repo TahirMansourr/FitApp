@@ -1,7 +1,7 @@
 'use server'
 
-import User from "../models/userSchema"
-import { connectToDB } from "../mongoose"
+import User from "../../models/userSchema"
+import { connectToDB } from "../../mongoose"
 
 interface Props{
     userId : string,

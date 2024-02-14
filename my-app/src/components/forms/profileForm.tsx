@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
-import { updateUser } from "@/lib/actions/userActions"
+import { updateUser } from "@/lib/actions/userActions/updateUser"
 import profile from '../../../public/assets/profile.svg'
 import { ChangeEvent, useState } from "react"
 

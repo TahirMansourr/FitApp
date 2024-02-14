@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema({
             ref : 'Challenges'
     }],
     trophies : [{
-        type : String,
+        type :mongoose.Schema.Types.ObjectId,
         ref : 'Trophy'
     }],
     onBoarded : {
