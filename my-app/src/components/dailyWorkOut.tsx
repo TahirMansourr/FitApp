@@ -8,9 +8,11 @@ import { connectToDatabase } from '@/lib/MongoConnection/services'
 // import express from 'express'
 type props = {
   dailyWorkoutFormState : boolean,
-  setDailyWorkoutFormState : Function
+  setIsBlurred :Function,
+  setDailyWorkoutFormState : Function,
+  setIsOpen : Function
 }
-const DailyWorkOut = ({dailyWorkoutFormState , setDailyWorkoutFormState} : props) => {
+const DailyWorkOut = ({dailyWorkoutFormState , setDailyWorkoutFormState , setIsBlurred , setIsOpen} : props) => {
   // const app = express()
   // app.use(express.json())
   
@@ -22,7 +24,8 @@ const DailyWorkOut = ({dailyWorkoutFormState , setDailyWorkoutFormState} : props
       <Button 
       className=' bg-[#164863] rounded-xl mt-3 text-white hover:scale-105 hover:bg-gray shadow-md '
      onClick={() => {setDailyWorkoutFormState(!dailyWorkoutFormState) 
-                     connectToDB()                 
+                     setIsBlurred(true)
+                     setIsOpen(true)                 
     }}
       > Enter today's workout</Button>
      

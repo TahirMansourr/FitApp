@@ -5,10 +5,12 @@ import { Button } from './ui/button'
 
 type Props = {
   dailyDietState : boolean ,
-   setDailyDietState : Function
+  setDailyDietState : Function,
+  setIsBlurred : Function,
+  setIsOpen : Function
 }
 
-const Diet = ({dailyDietState , setDailyDietState} : Props) => {
+const Diet = ({dailyDietState , setDailyDietState , setIsBlurred , setIsOpen} : Props) => {
 
   const [date , setDate] = useState(new Date())
   return (
@@ -17,7 +19,13 @@ const Diet = ({dailyDietState , setDailyDietState} : Props) => {
       <h1>Enter your Meals and i'll make you remember</h1>
      <Button   
      className=' bg-[#164863] rounded-xl mt-3 text-white hover:scale-105 hover:bg-gray shadow-md '
-     onClick={()=> setDailyDietState(!dailyDietState)}
+     onClick={
+      ()=> {setDailyDietState(!dailyDietState)
+            setIsOpen(true)
+            setIsBlurred(true)
+      }
+    
+    }
      >
        <p>what did you eat today?</p>
      </Button>
