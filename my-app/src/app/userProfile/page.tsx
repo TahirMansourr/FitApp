@@ -119,7 +119,7 @@ const UserProfile = () => {
           <div className={ isBlurred ? ' blur-xl flex flex-col items-center gap-5 justify-center'  : 
                                        ' flex flex-col items-center gap-5 justify-center'}>
           <PersonalRecordsComponent/>
-          <ChallengesComponent />
+          <ChallengesComponent  />
           {/* <RenderBarChart/> */}
           
           </div>

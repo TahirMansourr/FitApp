@@ -1,4 +1,3 @@
-'use client'
 import {
     Carousel,
     CarouselContent,
@@ -22,16 +21,17 @@ import {
          DialogTrigger 
         } from "@/components/ui/dialog"
 
-  
-  import { SiAddthis } from "react-icons/si";
-  
-  import React from 'react'
+import { SiAddthis } from "react-icons/si";
 import CardInputComponent from "./forms/ChallengeCard"
 import { challegnArray } from "./arrayofchallenges"
+import CreateChallengeForm from "./forms/createChallengeForm";
+import { currentUser } from "@clerk/nextjs";
+import { useEffect } from "react";
+
   
-  const ChallengesComponent = () => {
+  async function ChallengesComponent() {
 
-
+    //  const user = await currentUser()
 
     return (
       <div className="">
@@ -51,8 +51,8 @@ import { challegnArray } from "./arrayofchallenges"
           {/* <CarouselPrevious />
           <CarouselNext /> */}
         </Carousel>
-        <Dialog className = ' ' >
-                            <DialogTrigger>
+        <Dialog className =' rounded-2xl shadow-xl' >
+                            <DialogTrigger >
                             <div className="p-1">
                             <TooltipProvider>
                                 <Tooltip>
@@ -66,12 +66,14 @@ import { challegnArray } from "./arrayofchallenges"
                               </TooltipProvider>
                             </div>
                             </DialogTrigger>
-                            <DialogContent className = 'bg-slate-500/100 '>
+                            <DialogContent className = 'rounded-2xl border border-emerald-50 bg-[#242c56] text-white shadow-xl '>
                                 <DialogHeader>
-                                <DialogTitle>Are you absolutely sure?</DialogTitle>
+                                <DialogTitle>Create Challenge</DialogTitle>
+                                <div className=" pt-5 pb-3">
+                                  <CreateChallengeForm />
+                                </div>
                                 <DialogDescription>
-                                    This action cannot be undone. This will permanently delete your account
-                                    and remove your data from our servers.
+                                   After you submit this challenge it will be shared with other users
                                 </DialogDescription>
                                 </DialogHeader>
                             </DialogContent>
