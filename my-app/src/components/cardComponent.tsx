@@ -1,3 +1,5 @@
+'use client'
+
 import {
     Carousel,
     CarouselContent,
@@ -14,43 +16,55 @@ import {
   } from "@/components/ui/tooltip"
   import { 
     Dialog,
-     DialogContent,
-      DialogDescription,
-       DialogHeader,
-        DialogTitle,
-         DialogTrigger 
-        } from "@/components/ui/dialog"
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger 
+   } from "@/components/ui/dialog"
 
 import { SiAddthis } from "react-icons/si";
 import CardInputComponent from "./forms/ChallengeCard"
-import { challegnArray } from "./arrayofchallenges"
+// import { challegnArray, generateChallengesArray } from "./arrayofchallenges"
 import CreateChallengeForm from "./forms/createChallengeForm";
 import { currentUser } from "@clerk/nextjs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getAllChallenges } from "@/lib/actions/ChallengeActions/findAllChallenges";
+import { ChallengeItem } from "./arrayofchallenges";
 
   
   async function ChallengesComponent() {
 
-    //  const user = await currentUser()
+    //const challengeLists = await generateChallengesArray()
+     const [challengeLists , setChallengeList] = useState<any>([])
+
+    // useEffect( () => {
+
+    //  async function fetch(){
+    //  const challengeList = await generateChallengesArray()
+    //   setChallengeList(challengeList) 
+    //   }
+    //   fetch()
+     
+    // } , [challengeLists] )
+    
 
     return (
       <div className="">
         <h1>My Challenges</h1>
-        <Carousel className="w-full max-w-xs items-center rounded-lg  dark:shadow-lg">
+        <ChallengeItem/>
+        {/* <Carousel className="w-full max-w-xs items-center rounded-lg  dark:shadow-lg">
           <CarouselContent>
-          {challegnArray.map( (obj , index) => (
+          { challengeLists.length > 0 ? challengeLists.map( (obj : any , index : any) => (
             <CarouselItem 
             key={index}
             className=" p-4 flex justify-center dark:shadow-lg"
             >
              {obj}
             </CarouselItem>
-          ))}
-           
+          )) : <p>Loading...</p> }
           </CarouselContent>
-          {/* <CarouselPrevious />
-          <CarouselNext /> */}
-        </Carousel>
+        </Carousel> */}
         <Dialog className =' rounded-2xl shadow-xl' >
                             <DialogTrigger >
                             <div className="p-1">
