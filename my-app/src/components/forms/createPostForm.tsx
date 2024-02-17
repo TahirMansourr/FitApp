@@ -33,6 +33,7 @@ import { ChangeEvent, useState } from "react"
 import { Textarea } from "../ui/textarea"
 import logo from '../../../public/assets/logo.svg'
 import { LuSend } from "react-icons/lu";
+import { createPost } from "@/lib/actions/postActions/createPost"
 
 interface Props{
 
@@ -44,7 +45,12 @@ const formSchema = z.object({
     }),
   })
 
-const CreateFormPost = () => {
+  interface Props {
+    userId : string,
+    imageUrl : string ,
+    username : string  
+  }
+const CreateFormPost = ({userId , imageUrl , username} : Props) => {
 
     
   const form = useForm<z.infer<typeof formSchema>>({
@@ -53,27 +59,26 @@ const CreateFormPost = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("Form Data:", values);
-    console.log(values)
-
+    await createPost({
+        text : values.post,
+        author : userId
+    })
+    
   }
   
     return(
         <Card className=" w-full">
-            {/* <CardHeader>
-                <CardTitle>Card Title</CardTitle>
-                <CardDescription>Card Description</CardDescription>
-            </CardHeader> */}
             <CardContent>
                 <div>
                     <section className="flex item-center gap-3 mb-3">
                         <Image
-                            src={logo}
+                            src={imageUrl}
                             alt="post creator photo"
                             width={40}
                             height={40}
                             className=" rounded-full"
                             />
-                            <p>this user</p>
+                            <p>{username}</p>
                     </section>
                     <section>
                     <Form {...form}>
@@ -95,6 +100,7 @@ const CreateFormPost = () => {
                                  color="blue" 
                                  className="absolute bottom-[1%] right-4 transform -translate-y-1/2 cursor-pointer"
                                  size={24} // Set the size of the icon
+                                //  onClick={() => onSubmit}
                                  />
                                 </div>
                                 <FormMessage className=" text-red-600" />
