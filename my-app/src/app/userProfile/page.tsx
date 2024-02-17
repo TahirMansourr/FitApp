@@ -28,7 +28,7 @@ const UserProfile = () => {
   // for the motion library
   const [isOpen , setIsOpen] = useState<boolean>(false)
   const variants = {
-    open : {x : 50 , y : -30 , scale : 1.2},
+    open : {x : 50 , y : -60 , scale : 1.2},
     closed : {x : 0 , y : 0}
   }
   
@@ -36,7 +36,7 @@ const UserProfile = () => {
   const [isBlurred , setIsBlurred] = useState<boolean>(false)
 
   return ( 
-    <div className={isBlurred ?' bg-cover bg-center bg-opacity-50 backdrop-blur-2xl flex flex-col justify-center ' : ' flex flex-col justify-center z-50'}>
+    <div className={isBlurred ?' backdrop-blur-2xl flex flex-col justify-center ' : ' flex flex-col justify-center z-50 h-1/2'}>
 
       <div className=' flex  '>
 
@@ -52,7 +52,7 @@ const UserProfile = () => {
       </div>
      
 
-          <div className='flex justify-around items-center mt-10'>
+          <div className='flex justify-around items-center mt-5'>
             <motion.div
                animate = {isOpen ? 'open' : 'closed'}
                variants={variants}
