@@ -29,6 +29,7 @@ export async function updateUser({
             age,
             Height : height,
             Weight : weight,
+            image : profileImage
             
         },
         {upsert : true}

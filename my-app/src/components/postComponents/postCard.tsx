@@ -13,11 +13,16 @@ import heart from '../../../public/assets/heart.svg'
 import reply from '../../../public/assets/reply.svg'
 // import logo from '../../../public/assets/logo.svg'
   
+interface Props{
+    author : string,
+    text : string,
+    imageUrl : string
+}
 
-const PostCard = () => {
+const PostCard = ({author , text , imageUrl} : Props) => {
   return (
-    <div className=" w-full p-6">
-        <Card className=" w-full">
+    <div className=" w-[90%]  p-6">
+        <Card className=" w-full ">
             {/* <CardHeader>
                 <CardTitle>Card Title</CardTitle>
                 <CardDescription>Card Description</CardDescription>
@@ -26,15 +31,15 @@ const PostCard = () => {
                 <div>
                     <section className="flex item-center gap-3 mb-3">
                         <Image
-                            src={logo}
+                            src={imageUrl}
                             alt="post creator photo"
                             width={40}
                             height={40}
                             className=" rounded-full"
                             />
-                            <p>this user</p>
+                            <p>{author}</p>
                     </section>
-                    <section>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim, aspernatur deleniti sunt praesentium provident fuga omnis laudantium ea odit consequatur autem officia adipisci tempora quaerat possimus, aliquam asperiores, placeat quod.</section>
+                    <section> {text} </section>
                 </div>
             </CardContent>
             <CardFooter>

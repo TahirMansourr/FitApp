@@ -19,6 +19,9 @@ import Image from "next/image"
 import { updateUser } from "@/lib/actions/userActions/updateUser"
 import profile from '../../../public/assets/profile.svg'
 import { ChangeEvent, useState } from "react"
+import { isBase64Image } from "@/lib/utils"
+import {useUploadThing} from "@/lib/uploadthing/uploadthing"
+import { useRouter } from "next/navigation"
 
 
 const formSchema = z.object({
@@ -45,6 +48,8 @@ const formSchema = z.object({
 const ProfileForm = ( {user} : Props)=>{
 
   const[files , setFiles] =useState<File[]>([])
+  const {startUpload} = useUploadThing("media")
+  const router = useRouter()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -58,6 +63,16 @@ const ProfileForm = ( {user} : Props)=>{
         console.log("Form Data:", values);
         console.log(values)
 
+        const blob = values.profileImage
+        const hasImageChanged = isBase64Image(blob)
+       
+        // if(hasImageChanged){
+        //   const imgRes = await startUpload(files)
+        //   if(imgRes && imgRes[0].fileurl){
+        //     values.profileImage = imgRes[0].fileurl
+        //   }
+        // }
+
         await updateUser({
          userId : user.id,
          username : values.username,
@@ -67,6 +82,10 @@ const ProfileForm = ( {user} : Props)=>{
          weight : values.weight
         }
         )
+
+        router.push('/userProfile')
+
+        
       }
         //function for handling the choosing image for the onboarding page
       const handleImageChange = ( 
@@ -92,7 +111,7 @@ const ProfileForm = ( {user} : Props)=>{
       }
 
       return(
-        <div className=" w-[500px] rounded-2xl mt-3 bg-[#252b50] text-white p-10">
+        <div className=" w-[500px] rounded-2xl mt-3  bg-gradient-to-tl from-[#161A30] to-[#232e6c] text-white p-10">
         <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
       <FormField
@@ -165,14 +184,9 @@ const ProfileForm = ( {user} : Props)=>{
                 type="number" 
                 className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray w-30"
                  {...field}
-                //  { ...register('age', { valueAsNumber: true } ) }
                  />
               </FormControl>
               </div>
-              
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage className=" text-red-600"/>
             </FormItem>
           )}
@@ -189,14 +203,9 @@ const ProfileForm = ( {user} : Props)=>{
                 placeholder="shadcn" 
                 className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray w-30" 
                 {...field}
-                // { ...register('weight', { valueAsNumber: true } ) }
                 />
               </FormControl>
               </div>
-              
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage className=" text-red-600" />
             </FormItem>
           )}
@@ -213,14 +222,9 @@ const ProfileForm = ( {user} : Props)=>{
                 placeholder="shadcn"
                  className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray w-30" 
                  {...field} 
-                //  { ...register('height', { valueAsNumber: true } ) }
                  />
               </FormControl>
               </div>
-              
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage className=" text-red-600" />
             </FormItem>
           )}

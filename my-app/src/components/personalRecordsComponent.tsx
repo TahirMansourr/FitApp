@@ -26,7 +26,7 @@ const PersonalRecordsComponent = () => {
           
           <CarouselItem key={index} className="pt-1 md:basis-1/2">
             <div className="p-1">
-              <Card className=" shadow-xl bg-[#304D30] text-[#FFBB5C] dark:shadow-md dark:shadow-white">
+              <Card className=" shadow-xl bg-gradient-to-br from-[#113511] to-[#4a8f4a] text-[#FFBB5C] dark:shadow-md dark:shadow-white">
                 <CardContent className="flex items-center justify-center p-6 flex-col">
                   <span className=" font-semibold"><h3>{Object.keys(obj)}</h3></span>
                   <span className="text-xl font-bold"><h1>{Object.values(obj)}</h1></span>
