@@ -7,18 +7,20 @@ const SinglePost =  async ({params} : {params : {id : string}}) => {
    
     const fetchThatPost = await getSinglePost(params.id)
     console.log(fetchThatPost);
-    if (!Array.isArray(fetchThatPost)) {
-        console.log(fetchThatPost);
+    if (!Array.isArray(fetchThatPost)) { // this is because sometime mongodb returns an array and just to make sure it's not
+        // console.log(fetchThatPost);
+        console.log(fetchThatPost?.children)
     if(! fetchThatPost) return null
     
 
   return (
     <div className=" flex flex-col justify-center items-center">
         <PostCard
-            author = {fetchThatPost.author.username}
-            imageUrl= { fetchThatPost.author.image}
+            author = {fetchThatPost.author}
+            // imageUrl= { fetchThatPost.author}
             text= {fetchThatPost.text}
             id = {fetchThatPost._id as string}
+            children= {fetchThatPost.children}
         />
         <CommentComponent
             currentUserImage = {fetchThatPost.author.image}
@@ -26,16 +28,20 @@ const SinglePost =  async ({params} : {params : {id : string}}) => {
             currentUserId = {fetchThatPost.author._id as string}
         />
 
-        {fetchThatPost.children.length > 0 ? 
-            fetchThatPost.children.map(( item : {author : string, imageUrl : string , text: string , id: string}) => {
-                <PostCard
-                    author={item.author}
-                    imageUrl={item.imageUrl}
-                    text = {item.text}
-                    id = {item.id}
-                />
-            })
-        : null}
+//TODO finish the styling here
+        <section className=" w-[90%]  ">
+            {fetchThatPost.children.length > 0 ? 
+                fetchThatPost.children.map(( item :any) => {
+                    return( 
+                    <PostCard
+                        author={item.author}
+                        text = {item.text}
+                        id = {item.id}
+                        children={item.children}
+                    />)
+                })
+            : <h1> there are no comments for this post</h1>}
+        </section>
     </div>
 
   )

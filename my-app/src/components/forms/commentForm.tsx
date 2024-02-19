@@ -16,6 +16,7 @@ import {
 
 import { Textarea } from "../ui/textarea"
 import { createComment } from "@/lib/actions/postActions/createComment"
+import Image from "next/image"
 
 const formSchema = z.object({
     comment: z.string().min(1, {
@@ -60,24 +61,33 @@ const CommentForm = ({
                 name="comment"
                 render={({ field }) => (
                     <FormItem>
-                    <div className="">
-                    {/* <FormLabel>Challenge Name</FormLabel> */}
+                    <div className="flex ">
+                    <FormLabel>
+                      <Image 
+                      src={currentUserImage}
+                      alt="user image"
+                      width={24}
+                      height={24}
+                      className=" rounded full"
+                      />
+                    </FormLabel>
                     <FormControl>
                         <Textarea
                         placeholder="write comment here" 
-                        className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray text-black text-lg " 
+                        className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray text-black text-lg w-full " 
                         {...field}
                         />
                     </FormControl>
+                    <Button 
+                    type="submit"
+                    className=" to-blue-600  rounded-xl"
+                    > Reply</Button>
                     </div>
                     <FormMessage className=" text-red-600" />
                     </FormItem>
                      )}
              />
-                    <Button 
-                    type="submit"
-                    className=" bg-green-700 w-full rounded-xl"
-                    > Create Challenge</Button>
+                    
             </form>
         </Form>
     </div>

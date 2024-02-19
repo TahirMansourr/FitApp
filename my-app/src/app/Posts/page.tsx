@@ -16,9 +16,9 @@ async function Posts(){
       {result.posts.length === 0 ? <h1>loading...</h1> : (
         result.posts.map((item) => (
           <PostCard
-            author={item.author.username}
+            author={item.author}
             text={item.text}
-            imageUrl= {item.author.image}
+            children = {item.children}
             id = {item._id as string}
           />
         ))

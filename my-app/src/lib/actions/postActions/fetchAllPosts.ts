@@ -10,7 +10,7 @@ export async function fetchAllPosts( pageNumber = 1 , pageSize = 20){
     
     const skipAmount = (pageNumber - 1) * pageSize
     const postsQuery = Post.find({parentId : {$in : [null , undefined]}})
-        .sort({createAt : "desc"})
+        .sort({createAt : "asc"})
         .skip(skipAmount)
         .populate({
             path : "author",

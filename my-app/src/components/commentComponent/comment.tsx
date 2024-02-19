@@ -14,7 +14,7 @@ const CommentComponent = ({
 } : Props
 ) => {
   return (
-    <div>
+    <div className='w-[80%]'>
         <CommentForm
              currentUserImage = {currentUserImage}
              currentPostId = {currentPostId}

@@ -29,7 +29,8 @@ export async function updateUser({
             age,
             Height : height,
             Weight : weight,
-            image : profileImage
+            image : profileImage,
+            onBoarded : true
             
         },
         {upsert : true}
