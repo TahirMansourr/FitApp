@@ -33,7 +33,13 @@ const userSchema = new mongoose.Schema({
     onBoarded : {
         type : Boolean,
         default : false
+    },
+    Posts : [
+        {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Post"
     }
+    ]
 
 })
 

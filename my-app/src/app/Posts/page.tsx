@@ -7,8 +7,6 @@ import { Suspense } from "react"
 
 async function Posts(){
 
-  const user = await currentUser()
-  console.log(user?.firstName)
   const result  = await fetchAllPosts(1 ,30)
   if(!result) return;
   
@@ -21,6 +19,7 @@ async function Posts(){
             author={item.author.username}
             text={item.text}
             imageUrl= {item.author.image}
+            id = {item._id as string}
           />
         ))
       )}

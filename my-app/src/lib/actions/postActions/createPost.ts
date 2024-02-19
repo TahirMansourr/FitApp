@@ -18,7 +18,7 @@ export async function createPost({text , author} : Params) {
             author
         })
         
-        await User.findByIdAndUpdate( author , {$push : createPost._id})
+        await User.findByIdAndUpdate( author , { $push : {Posts : createPost._id}}) // this one isn't working yet
     } catch (error:any) {
         throw new Error(`Error at createPost.ts : ${error}`)
     }

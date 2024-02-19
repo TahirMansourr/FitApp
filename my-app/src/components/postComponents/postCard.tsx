@@ -11,22 +11,20 @@ import Image from "next/image"
 import logo from '../../../public/assets/logo.svg'
 import heart from '../../../public/assets/heart.svg'
 import reply from '../../../public/assets/reply.svg'
+import Link from "next/link"
 // import logo from '../../../public/assets/logo.svg'
   
 interface Props{
     author : string,
     text : string,
-    imageUrl : string
+    imageUrl : string,
+    id : string
 }
 
-const PostCard = ({author , text , imageUrl} : Props) => {
+const PostCard = ({author , text , imageUrl , id} : Props) => {
   return (
     <div className=" w-[90%]  p-6">
         <Card className=" w-full ">
-            {/* <CardHeader>
-                <CardTitle>Card Title</CardTitle>
-                <CardDescription>Card Description</CardDescription>
-            </CardHeader> */}
             <CardContent>
                 <div>
                     <section className="flex item-center gap-3 mb-3">
@@ -51,13 +49,16 @@ const PostCard = ({author , text , imageUrl} : Props) => {
                        height={20}
                        className=""
                     />
-                     <Image 
-                       src={reply}
-                       alt="reply"
-                       width={20}
-                       height={20}
-                       className=""
-                    />
+                    <Link href={ `Posts/${id}`} >
+                        <Image 
+                            src={reply}
+                            alt="reply"
+                            width={20}
+                            height={20}
+                            className=""
+                            />
+                    </Link>
+                     
                    {/* <Image 
                        src={}
                        alt=""
