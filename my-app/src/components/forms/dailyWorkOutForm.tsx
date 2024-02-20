@@ -89,7 +89,7 @@ import { fetchUser } from "@/lib/actions/userActions/fetchUser"
         await createMyWorkout({
           caloriesBurnt : values.caloriesBurnt,
           running : values.run,
-          workout : values.trainingHistory,
+          workout : values.todayWorkout,
           runningDistance : values.runningDistance,
           runningDuration : values.runningDuration,
         })
