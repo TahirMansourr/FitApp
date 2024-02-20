@@ -17,6 +17,11 @@
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User'
     },
+    runningDuration : Number,
+    runningDistance: Number
 
 
  })
+
+ const WorkOut = mongoose.models.WorkOut || mongoose.model("WorkOut" , workOutSchema)
+export default WorkOut;

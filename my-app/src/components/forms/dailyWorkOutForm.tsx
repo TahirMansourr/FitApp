@@ -35,6 +35,9 @@ import { Controller } from "react-hook-form"
 import { fromJSON } from "postcss"
 import { TrainingHistory } from "@/DTO"
 import {format} from 'date-fns'
+import { createMyWorkout } from "@/lib/actions/workOutActions/createWorkout"
+import { currentUser } from "@clerk/nextjs"
+import { fetchUser } from "@/lib/actions/userActions/fetchUser"
   
   type props = {
     dailyWorkoutFormState : boolean,
@@ -62,11 +65,11 @@ import {format} from 'date-fns'
     const form = useForm<useformfields>({
       defaultValues: {
         run: false,
-        runningDuration: 0,
-        runningDistance : 0,
+        // runningDuration: 0,
+        // runningDistance : 0,
         caloriesBurnt : 0,
         workout: [
-        ' Chest' ,' Bisceps' ,' Triceps' ,' Back' , 'Shoulders' , 'Legs '
+        ' Chest' ,' Bisceps' ,' Triceps' ,' Back' , 'Shoulders' , 'Legs ' , 'Push Ups' , 'Pull Ups', 'Cardio'
         ],
         todayWorkout : [],
         date : date
@@ -75,14 +78,21 @@ import {format} from 'date-fns'
   
     React.useEffect(() => {
       form.trigger();
-  }, [form.getValues('runningDuration'), form.getValues('runningDistance')]);
+  }, [form.getValues('runningDuration'), form.getValues('runningDistance') , form.getValues('caloriesBurnt')]);
 
-  
-
-    const onSubmit= (values : any) => {
+     
+    const onSubmit= async (values : any) => {
         console.log(values);
         TrainingHistory.push(values)
         console.log(TrainingHistory);
+
+        await createMyWorkout({
+          caloriesBurnt : values.caloriesBurnt,
+          running : values.run,
+          workout : values.trainingHistory,
+          runningDistance : values.runningDistance,
+          runningDuration : values.runningDuration,
+        })
         
       };
     
@@ -113,7 +123,7 @@ import {format} from 'date-fns'
                 render={({ field }) => (
                   <FormItem className="flex flex-row items-center justify-between rounded-lg gap-3  px-4 pt-2">
                   <div className="space-y-0.5">
-                    <FormLabel className="text-base">did u run today?</FormLabel>
+                    <FormLabel className="text-base">Did you run today?</FormLabel>
                   </div>
                   <FormControl>
                     <Switch
@@ -172,13 +182,16 @@ import {format} from 'date-fns'
                                     )}
                                     name="runningDistance"
                                     control={form.control}
-                                />
+                                /><p>KM</p>
                                 </div>
                   </FormControl>
                 </FormItem>
                 )}
               /> 
-              <FormField
+            
+            </div>
+              : null }
+               <FormField
                 control={form.control}
                 name="caloriesBurnt"
                 render={({ field }) => (
@@ -193,9 +206,6 @@ import {format} from 'date-fns'
                 </FormItem>
                 )}
               /> 
-            </div>
-              : null }
-             
                 <label className=" pr-3">choose excersises</label>
                   <Popover open={open} onOpenChange={setOpen} >
                   <PopoverTrigger asChild >
@@ -214,7 +224,7 @@ import {format} from 'date-fns'
                   <PopoverContent className="w-[200px] p-0">
                     <Command>
                       <CommandInput placeholder="Search framework..." />
-                      <CommandEmpty>No framework found.</CommandEmpty>
+                      <CommandEmpty>No excercise found.</CommandEmpty>
                       <CommandGroup>
                         {form.getValues('workout').map((framework) => (
                           <CommandItem
@@ -246,7 +256,8 @@ import {format} from 'date-fns'
                   run = {form.getValues('run')}
                   duration = {form.getValues('runningDuration')}
                   distance = {form.getValues('runningDistance')}
-                  calories = {form.getValues('caloriesBurnt')}                  />
+                  calories = {form.getValues('caloriesBurnt')} 
+                  />
               <Button variant={"secondary"} type="submit" className=" flex">Submit</Button>
             </form>
           </Form>

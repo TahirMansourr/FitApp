@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export async function getCurrentUser(){
-  return currentUser()
+  return await currentUser()
 }
 
 export function isBase64Image(imageData: string) {

@@ -1,7 +1,7 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import Image from 'next/image';
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, currentUser } from "@clerk/nextjs";
 import CardInputComponent from '@/components/forms/ChallengeCard';
 import ChallengesComponent from '@/components/cardComponent';
 import DailyWorkOut from '@/components/dailyWorkOut';
@@ -18,11 +18,15 @@ import ProgressChart from '@/components/progressChart';
 import Example from '@/components/progressChart';
 import {motion} from 'framer-motion'
 import { Scale } from 'lucide-react';
+import { fetchUser } from '@/lib/actions/userActions/fetchUser';
+import { getCurrentUser } from '@/lib/utils';
 
-const UserProfile = () => {
+
+const UserProfile = (userId : string) => {
 
   const [dailyWorkOutFormState , setDailyWorkOutFormState] = useState<boolean>(false)
   const [dailyDietState , setDailyDietState] = useState<boolean>(false)
+  const [theUserId , setUserId] = useState<string>('')
 
 
   // for the motion library

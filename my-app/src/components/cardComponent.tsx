@@ -43,7 +43,7 @@ import { ChallengeItem } from "./arrayofchallenges";
       <div className="">
         <h1>My Challenges</h1>
         <ChallengeItem/>
-        <Dialog className =' rounded-2xl shadow-xl' >
+        <Dialog  >
                             <DialogTrigger >
                             <div className="p-1">
                             <TooltipProvider>
