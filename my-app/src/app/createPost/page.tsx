@@ -14,8 +14,8 @@ async function CreatePost () {
     <div className=' p-4'>
         <CreateFormPost 
         userId={userInfo._id}
-        username = {user.username ? user.username : 'Anonymous User'}
-        imageUrl={user.imageUrl}
+        username = {userInfo.username}
+        imageUrl={userInfo.image}
         />
     </div>
   )

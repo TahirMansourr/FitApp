@@ -21,6 +21,7 @@ const SinglePost =  async ({params} : {params : {id : string}}) => {
             text= {fetchThatPost.text}
             id = {fetchThatPost._id as string}
             children= {fetchThatPost.children}
+            createdAt={ fetchThatPost.createdAt}
         />
         <CommentComponent
             currentUserImage = {fetchThatPost.author.image}
@@ -38,6 +39,7 @@ const SinglePost =  async ({params} : {params : {id : string}}) => {
                         text = {item.text}
                         id = {item.id}
                         children={item.children}
+                        createdAt={item.createdAt}
                     />)
                 })
             : <h1> there are no comments for this post</h1>}

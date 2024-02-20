@@ -31,9 +31,18 @@ const NavBar = () => {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <NavigationMenuLink>Link</NavigationMenuLink>
+          <NavigationMenuTrigger>Posts and Articles</NavigationMenuTrigger>
+          <NavigationMenuContent className=' bg-blue-500 text-white p-10 mt-3 rounded-2xl flex flex-col w-20 gap-3'>
+            <NavigationMenuLink>
+              <Link href={'/Posts'} className=' w-full'>
+                Post Feed
+              </Link>
+            </NavigationMenuLink>
+            <NavigationMenuLink>
+              <Link href={'/createPost'}>
+                Create A new Post or Article
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>

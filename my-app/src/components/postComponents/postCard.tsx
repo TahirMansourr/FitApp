@@ -22,9 +22,10 @@ interface Props{
     text : string,
     id : string
     children? : Object[]
+    createdAt : Date
 }
 
-const PostCard = ({author , text , id , children} : Props) => {
+const PostCard = ({author , text , id , children , createdAt} : Props) => {
   return (
     <div className=" w-[90%]  p-6">
         <Card className=" w-full ">
@@ -78,6 +79,7 @@ const PostCard = ({author , text , id , children} : Props) => {
                        height={}
                        className=""
                     /> */}
+                    <p>{createdAt?.toDateString()}</p>
                 </footer>
             </CardFooter>
         </Card>

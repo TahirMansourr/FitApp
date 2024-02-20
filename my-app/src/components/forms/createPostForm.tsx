@@ -35,9 +35,6 @@ import logo from '../../../public/assets/logo.svg'
 import { LuSend } from "react-icons/lu";
 import { createPost } from "@/lib/actions/postActions/createPost"
 
-interface Props{
-
-}
 
 const formSchema = z.object({
     post: z.string().min(2, {
@@ -48,7 +45,7 @@ const formSchema = z.object({
   interface Props {
     userId : string,
     imageUrl : string ,
-    username : string  
+    username : string 
   }
 const CreateFormPost = ({userId , imageUrl , username} : Props) => {
 

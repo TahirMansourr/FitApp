@@ -20,8 +20,9 @@ import { updateUser } from "@/lib/actions/userActions/updateUser"
 import profile from '../../../public/assets/profile.svg'
 import { ChangeEvent, useState } from "react"
 import { isBase64Image } from "@/lib/utils"
-import {useUploadThing} from "@/lib/uploadthing/uploadthing"
+// import {useUploadThing} from "@/lib/uploadthing/uploadthing"
 import { useRouter } from "next/navigation"
+import { UploadButton } from "@/lib/uploadthing/uploadthing"
 
 
 const formSchema = z.object({
@@ -48,7 +49,7 @@ const formSchema = z.object({
 const ProfileForm = ( {user} : Props)=>{
 
   const[files , setFiles] =useState<File[]>([])
-  const {startUpload} = useUploadThing("media")
+  // const {startUpload} = useUploadThing("media")
   const router = useRouter()
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -139,6 +140,18 @@ const ProfileForm = ( {user} : Props)=>{
                 }
               </FormLabel>
               <FormControl>
+              {/* <UploadButton
+                  endpoint="media"
+                  onClientUploadComplete={(res) => {
+                  
+                    console.log("Files: ", res);
+                    alert("Upload Completed");
+                  }}
+                  onUploadError={(error: Error) => {
+                    // Do something with the error.
+                    alert(`ERROR! ${error.message}`);
+                  }}
+                /> */}
                 <Input
                  placeholder="no fle "
                  className=" " 

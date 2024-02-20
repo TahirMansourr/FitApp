@@ -20,6 +20,7 @@ async function Posts(){
             text={item.text}
             children = {item.children}
             id = {item._id as string}
+            createdAt={item.createdAt}
           />
         ))
       )}
