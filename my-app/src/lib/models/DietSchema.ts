@@ -1,13 +1,20 @@
 import mongoose , { Schema } from 'mongoose'
 
-const Diet = new Schema({
+const DietSchema = new Schema({
     meals : [
         {
-            name : String,
+            meal : String,
             calories : Number,
-            time : Date
+            time : {
+                type : Date,
+                default : Date.now
+            }
         }
     ],
     totalCalories : Number,
     
 })
+
+
+const Diet = mongoose.models.Diet || mongoose.model("Diet" , DietSchema)
+export default Diet;

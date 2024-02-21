@@ -35,6 +35,7 @@ import {
   import { Input } from "@/components/ui/input"
   import { Button } from '../ui/button'
   import RenderBarChart from '../barChart';
+import { createMeal } from '@/lib/actions/DietActions/createMeal';
 
   
 
@@ -59,7 +60,12 @@ const DailyDiet = ({setIsBlurred} : {setIsBlurred : Function}) => {
             tableContent : []
         }
     })
-    const onSubmit = (values : any) => console.log(values); 
+    
+    const onSubmit = async (values : any) => {
+      console.log(values);
+      await createMeal(values.tableContent)
+      
+    } 
     
     
 
