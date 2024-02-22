@@ -44,7 +44,7 @@ const WorkOutHistory = () => {
             <div className=' h-96 w-96  rounded-xl grid grid-cols-2 gap-4 '>
             {weekDays.map(( day , index) => (
                 
-                <Dialog className = ' ' >
+                <Dialog>
                 <DialogTrigger >
                 <div className="p-1">
                 <Card className=' hover:scale-110 hover:shadow-2xl shadow-xl bg-[#190482] text-white dark:shadow-md dark:shadow-white'>
