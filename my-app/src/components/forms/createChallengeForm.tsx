@@ -23,6 +23,7 @@ const formSchema = z.object({
     message: "Challenge name must be at least 2 characters.",
   }),
     body : z.string(),
+    description : z.string()
 })
 
 
@@ -45,7 +46,8 @@ const CreateChallengeForm = () => {
     await createChallenge({
      
       name : values.name,
-      body : values.body
+      body : values.body,
+      description : values.description
     })
   }
   
@@ -74,11 +76,30 @@ const CreateChallengeForm = () => {
         />
       <FormField
           control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <div className="">
+              <FormLabel>Challenge Description</FormLabel>
+              <FormControl>
+                <Input 
+                placeholder="Example : Core Challenge or Chest any Shoulders Challenge" 
+                className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray text-black text-lg " 
+                {...field}
+                />
+              </FormControl>
+              </div>
+              <FormMessage className=" text-red-600" />
+            </FormItem>
+          )}
+        />
+      <FormField
+          control={form.control}
           name="body"
           render={({ field }) => (
             <FormItem>
               <div className=" ">
-              <FormLabel>Challenge Description</FormLabel>
+              <FormLabel>Challenge Body</FormLabel>
               <FormControl>
                 <Textarea
                 placeholder="Describe your challenge here" 

@@ -9,11 +9,18 @@ import {
 } from "@/components/ui/carousel"
 
 import { PersonalRecordsArray } from "@/DTO"
+import { Roboto } from "next/font/google"
+
+const roboto = Roboto({
+  weight :"400",
+  subsets : ["latin"]
+})
 
 const PersonalRecordsComponent = () => {
   return (
-    <div className=" w-full">
-        <h1>My Personal records</h1>
+    <div className={`${roboto.className} w-full`}>
+         <div className=" w-full">
+        <h1 className=" font-bold ">My Personal records</h1>
          <Carousel
       opts={{
         align: "start",
@@ -39,6 +46,8 @@ const PersonalRecordsComponent = () => {
       
     </Carousel>
     </div>
+    </div>
+   
   )
 }
 

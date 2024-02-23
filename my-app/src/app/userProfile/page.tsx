@@ -21,6 +21,7 @@ import { Scale } from 'lucide-react';
 import { fetchUser } from '@/lib/actions/userActions/fetchUser';
 import { getCurrentUser } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import CreateChallenge from '@/components/challengesComponents/createChallenge';
 
 
 const UserProfile = (userId : string) => {
@@ -100,7 +101,7 @@ const UserProfile = (userId : string) => {
                  See My challenges
                  </Button>
                 </Link> 
-                <Link href = '/workoutHistory' >
+                <Link href = '/mealshistory' >
                 <Button 
                     className='  rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
                  
@@ -108,14 +109,16 @@ const UserProfile = (userId : string) => {
                  See My Meals History
                  </Button>
                 </Link> 
-                <Link href = '/workoutHistory' >
-                <Button 
+               {/* <Link href = '/workoutHistory' > */}
+               <CreateChallenge>
+               <Button 
                     className='  rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
-                 
                  > 
                  Create A new Challenge
                  </Button>
-                </Link> 
+               </CreateChallenge>
+                
+                {/* </Link>  */}
                 {/* <WorkOutHistory/> */}
                 {/* </div> */}
            

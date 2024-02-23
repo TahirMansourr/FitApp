@@ -10,10 +10,10 @@ interface Props {
     
     name : string,
     body : string,
-
+    description : string
 }
 
-export async function createChallenge ({ name  , body} : Props){
+export async function createChallenge ({ name  , body ,description} : Props){
   connectToDB()
   try {
 
@@ -27,7 +27,8 @@ export async function createChallenge ({ name  , body} : Props){
     await Challenge.create({
         createdBy : userObjectId._id,
         name,
-        body
+        body,
+       description
     })
     // .populate({
     //     path : "User",
