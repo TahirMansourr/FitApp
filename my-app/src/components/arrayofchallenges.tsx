@@ -32,23 +32,23 @@ export function ChallengeItem() {
 
     return (
         <>
-        <Carousel className="w-full max-w-xs items-center rounded-lg  dark:shadow-lg">
+        <Carousel className="w-full max-w-xs items-center rounded-lg  dark:shadow-lg mb-0 p-0">
             <CarouselContent>
             {challengeFromDb.length > 0 ? (
                 challengeFromDb.map((obj: any, index: number) => (
                     <CarouselItem
                     key={index}
-                    className=" p-4 flex justify-center dark:shadow-lg w-full"
+                    // className=" flex justify-center dark:shadow-lg w-full"
                     >
-                      <Card key={index} className="shadow-xl bg-[#31304D] text-white dark:shadow-md dark:shadow-white w-full">
-                        <CardHeader>
-                            <CardTitle>{obj.name}</CardTitle>
+                      <Card key={index} className="shadow-xl bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white dark:shadow-md dark:shadow-white w-full h-fit">
+                        <CardHeader className=" text-center p-2">
+                            <CardTitle >{obj.name}</CardTitle>
                             <CardDescription>Description will be here</CardDescription>
                         </CardHeader>
                         <CardContent>
                             <p>{obj.body}</p>
                         </CardContent>
-                        <CardFooter className=" p-0  mx-auto">Created by {obj.createdBy.username}</CardFooter>
+                        <CardFooter className=" p-1 mx-auto">Created by :  {obj.createdBy.username}</CardFooter>
                     </Card>
                     </CarouselItem >
                     

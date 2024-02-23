@@ -14,11 +14,9 @@ const Diet = ({dailyDietState , setDailyDietState , setIsBlurred , setIsOpen} : 
 
   const [date , setDate] = useState(new Date())
   return (
-    <div className=' bg-gray bg-opacity-10 p-3 rounded-xl shadow-md mt-3 h-fit flex flex-col items-center'>
-      {/* <h2>{date.toDateString()}</h2> */}
-      <h1>Enter your Meals and i'll make you remember</h1>
+    
      <Button   
-     className=' bg-[#164863] rounded-xl mt-3 text-white hover:scale-105 hover:bg-gray shadow-md '
+     className=' bg-[#164863] rounded-xl mt-3 text-white hover:scale-105shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
      onClick={
       ()=> {setDailyDietState(!dailyDietState)
             setIsOpen(true)
@@ -29,7 +27,7 @@ const Diet = ({dailyDietState , setDailyDietState , setIsBlurred , setIsOpen} : 
      >
        <p>what did you eat today?</p>
      </Button>
-    </div>
+    
     
   )
 }

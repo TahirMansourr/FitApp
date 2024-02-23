@@ -31,7 +31,12 @@ import { currentUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { getAllChallenges } from "@/lib/actions/ChallengeActions/findAllChallenges";
 import { ChallengeItem } from "./arrayofchallenges";
+import { Roboto } from "next/font/google";
 
+const roboto = Roboto({
+  weight :"400",
+  subsets : ["latin"]
+})
   
   async function ChallengesComponent() {
 
@@ -40,39 +45,9 @@ import { ChallengeItem } from "./arrayofchallenges";
 
 
     return (
-      <div className="">
-        <h1>My Challenges</h1>
+      <div className={roboto.className}>
+        <h1>New Challenges</h1>
         <ChallengeItem/>
-        <Dialog  >
-                            <DialogTrigger >
-                            <div className="p-1">
-                            <TooltipProvider>
-                                <Tooltip>
-                                  <TooltipTrigger>
-                                      <SiAddthis size={20} />
-                                  </TooltipTrigger>
-                                  <TooltipContent>
-                                    <p>Create a new challenge</p>
-                                  </TooltipContent>
-                                </Tooltip>
-                              </TooltipProvider>
-                            </div>
-                            </DialogTrigger>
-                            <DialogContent className = 'rounded-2xl border border-emerald-50 bg-[#242c56] text-white shadow-xl '>
-                                <DialogHeader>
-                                <DialogTitle>Create Challenge</DialogTitle>
-                                <div className=" pt-5 pb-3">
-                                  <CreateChallengeForm />
-                                </div>
-                                <DialogDescription>
-                                   After you submit this challenge it will be shared with other users
-                                </DialogDescription>
-                                </DialogHeader>
-                            </DialogContent>
-                            </Dialog>
-      
-
-        
       </div>
     )
   }
@@ -80,3 +55,31 @@ import { ChallengeItem } from "./arrayofchallenges";
   export default ChallengesComponent
 
 
+  // <Dialog  >
+  //                           <DialogTrigger >
+  //                           {/* <div className="p-1">
+  //                           <TooltipProvider>
+  //                               <Tooltip>
+  //                                 <TooltipTrigger>
+  //                                     <SiAddthis size={20} />
+  //                                 </TooltipTrigger>
+  //                                 <TooltipContent>
+  //                                   <p>Create a new challenge</p>
+  //                                 </TooltipContent>
+  //                               </Tooltip>
+  //                             </TooltipProvider>
+  //                           </div> */}
+  //                           </DialogTrigger>
+  //                           <DialogContent className = 'rounded-2xl border border-emerald-50 bg-[#242c56] text-white shadow-xl '>
+  //                               <DialogHeader>
+  //                               <DialogTitle>Create Challenge</DialogTitle>
+  //                               <div className=" pt-5 pb-3">
+  //                                 <CreateChallengeForm />
+  //                               </div>
+  //                               <DialogDescription>
+  //                                  After you submit this challenge it will be shared with other users
+  //                               </DialogDescription>
+  //                               </DialogHeader>
+  //                           </DialogContent>
+  //       </Dialog>
+      

@@ -112,7 +112,7 @@ import { fetchUser } from "@/lib/actions/userActions/fetchUser"
       };
     
       return (
-        <div>
+        <div className="">
           <div className=" text-center">Today's Workout</div>
     
           <Form {...form}>

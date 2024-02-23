@@ -20,6 +20,7 @@ import {motion} from 'framer-motion'
 import { Scale } from 'lucide-react';
 import { fetchUser } from '@/lib/actions/userActions/fetchUser';
 import { getCurrentUser } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 
 const UserProfile = (userId : string) => {
@@ -32,7 +33,7 @@ const UserProfile = (userId : string) => {
   // for the motion library
   const [isOpen , setIsOpen] = useState<boolean>(false)
   const variants = {
-    open : {x : 50 , y : -60 , scale : 1.2},
+    open : {x : 50  },
     closed : {x : 0 , y : 0}
   }
   
@@ -40,9 +41,9 @@ const UserProfile = (userId : string) => {
   const [isBlurred , setIsBlurred] = useState<boolean>(false)
 
   return ( 
-    <div className={isBlurred ?' backdrop-blur-2xl flex flex-col justify-center ' : ' flex flex-col justify-center z-50 h-1/2'}>
+    <div className={isBlurred ?' backdrop-blur-2xl flex flex-col justify-center ' : ' flex flex-col justify-center z-50 '}>
 
-      <div className=' flex  '>
+      {/* <div className=' flex  '>
 
       {trophyArray.map ( (obj , index) => (
 
@@ -53,15 +54,20 @@ const UserProfile = (userId : string) => {
       ))}
 
 
-      </div>
+      </div> */}
      
 
           <div className='flex justify-around items-center mt-5'>
+          <div className='flex flex-col -mt-3'>
+            <h1 className='font-bold '>Activities</h1>
             <motion.div
                animate = {isOpen ? 'open' : 'closed'}
                variants={variants}
             >
-           { !dailyWorkOutFormState && !dailyDietState ? <div className=' flex flex-col gap-3'>
+             
+
+              
+           { !dailyWorkOutFormState && !dailyDietState ? <div className=' grid grid-cols-2 gap-4'>
               <DailyWorkOut 
               dailyWorkoutFormState = {dailyWorkOutFormState}
               setDailyWorkoutFormState = {setDailyWorkOutFormState}
@@ -74,13 +80,48 @@ const UserProfile = (userId : string) => {
               setIsBlurred={setIsBlurred}
               setIsOpen = {setIsOpen}
               />
-                <div className=' bg-[#B6BBC4] bg-opacity-10 p-3  shadow-md mt-3 h-fit rounded-xl flex flex-col items-center'>
-                <Link href = '/workoutHistory' >want to see your training history??</Link> 
-                <WorkOutHistory/>
-                </div>
+                {/* <div className='  bg-gradient-to-br from-gray to-slate-400  p-3 rounded-xl shadow-lg mt-3 h-fit flex flex-col items-center'> */}
+                <Link href = '/workoutHistory' >
+                <Button 
+                      className='  rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
+                 > 
+                 See Training History
+                 </Button>
+     
+                  </Link> 
+                {/* <WorkOutHistory/> */}
+                {/* </div> */}
+                {/* <div className='  bg-gradient-to-br from-gray to-slate-400  p-3 rounded-xl shadow-lg mt-3 h-fit flex flex-col items-center'> */}
+                <Link href = '/workoutHistory' >
+                <Button 
+                    className='  rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
+                 
+                 > 
+                 See My challenges
+                 </Button>
+                </Link> 
+                <Link href = '/workoutHistory' >
+                <Button 
+                    className='  rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
+                 
+                 > 
+                 See My Meals History
+                 </Button>
+                </Link> 
+                <Link href = '/workoutHistory' >
+                <Button 
+                    className='  rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
+                 
+                 > 
+                 Create A new Challenge
+                 </Button>
+                </Link> 
+                {/* <WorkOutHistory/> */}
+                {/* </div> */}
            
-            </div> : dailyWorkOutFormState ?
-            <div className=' bg-gray bg-opacity-10 p-5 shadow-lg rounded-xl w-96 max-h-fit   '>
+            </div>
+             : dailyWorkOutFormState ?
+            <div className=' text-white bg-gradient-to-br from-gray to-slate-400  p-3 rounded-xl shadow-lg mt-3 h-fit flex flex-col items-center'>
 
               {dailyWorkOutFormState ? 
               <div 
@@ -100,7 +141,7 @@ const UserProfile = (userId : string) => {
                />
             </div>
             : dailyDietState ? 
-            <div className='  bg-[#B6BBC4] bg-opacity-10 p-5 shadow-lg rounded-xl w-96 max-h-fit '>
+            <div className='   bg-gradient-to-br from-gray to-slate-400 p-5 shadow-lg rounded-xl w-96  '>
               
               {dailyDietState ? 
               <div 
@@ -119,13 +160,13 @@ const UserProfile = (userId : string) => {
               </div>
          
              : null }
+            
               </motion.div>
-          <div className={ isBlurred ? ' blur-xl flex flex-col items-center gap-5 justify-center'  : 
-                                       ' flex flex-col items-center gap-5 justify-center'}>
+              </div>
+          <div className={ isBlurred ? ' blur-xl flex flex-col items-center gap-5 justify-center '  : 
+                                       ' flex flex-col items-center gap-5 justify-center mt-3 '}>
           <PersonalRecordsComponent/>
           <ChallengesComponent  />
-          {/* <RenderBarChart/> */}
-          
           </div>
         </div>
        
