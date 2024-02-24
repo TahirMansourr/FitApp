@@ -93,7 +93,7 @@ const UserProfile = (userId : string) => {
                 {/* <WorkOutHistory/> */}
                 {/* </div> */}
                 {/* <div className='  bg-gradient-to-br from-gray to-slate-400  p-3 rounded-xl shadow-lg mt-3 h-fit flex flex-col items-center'> */}
-                <Link href = '/workoutHistory' >
+                <Link href = '/mychallenges' >
                 <Button 
                     className='  rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
                  
