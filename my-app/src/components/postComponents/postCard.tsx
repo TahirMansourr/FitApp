@@ -18,6 +18,7 @@ interface Props{
     author : {
         username : string,
         image : string,
+        _id : string
     },
     text : string,
     id : string
@@ -39,7 +40,9 @@ const PostCard = ({author , text , id , children , createdAt} : Props) => {
                             height={40}
                             className=" rounded-full"
                             />
-                            <p  className=" font-bold text-xl font-serif">{author.username}</p>
+                            <Link href = {`/Profile/${author._id}`}>
+                                 <p  className=" font-bold text-xl font-serif">{author.username}</p>
+                            </Link>
                     </section>
                     <section> {text} </section>
                 </div>

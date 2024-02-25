@@ -1,9 +1,5 @@
 import PostCard from "@/components/postComponents/postCard"
 import { fetchAllPosts } from "@/lib/actions/postActions/fetchAllPosts"
-import { currentUser } from "@clerk/nextjs"
-import { Suspense } from "react"
-
-
 
 async function Posts(){
 
