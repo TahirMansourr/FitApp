@@ -11,11 +11,11 @@ async function CreatePost () {
     const userInfo = await fetchUser({userId : user.id})
 
   return (
-    <div className=' p-4'>
+    <div className=' p-10 pt-28'>
         <CreateFormPost 
         userId={userInfo._id}
         username = {userInfo.username}
-        imageUrl={userInfo.image}
+        imageUrl={user.imageUrl}
         />
     </div>
   )

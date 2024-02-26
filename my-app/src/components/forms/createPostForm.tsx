@@ -97,7 +97,7 @@ const CreateFormPost = ({userId , imageUrl , username} : Props) => {
                                  color="blue" 
                                  className="absolute bottom-[1%] right-4 transform -translate-y-1/2 cursor-pointer"
                                  size={24} // Set the size of the icon
-                                //  onClick={() => onSubmit}
+                                 onClick={() => form.handleSubmit(onSubmit)()}
                                  />
                                 </div>
                                 <FormMessage className=" text-red-600" />
@@ -105,10 +105,10 @@ const CreateFormPost = ({userId , imageUrl , username} : Props) => {
                             )}
                             />
                         
-                            <Button 
+                            {/* <Button 
                             type="submit"
                             className=" bg-blue-500 text-white rounded-xl"
-                            > Post</Button>
+                            > Post</Button> */}
                         </form>
                         </Form>
                     </section>

@@ -36,7 +36,7 @@ const MealHistory =  () => {
     } , [])
 
   return (
-    <div className=" flex items-center justify-center p-10">
+    <div className=" flex items-center justify-center p-10 pt-20">
         <Suspense fallback = {<Loading/>}>
         <Table>
             <TableCaption>A list containing all your meals.</TableCaption>

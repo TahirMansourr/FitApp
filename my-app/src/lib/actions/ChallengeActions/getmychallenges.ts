@@ -3,6 +3,7 @@
 import { currentUser } from "@clerk/nextjs"
 import { fetchUser } from "../userActions/fetchUser"
 import Challenge from "@/lib/models/ChallengeSchema"
+import User from "@/lib/models/userSchema"
 
 export async function GetMyChallenges() {
     try {
@@ -14,10 +15,16 @@ export async function GetMyChallenges() {
 
         const populatedUser = await mongoUser.populate({
             path : "challenges",
-            model : Challenge    
+            model : Challenge ,
+            populate : {
+                path : 'createdBy',
+                model : User
+            }   
         })
 
-        return populatedUser.challenges
+        
+
+         return populatedUser.challenges
     } catch (error: any) {
         throw new Error(`error at getmychallenges.ts : ${error}`)
     }

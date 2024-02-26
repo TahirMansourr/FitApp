@@ -52,7 +52,7 @@ const WorkOutHistory = () => {
   } , [])
 
   return (
-    <div className={ isBlurred ? 'blur-xl flex justify-around items-center mt-6 p-5' 
+    <div className={ isBlurred ? 'blur-xl flex justify-around items-center pt-20 p-5' 
     : 'flex justify-around items-center mt-6 p-5 '}>
         <div className=' flex justify-center bg-opacity-10'>
             <div className=' h-96 w-96  rounded-xl grid grid-cols-2 gap-4 '>

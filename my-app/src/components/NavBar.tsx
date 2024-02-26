@@ -1,24 +1,34 @@
-'use client'
-import { UserButton } from '@clerk/nextjs'
+import { UserButton, currentUser } from '@clerk/nextjs'
 import  Link  from 'next/link'
 import React from 'react'
 import { ModeToggle } from './themeTogller'
+
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu"
+  Menubar,
+  MenubarCheckboxItem,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
+} from "@/components/ui/menubar"
+import { fetchUser } from '@/lib/actions/userActions/fetchUser'
+ 
+const NavBar = async () => {
 
-
-const NavBar = () => {
+  const user = await currentUser()
+  if(!user) return null
+  const mongoUser = await fetchUser({userId : user.id})
+  if(!mongoUser) return null
   return (
-   <div className='flex justify-between px-6 pt-5 pb-3 
-   align-baseline mx-6 shadow-md rounded-2xl mt-3 
+   <div className=' fixed top-0 left-0  w-[95%] z-50 flex justify-between px-6 pt-5 pb-3 
+   align-baseline ml-6 shadow-md rounded-2xl mt-3 
    bg-gradient-to-r from-[#161A30] to-[#232e6c]
    bg- text-white dark:bg-gray
     dark:shadow-slate-500 dark:shadow-md '>
@@ -28,40 +38,43 @@ const NavBar = () => {
         FITNESS APP
     </div>
     <div className=' flex justify-between gap-6  '>
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Posts and Articles</NavigationMenuTrigger>
-          <NavigationMenuContent className=' bg-blue-500 text-white p-10 mt-3 rounded-2xl flex flex-col w-20 gap-3'>
-            <NavigationMenuLink>
-              <Link href={'/Posts'} className=' w-full'>
-                Post Feed
-              </Link>
-            </NavigationMenuLink>
-            <NavigationMenuLink>
-              <Link href={'/createPost'}>
-                Create A new Post or Article
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <NavigationMenuLink>Link</NavigationMenuLink>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem >
-          <NavigationMenuTrigger>My profile</NavigationMenuTrigger>
-          
-          <NavigationMenuContent className=' bg-gray flex flex-col p-5 w-fit   '>
-            <NavigationMenuLink>My acheivments</NavigationMenuLink>
-            <Link href = '/userProfile'>Profile</Link>
-            <NavigationMenu>My Personal Records</NavigationMenu>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+    <Menubar className=' border-none'>
+      <MenubarMenu >
+        <MenubarTrigger>Posts</MenubarTrigger>
+        <MenubarContent className=' border-none flex flex-col justify-start mt-3 bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white rounded-xl'>
+          <MenubarItem className=' hover: cursor-pointer'>
+          <Link href={'/createPost'}>
+          Create a New Post 
+          </Link>
+          </MenubarItem>
+          <MenubarItem>
+          <Link href={'/Posts'}>
+              Post Feed 
+          </Link>
+          </MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+      <MenubarMenu>
+        <MenubarTrigger>Profile</MenubarTrigger>
+        <MenubarContent  className=' border-none flex flex-col justify-start mt-3 bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white rounded-xl'>
+          <MenubarItem>
+           <Link href = {`/Profile/${mongoUser._id}`}>
+             My profile
+           </Link>
+          </MenubarItem>
+          <MenubarItem>
+          <Link href = {''}>
+              Manage my profile
+          </Link>
+          </MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+      <MenubarMenu>
+        <Link href={'/userProfile'}>
+        <MenubarTrigger className='hover: cursor-pointer'>Action Page</MenubarTrigger>
+        </Link>
+      </MenubarMenu>
+    </Menubar>
 
         
     </div>

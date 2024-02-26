@@ -57,7 +57,7 @@ const PostCard = ({author , text , id , children , createdAt} : Props) => {
                        className=""
                     //    onClick={ add a todo here for the likes}
                     />
-                    <Link href={ `Posts/${id}`} className="flex gap-1">
+                    <Link href={ `Posts/${id}`}  replace className="flex gap-1">
                         <Image 
                             src={reply}
                             alt="reply"

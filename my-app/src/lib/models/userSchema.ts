@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
     age : Number,
     Weight : Number,
     Height : Number,
+    status : String, // this is to show if he is a coach or a personal trainer or whatever
     communities : [
         {
             type : mongoose.Schema.Types.ObjectId,
@@ -51,7 +52,24 @@ const userSchema = new mongoose.Schema({
             type : mongoose.Schema.Types.ObjectId,
             ref : "Diet"
         }
-    ]
+    ],
+    createdChallenges : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Challenges'
+    }],
+    followers : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'User'
+    }],
+    following : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'User'
+    }],
+    completedChallenges : [{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Challenges'
+    }],
+
 
 })
 

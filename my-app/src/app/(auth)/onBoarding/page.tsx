@@ -16,7 +16,7 @@ import { currentUser } from "@clerk/nextjs";
     }
 
   return (
-    <div className=" flex justify-center items-center align-middle ">
+    <div className=" flex justify-center items-center align-middle pt-20 pb-2  ">
         <ProfileForm user = {userData as {id : string , username : string , profilePicture : string}} />
     </div>
   )

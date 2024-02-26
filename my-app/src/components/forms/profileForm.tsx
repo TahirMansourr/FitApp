@@ -168,8 +168,8 @@ const ProfileForm = ( {user} : Props)=>{
           control={form.control}
           name="username"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
+            <FormItem className="">
+              <FormLabel >Username</FormLabel>
               <FormControl>
                 <Input 
                 placeholder="shadcn" 
@@ -195,7 +195,7 @@ const ProfileForm = ( {user} : Props)=>{
                 <Input 
                 placeholder="age" 
                 type="number" 
-                className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray w-30"
+                className=" rounded-2xl bg-white shadow-sm text-black placeholder:text-gray w-30"
                  {...field}
                  />
               </FormControl>
@@ -214,7 +214,7 @@ const ProfileForm = ( {user} : Props)=>{
               <FormControl>
                 <Input 
                 placeholder="shadcn" 
-                className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray w-30" 
+                className=" m-0 rounded-2xl bg-white shadow-sm text-black placeholder:text-gray w-30" 
                 {...field}
                 />
               </FormControl>
@@ -230,10 +230,10 @@ const ProfileForm = ( {user} : Props)=>{
             <FormItem>
               <div className=" flex items-center gap-4">
               <FormLabel>Height</FormLabel>
-              <FormControl>
+              <FormControl >
                 <Input 
                 placeholder="shadcn"
-                 className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray w-30" 
+                 className=" m-0 rounded-2xl bg-white shadow-sm text-black placeholder:text-gray w-30" 
                  {...field} 
                  />
               </FormControl>

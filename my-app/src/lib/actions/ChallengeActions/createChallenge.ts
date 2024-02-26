@@ -24,16 +24,17 @@ export async function createChallenge ({ name  , body ,description} : Props){
         
     }
     const userObjectId = await fetchUser({userId : user.id})
-    await Challenge.create({
+    const newChallenge = await Challenge.create({
         createdBy : userObjectId._id,
         name,
         body,
        description
     })
-    // .populate({
-    //     path : "User",
-    //     model : User
-    // })
+    
+    await newChallenge.save()
+    await userObjectId.createdChallenges.push(newChallenge._id)
+    await userObjectId.save()
+    
   } catch (error : any) {
     throw new Error(`Error at creating Challenge in createChallenge.ts : ${error.message}`)
   }

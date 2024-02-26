@@ -42,7 +42,7 @@ const UserProfile = (userId : string) => {
   const [isBlurred , setIsBlurred] = useState<boolean>(false)
 
   return ( 
-    <div className={isBlurred ?' backdrop-blur-2xl flex flex-col justify-center ' : ' flex flex-col justify-center z-50 '}>
+    <div className={isBlurred ?' backdrop-blur-2xl flex flex-col justify-center pt-20' : ' flex flex-col justify-center z-50 pt-20 '}>
 
       {/* <div className=' flex  '>
 

@@ -1,5 +1,6 @@
 'use server'
 
+import Challenge from "@/lib/models/ChallengeSchema"
 import Post from "@/lib/models/PostSchema"
 import User from "@/lib/models/userSchema"
 import { connectToDB } from "@/lib/mongoose"
@@ -12,10 +13,14 @@ export async function fetchUserWithMongoId( { userId } : { userId : string}){
         path : 'Posts' ,
         model : Post
      })
-    //  .populate({
-    //     path : 'communities',
-    //     model : Community
-    //  })
+     .populate({
+        path : 'createdChallenges',
+        model :Challenge
+     })
+     .populate({
+        path : 'completedChallenges',
+        model :Challenge
+     })
     // .populate({
 
     // })

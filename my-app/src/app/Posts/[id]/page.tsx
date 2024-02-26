@@ -14,7 +14,7 @@ const SinglePost =  async ({params} : {params : {id : string}}) => {
     
 
   return (
-    <div className=" flex flex-col justify-center items-center">
+    <div className=" flex flex-col justify-center items-center pt-20">
         <PostCard
             author = {fetchThatPost.author}
             // imageUrl= { fetchThatPost.author}

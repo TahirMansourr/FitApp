@@ -1,3 +1,4 @@
+
 import { GetMyChallenges } from '@/lib/actions/ChallengeActions/getmychallenges'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import React from 'react'
@@ -10,15 +11,17 @@ import {
     DialogTitle,
     DialogTrigger 
    } from "@/components/ui/dialog"
+import { completeChallenge } from '@/lib/actions/ChallengeActions/completeChallenge';
+import BFC from '@/components/profileChallengeComponent';
 
 const MyChallenges = async () => {
 
     const challenges = await GetMyChallenges()
     console.log(challenges);
-    
+
     
   return (
-    <div className='flex justify-around items-center p-10 gap-7'>
+    <div className='flex justify-around items-center p-10 pt-20 gap-7'>
           <div className=' mt-5 grid grid-cols-2 gap-6 ml-2'>
         {
             challenges && challenges.map((obj : any , index : number) => (
@@ -49,16 +52,13 @@ const MyChallenges = async () => {
                          <div>
                          {obj.description}
                         </div> 
-                        {/* <TooltipProvider>
-                            <Tooltip>
-                            <TooltipTrigger>
-                                <p onClick={() => handleClick(obj._id)}>+</p>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                <p>Participate to this challenge</p>
-                            </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider> */}
+                        <BFC challengeId = {obj._id}/>
+                        {/* <div 
+                        className=' px-3 bg-green-500 rounded-xl py-1'
+                        onClick={() => handleComplete(obj._id)}
+                        >
+                            COMPLETED
+                        </div> */}
                           {` created by : ${obj.createdBy.username}`}
                         </DialogDescription>
                     </DialogHeader>

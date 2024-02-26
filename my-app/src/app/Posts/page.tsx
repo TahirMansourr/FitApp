@@ -8,7 +8,7 @@ async function Posts(){
   
   
   return (
-    <div className="flex flex-col justify-center items-center align-middle w-full">
+    <div className="flex flex-col justify-center items-center align-middle w-full mt-20">
       {result.posts.length === 0 ? <h1>loading...</h1> : (
         result.posts.map((item) => (
           <PostCard
