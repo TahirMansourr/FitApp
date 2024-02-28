@@ -52,6 +52,8 @@ const ProfileForm = ( {user} : Props)=>{
   // const {startUpload} = useUploadThing("media")
   const router = useRouter()
 
+  const [steps , setSteps] = useState(1)
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -60,6 +62,13 @@ const ProfileForm = ( {user} : Props)=>{
         },
       })
 
+    const handleNext = ()=>{
+      setSteps(steps + 1)
+    }
+
+    const handlePrev = ()=>{
+      setSteps(steps - 1)
+    }
      async function onSubmit(values: z.infer<typeof formSchema>) {
         console.log("Form Data:", values);
         console.log(values)
@@ -115,7 +124,10 @@ const ProfileForm = ( {user} : Props)=>{
         <div className=" w-[500px] rounded-2xl mt-3  bg-gradient-to-tl from-[#161A30] to-[#232e6c] text-white p-10">
         <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-      <FormField
+       
+      { steps === 1 ? 
+          <section>
+          <FormField
           control={form.control}
           name="profileImage"
           render={({ field }) => (
@@ -184,12 +196,26 @@ const ProfileForm = ( {user} : Props)=>{
             </FormItem>
           )}
         />
+        <Button 
+        className=" bg-green-300 rounded-xl px-7 text-center hover:bg-green-600 shadow-xl m-2 ml-[75%]"
+        onClick={ handleNext}
+        >
+          Next
+        </Button>
+        </section>
+       : null   }
+       {steps === 2 ? 
+       
+       <section>
+
+        <h1 className=" text-center mb-10">Personal Information</h1>
+      
         <FormField
           control={form.control}
           name="age"
           render={({ field }) => (
             <FormItem>
-              <div className=" flex items-center gap-8">
+              <div className="  mb-2 flex items-center gap-8">
               <FormLabel>Age</FormLabel>
               <FormControl>
                 <Input 
@@ -209,7 +235,7 @@ const ProfileForm = ( {user} : Props)=>{
           name="weight"
           render={({ field }) => (
             <FormItem>
-              <div className=" flex items-center gap-3">
+              <div className=" mb-2 flex items-center gap-3">
               <FormLabel>Weight</FormLabel>
               <FormControl>
                 <Input 
@@ -242,8 +268,17 @@ const ProfileForm = ( {user} : Props)=>{
             </FormItem>
           )}
         />
-       
-        <Button className=" ml-[75%] bg-white text-blue-700 rounded-2xl shadow-xl" type="submit">Submit</Button>
+        <div className=" flex justify-between items-center mt-5">
+        <Button 
+        className=" bg-green-300 rounded-xl px-7 text-center hover:bg-green-600 shadow-xl m-2 "
+        onClick={handlePrev}
+        >
+          Prev
+        </Button>
+        <Button className=" bg-white text-blue-700 rounded-2xl shadow-xl" type="submit">Submit</Button>
+        </div>
+        
+        </section> : null }
       </form>
     </Form>
 

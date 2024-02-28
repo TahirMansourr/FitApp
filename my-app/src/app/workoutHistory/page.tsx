@@ -53,7 +53,7 @@ const WorkOutHistory = () => {
 
   return (
     <div className={ isBlurred ? 'blur-xl flex justify-around items-center pt-20 p-5' 
-    : 'flex justify-around items-center mt-6 p-5 '}>
+    : 'flex justify-around items-center  pt-28 p-5 '}>
         <div className=' flex justify-center bg-opacity-10'>
             <div className=' h-96 w-96  rounded-xl grid grid-cols-2 gap-4 '>
             { response?.length === 0 ? <h1>loading...</h1> : response?.slice(0,8).map(( day , index) => (
@@ -99,8 +99,8 @@ const WorkOutHistory = () => {
               </div>
         </div>
         
-        <div className='flex flex-col gap-6'>
-        <div className=''>
+        <div className='flex flex-col gap-6 justify-center items-center'>
+        <Button className=' bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white px-4 py-2 rounded-xl hover:scale-105 shadow-xl'>
             <h1>See all of your trainings</h1>
                 {/* <Calendar
                     mode="single"
@@ -108,17 +108,20 @@ const WorkOutHistory = () => {
                     onSelect={setDate}
                     className="rounded-xl bg-[#190482] text-white"
                 /> */}
+        </Button>
         <div>
         <Drawer onClose={() => setIsBlurred(false)}> {/* Update state when drawer is closed */}
             <DrawerTrigger>
-                <Button onClick={toggleDrawer}>
+                <Button
+                className=' bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white px-4 py-2 rounded-xl hover:scale-105 shadow-xl'
+                onClick={toggleDrawer}>
                     See Training days burnt Calories
                 </Button>
             </DrawerTrigger>
-            <DrawerContent>
+            <DrawerContent className=' bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white opacity-85'>
                 <DrawerHeader>
-                <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                <DrawerDescription>This action cannot be undone.</DrawerDescription>
+                <DrawerTitle>Burnt calories in your training sessions</DrawerTitle>
+                <DrawerDescription>Keep up the hard work</DrawerDescription>
                 </DrawerHeader>
                      <div className=' flex justify-center items-center'>
                 <RenderBarChart/>
@@ -126,13 +129,13 @@ const WorkOutHistory = () => {
                 <DrawerFooter>
                 <Button>Submit</Button>
                 <DrawerClose>
-                    <Button variant="outline">Cancel</Button>
+                    <Button variant="outline" className=' rounded-xl'>Close</Button>
                 </DrawerClose>
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>
         </div>
-    </div>
+    
   </div>
 </div>
   )

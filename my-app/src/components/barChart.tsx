@@ -8,13 +8,13 @@ const data = [
 
 const RenderBarChart = () => (
   <BarChart width={600} height={200} data={data} className=''>
-    <XAxis dataKey="name" stroke="#607274" />
-    <YAxis />
-    <Tooltip wrapperStyle={{ width: 150, backgroundColor: '#ccc' }} />
+    <XAxis dataKey="name" stroke="white" />
+    <YAxis stroke='white' />
+    <Tooltip wrapperStyle={{ width: 150, backgroundColor: '#ccc', color : 'black' }} />
     {/* <Legend width={100} wrapperStyle={{ top: 0, right: 20, backgroundColor: '#f5f5f5', border: '1px solid #d5d5d5', borderRadius: 3, lineHeight: '40px' }} /> 
      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" /> */}
-    <Bar dataKey="cals" fill="#607274" barSize={40} />
-    <Bar dataKey="calintake" fill="#607274" barSize={10} />
+    <Bar dataKey="cals" fill="white" barSize={40} className=' rounded-xl' />
+    <Bar dataKey="calintake" fill="white" barSize={10} />
   </BarChart>
 );
 
