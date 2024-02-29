@@ -2,6 +2,7 @@
 import { GetMyChallenges } from '@/lib/actions/ChallengeActions/getmychallenges'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import React from 'react'
+import {format} from 'date-fns'
 import { 
     Dialog,
     DialogContent,
@@ -21,6 +22,7 @@ import { completeChallenge } from '@/lib/actions/ChallengeActions/completeChalle
 import BFC from '@/components/profileChallengeComponent';
 import { ObjectId } from 'mongoose';
 import { GetMyCreatedChallenges } from '@/lib/actions/ChallengeActions/getMyCreatedChallenges';
+import DeletehthisChallenge from '@/components/challengesComponents/deletebutton';
 
 const MyChallenges = async () => {
 
@@ -35,7 +37,7 @@ const MyChallenges = async () => {
   return (
     <div className='flex flex-col p-10 pt-24 gap-7'>
          <div>
-        <Tabs defaultValue="Challenges I'm In">
+        <Tabs defaultValue="myChallenges">
             <div className="mx-auto w-fit">
             <TabsList className=' mx-auto'>
                 <TabsTrigger value="myChallenges"> myChallenges </TabsTrigger>
@@ -107,7 +109,7 @@ const MyChallenges = async () => {
                         <p>{obj.body.slice(0,50)} {obj.body.length > 50 ?' ...' : null}</p>
                     </CardContent>
                     <CardFooter className=" p-1 mb-2 mx-auto">
-                        Created by :  {obj.createdBy.username}
+                        Created AT :  {format(obj.createdAt , 'dd/MM/yyy  HH:mm')}
                     </CardFooter>
                 </Card>
                 </DialogTrigger>
@@ -123,8 +125,7 @@ const MyChallenges = async () => {
                          <div>
                          {obj.description}
                         </div> 
-                        {/* <BFC challengeId = {obj._id as ObjectId}/>
-                          {` created by : ${obj.createdBy.username}`} */}
+                        <DeletehthisChallenge id = {obj._id}/>
                         </DialogDescription>
                     </DialogHeader>
                 </DialogContent>
