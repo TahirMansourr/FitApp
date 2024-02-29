@@ -1,25 +1,15 @@
 'use client'
-import React, { useState , useEffect } from 'react'
-import Image from 'next/image';
-import { UserButton, currentUser } from "@clerk/nextjs";
-import CardInputComponent from '@/components/forms/ChallengeCard';
+import React, { useState } from 'react'
 import ChallengesComponent from '@/components/cardComponent';
 import DailyWorkOut from '@/components/dailyWorkOut';
 import Diet from '@/components/diet';
 import DailyWorkOutForm from '@/components/forms/dailyWorkOutForm';
 import Link from 'next/link';
 import PersonalRecordsComponent from '@/components/personalRecordsComponent';
-import WorkOutHistory from '@/components/workOutHistory';
 import { IoIosArrowBack } from "react-icons/io";
-import RenderBarChart from '@/components/barChart';
 import DailyDiet from '@/components/forms/DailyDiet';
 import transparent from '../.././../public/transparent.jpg'
-import ProgressChart from '@/components/progressChart';
-import Example from '@/components/progressChart';
 import {motion} from 'framer-motion'
-import { Scale } from 'lucide-react';
-import { fetchUser } from '@/lib/actions/userActions/fetchUser';
-import { getCurrentUser } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import CreateChallenge from '@/components/challengesComponents/createChallenge';
 

@@ -13,7 +13,7 @@ const BFC = ( challengeId : any) => {
   return (
     <div>
         <Button 
-        className=' bg-green-400 rounded-lg'
+        className='  bg-gradient-to-br from-green-700 to-green-500  rounded-xl shadow-xl'
         onClick={ () => handleComplete(challengeId)}
         >
             completed

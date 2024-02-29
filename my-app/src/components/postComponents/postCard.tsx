@@ -12,6 +12,9 @@ import logo from '../../../public/assets/logo.svg'
 import heart from '../../../public/assets/heart.svg'
 import reply from '../../../public/assets/reply.svg'
 import Link from "next/link"
+import { Button } from "../ui/button"
+import { DeletePost } from "@/lib/actions/postActions/deletePost"
+import DeleteButton from "./deleteButton"
 // import logo from '../../../public/assets/logo.svg'
   
 interface Props{
@@ -23,10 +26,16 @@ interface Props{
     text : string,
     id : string
     children? : Object[]
-    createdAt : Date
+    createdAt : Date,
+    shouldDelete? : boolean
 }
 
-const PostCard = ({author , text , id , children , createdAt} : Props) => {
+const PostCard = ({author , text , id , children , createdAt , shouldDelete} : Props) => {
+
+    // async function handleDelete(){
+    //     await DeletePost(id)
+    // }
+
   return (
     <div className=" w-[90%]  p-6">
         <Card className=" w-full ">
@@ -48,7 +57,7 @@ const PostCard = ({author , text , id , children , createdAt} : Props) => {
                 </div>
             </CardContent>
             <CardFooter>
-                <footer className="flex gap-3.5">
+                <footer className="flex gap-3.5 items-center">
                     <Image 
                        src={heart}
                        alt="likes image"
@@ -83,6 +92,9 @@ const PostCard = ({author , text , id , children , createdAt} : Props) => {
                        className=""
                     /> */}
                     <p>{createdAt?.toDateString()}</p>
+                    {shouldDelete && 
+                    <DeleteButton id = {id as string}/>
+                    }
                 </footer>
             </CardFooter>
         </Card>

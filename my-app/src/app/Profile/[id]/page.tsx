@@ -12,6 +12,8 @@ import { Roboto } from 'next/font/google'
 import { fetchUserWithMongoId } from '@/lib/actions/userActions/findMongoUser'
 import PostCard from '@/components/postComponents/postCard'
 import TabsComponent from '@/components/tabsComponent'
+import { currentUser } from '@clerk/nextjs'
+import { fetchUser } from '@/lib/actions/userActions/fetchUser'
 
 const roboto = Roboto({
   weight : "500",
@@ -20,10 +22,26 @@ const roboto = Roboto({
 
 const MyProfile = async ({params} : {params : {id : string}}) => {
 
+  let shouldDelete;
   const passedUser = await fetchUserWithMongoId({userId : params.id})
   if(!passedUser) return null
 
+  const user = await currentUser()
+  if(!user) return null
+
+  const mongoUser = await fetchUser({userId : user.id})
+  if(!mongoUser) return null
+  if (params.id == mongoUser._id){
+    shouldDelete = true
+  }
+  else{
+    shouldDelete = false
+  }
+  
+
   console.log(passedUser.username);
+  console.log(shouldDelete);
+  
   
     
   return (
@@ -71,25 +89,11 @@ const MyProfile = async ({params} : {params : {id : string}}) => {
         </div>
        </div> 
       </div>
-     
-     <div className=' w-[40rem] mx-auto h-1 bg-slate-500 rounded-full shadow-lg'>
-
-     </div>
-     {/* <div className=' flex gap-5 justify-center mt-3'>
-     <div className=' flex flex-col items-center'>
-          <p  className=' text-2xl' >{passedUser.Posts? passedUser.Posts.length : 'x'}</p>
-          <p>Posts</p>
-      </div>
-      <div className=' flex flex-col items-center'>
-          <p  className=' text-2xl'>{passedUser.createdChallenges? passedUser.createdChallenges.length : 'x'}</p>
-          <p>Challenges Created</p>
-      </div>
-      <div className=' flex flex-col items-center'>
-          <p  className=' text-2xl'>{passedUser.completedChallenges? passedUser.completedChallenges.length : 'x'}</p>
-          <p>completed Challenges</p>
-      </div>
-     </div> */}
-     <TabsComponent passedUser = {passedUser}/> 
+      <div className=' w-[40rem] mx-auto h-1 bg-slate-500 rounded-full shadow-lg'></div>
+    <TabsComponent 
+      passedUser = {passedUser}
+      shouldDelete = {shouldDelete}
+    /> 
     </div>
   )
 }

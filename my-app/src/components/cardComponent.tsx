@@ -1,4 +1,5 @@
 
+import Link from "next/link";
 import { ChallengeItem } from "./arrayofchallenges";
 import { Roboto } from "next/font/google";
 
@@ -11,7 +12,9 @@ const roboto = Roboto({
 
     return (
       <div className={roboto.className}>
-        <h1 className="font-bold mb-2">New Challenges</h1>
+        <Link href = {'/allChallenges'}>
+          <h1 className="font-bold mb-2">All Challenges</h1>
+        </Link>
         <ChallengeItem/>
       </div>
     )

@@ -13,16 +13,23 @@ import {
    } from "@/components/ui/dialog"
 import { completeChallenge } from '@/lib/actions/ChallengeActions/completeChallenge';
 import BFC from '@/components/profileChallengeComponent';
+import { ObjectId } from 'mongoose';
+import { GetMyCreatedChallenges } from '@/lib/actions/ChallengeActions/getMyCreatedChallenges';
 
 const MyChallenges = async () => {
 
     const challenges = await GetMyChallenges()
     console.log(challenges);
 
+    const createdChallenges = await GetMyCreatedChallenges()
+    console.log(`createdChallenges : ${createdChallenges}`);
+    
+
     
   return (
-    <div className='flex justify-around items-center p-10 pt-20 gap-7'>
-          <div className=' mt-5 grid grid-cols-2 gap-6 ml-2'>
+    <div className='flex flex-col p-10 pt-24 gap-7'>
+        <h1>Challenges I am Participating In</h1>
+          <div className=' grid grid-cols-3 gap-3 ml-2'>
         {
             challenges && challenges.map((obj : any , index : number) => (
                 <Dialog>
@@ -40,25 +47,19 @@ const MyChallenges = async () => {
                     </CardFooter>
                 </Card>
                 </DialogTrigger>
-                <DialogContent className = 'rounded-2xl border border-emerald-50 bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white shadow-xl '>
+                <DialogContent className = 'rounded-2xl  bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white shadow-xl '>
                     <DialogHeader>
-                        <DialogTitle>
+                        <DialogTitle className=' text-center'>
                            {obj.name}
                         </DialogTitle>
                         <div className=" pt-5 pb-3">
                             {obj.body}
                         </div>
-                        <DialogDescription className="flex justify-between">
+                        <DialogDescription className="flex justify-between items-center">
                          <div>
                          {obj.description}
                         </div> 
-                        <BFC challengeId = {obj._id}/>
-                        {/* <div 
-                        className=' px-3 bg-green-500 rounded-xl py-1'
-                        onClick={() => handleComplete(obj._id)}
-                        >
-                            COMPLETED
-                        </div> */}
+                        <BFC challengeId = {obj._id as ObjectId}/>
                           {` created by : ${obj.createdBy.username}`}
                         </DialogDescription>
                     </DialogHeader>
@@ -68,9 +69,10 @@ const MyChallenges = async () => {
             ))
         }
     </div>
-    <div  className='w-[15rem] px-5 py-2 text-center shadow-2xl rounded-xl bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white'>
+    <h1>Challenges I created</h1>
+    {/* <div  className='w-[15rem] px-5 py-2 text-center shadow-2xl rounded-xl bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white'>
         <h1>Browse all challenges</h1>
-    </div>
+    </div> */}
     </div>
   
   )

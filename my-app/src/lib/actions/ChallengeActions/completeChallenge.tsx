@@ -3,8 +3,10 @@
 import { connectToDB } from "@/lib/mongoose"
 import { currentUser } from "@clerk/nextjs";
 import { fetchUser } from "../userActions/fetchUser";
+import mongoose, { ObjectId } from "mongoose";
 
-export async function completeChallenge(id :  any) {
+
+export async function completeChallenge({challengeId} : {challengeId : ObjectId}) {
  try {
     connectToDB()
     const user = await currentUser()
@@ -13,8 +15,10 @@ export async function completeChallenge(id :  any) {
         return null
     }
     const userObjectId = await fetchUser({userId : user.id})
-
-    await userObjectId.completedChallenges.push(id)
+    console.log(challengeId);
+    
+  
+    await userObjectId.completedChallenges.push( challengeId)
     await userObjectId.save()
 
  } catch (error: any) {

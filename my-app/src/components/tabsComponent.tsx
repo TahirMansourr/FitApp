@@ -6,8 +6,13 @@ import {
     TabsTrigger,
   } from "@/components/ui/tabs"
 import PostCard from './postComponents/postCard'
+import { currentUser } from '@clerk/nextjs'
 
-const TabsComponent = ({passedUser} : {passedUser : any}) => {
+const TabsComponent = async ({passedUser , shouldDelete} : {passedUser : any , shouldDelete : boolean}) => {
+
+  const user = await currentUser()
+  if(!user) return null
+
   return (
     <div>
         <Tabs defaultValue="Posts">
@@ -30,6 +35,7 @@ const TabsComponent = ({passedUser} : {passedUser : any}) => {
                     children = {item.children}
                     id = {item._id as string}
                     createdAt={item.createdAt}
+                    shouldDelete = { shouldDelete}
                     />
                 ))
                 : <h1>{passedUser.username} hasn't posted anything yet </h1>

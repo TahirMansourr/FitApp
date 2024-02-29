@@ -1,17 +1,8 @@
 'use client'
-import React, { useEffect, useState } from "react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { getAllChallenges } from "@/lib/actions/ChallengeActions/findAllChallenges";
-
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-  } from "@/components/ui/carousel"
-
-  import { 
+import { ChallengeItem } from '@/components/arrayofchallenges'
+import { getAllChallenges } from '@/lib/actions/ChallengeActions/findAllChallenges';
+import React, { useEffect, useState } from 'react'
+import { 
     Dialog,
     DialogContent,
     DialogDescription,
@@ -21,15 +12,18 @@ import {
     DialogTrigger 
    } from "@/components/ui/dialog"
 import { TooltipProvider } from "@radix-ui/react-tooltip";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { participateToChallenge } from "@/lib/actions/ChallengeActions/participateToChallenge";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 
-export function ChallengeItem() {
-    
+
+const AllChallenges = () => {
+
     const [challengeFromDb, setChallengeFromDb] = useState<any[]>([]);
 
     useEffect(() => {
+
         async function fetchChallenges() {
             try {
                 const fetching = await getAllChallenges();
@@ -43,24 +37,19 @@ export function ChallengeItem() {
         fetchChallenges();
 
         // Cleanup function for when the component unmounts
-    }, []); // Empty dependency array to run useEffect only once after initial render
+    }, []); // Empty depen
 
     async function handleClick(param : string){
         await participateToChallenge(param)
     }
 
-    return (
-        <>
-        <Carousel className="w-full max-w-xs items-center rounded-lg  dark:shadow-lg mb-0 p-0">
-            <CarouselContent>
-            {challengeFromDb.length > 0 ? (
+
+  return (
+    <div className=' p-5 pt-28 grid grid-cols-3 gap-4'>
+         {challengeFromDb.length > 0 ? (
                 challengeFromDb.map((obj: any, index: number) => (
-                    <CarouselItem
-                    key={index}
-                    // className=" flex justify-center dark:shadow-lg w-full"
-                    >
                         <Dialog>
-                            <DialogTrigger className=" w-full">
+                            <DialogTrigger className=" w-full hover:scale-105">
                             <Card key={index} className="shadow-xl bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white dark:shadow-md dark:shadow-white w-full h-fit">
                                 <CardHeader className=" text-center p-2">
                                     <CardTitle >{obj.name}</CardTitle>
@@ -103,11 +92,11 @@ export function ChallengeItem() {
                            
                         </Dialog>
                      
-                    </CarouselItem >
+                    
                     
                 ))
             ) : (
-                <CarouselItem>
+               
                      <Card className="shadow-xl bg-[#31304D] text-white dark:shadow-md dark:shadow-white">
                     <CardHeader>
                         <CardTitle>Placeholder</CardTitle>
@@ -117,12 +106,11 @@ export function ChallengeItem() {
                         <p>Placeholder</p>
                     </CardContent>
                 </Card>
-                </CarouselItem>
+                
                
             )}
-            </CarouselContent>
-        </Carousel>
-            
-        </>
-    );
+    </div>
+  )
 }
+
+export default AllChallenges

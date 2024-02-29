@@ -1,8 +1,14 @@
 import mongoose , { Schema, mongo } from 'mongoose'
 
 const challengeSchema = new Schema({
-   name : String,
-   body : String,
+   name :{
+    type: String,
+    unique: true  // Ensures that each 'name' is unique
+  },
+   body : {
+    type: String,
+    unique: true  // Ensures that each 'name' is unique
+  },
    isCompleted : Boolean,
    description : String,
    createdAt : {
