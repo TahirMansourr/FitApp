@@ -5,20 +5,13 @@ import { ModeToggle } from './themeTogller'
 
 import {
   Menubar,
-  MenubarCheckboxItem,
   MenubarContent,
   MenubarItem,
   MenubarMenu,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar"
 import { fetchUser } from '@/lib/actions/userActions/fetchUser'
+import Search from './searchComponent'
  
 const NavBar = async () => {
 
@@ -78,7 +71,10 @@ const NavBar = async () => {
 
         
     </div>
-    <div className=' flex gap-3'>
+    <div className=' flex gap-3 items-center'>
+    <Search 
+    userId = {mongoUser._id}
+    />
     <ModeToggle  />
     <UserButton afterSignOutUrl='/'/>
     </div>
