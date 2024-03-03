@@ -15,13 +15,11 @@ import {
 
   import {
     Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
 import Image from 'next/image';
+import Link from 'next/link';
   
   
 
@@ -55,12 +53,13 @@ const Search = ({userId} : {userId : string}) => {
             <DialogTrigger>
                 <IoIosSearch />
             </DialogTrigger>
-                <DialogContent className=' w-[22rem]'>
+                <DialogContent className=' w-[22rem] bg-gradient-to-r  rounded-full border-none'>
                     <DialogHeader>
                     <DialogTitle className=' flex items-center justify-center relative mt-2 p-2 w-[16rem] mx-auto'>
                     <Input 
-                        className=' bg-white text-black rounded-xl h-7'
+                        className=' bg-white text-black rounded-xl h-7 placeholder:slate-600 placeholder:font-light'
                         onChange={(e) => setSearch(e.target.value)}
+                        placeholder='search for user'
                         />
                     <IoIosSearch 
                         size={24} 
@@ -71,7 +70,7 @@ const Search = ({userId} : {userId : string}) => {
                     </DialogTitle>
                     <DialogDescription>
                        
-                        <Card>
+                        <Card className='bg-gradient-to-r from-[#161A30] to-[#232e6c] text-white shadow-2xl'>
                             <CardHeader>
                                 <CardTitle>
                                     {loading === true ?
@@ -88,7 +87,10 @@ const Search = ({userId} : {userId : string}) => {
                                                  height={30}
                                                  className=' rounded-full'
                                                 />
+                                                <Link href={`/Profile/${item._id}`}>
                                                 <h1> {item.username} </h1>
+                                                </Link>
+                                                
                                             </div>
                                         ))
                                         : <h1> No user :( </h1>

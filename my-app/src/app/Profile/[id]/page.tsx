@@ -1,19 +1,14 @@
 import Image from 'next/image'
 import React from 'react'
 import profile from '../../../../public/assets/profile.svg'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+
 import { Roboto } from 'next/font/google'
 import { fetchUserWithMongoId } from '@/lib/actions/userActions/findMongoUser'
 import PostCard from '@/components/postComponents/postCard'
 import TabsComponent from '@/components/tabsComponent'
 import { currentUser } from '@clerk/nextjs'
 import { fetchUser } from '@/lib/actions/userActions/fetchUser'
+import FollowComponent from '@/components/followComponent'
 
 const roboto = Roboto({
   weight : "500",
@@ -26,6 +21,8 @@ const MyProfile = async ({params} : {params : {id : string}}) => {
   const passedUser = await fetchUserWithMongoId({userId : params.id})
   if(!passedUser) return null
 
+  const requiredUsersFriends = {id : params.id , followers : passedUser.followers , following : passedUser.following}
+
   const user = await currentUser()
   if(!user) return null
 
@@ -37,6 +34,8 @@ const MyProfile = async ({params} : {params : {id : string}}) => {
   else{
     shouldDelete = false
   }
+
+  const currentUserFreinds = {id : mongoUser._id , followers : mongoUser.Followers , following : mongoUser.following}
   
 
   console.log(passedUser.username);
@@ -63,27 +62,21 @@ const MyProfile = async ({params} : {params : {id : string}}) => {
      
       <div className=' flex items-center gap-3'>
         <div className=' flex flex-col gap-2'>
-            <p className=' bg-slate-500 px-2 py-1 rounded-xl h-fit text-white shadow-xl w-fit'>@BodyBuilding</p>
-            <p className=' bg-slate-500 px-2 py-1 rounded-xl h-fit text-white shadow-xl w-fit mx-auto'>@Coach</p>
+            <p className=' bg-slate-500 px-2 py-1 rounded-xl h-fit text-white shadow-xl w-fit'>{passedUser.sport? passedUser.sport : '@BodyBuilding'}</p>
+            <p className=' bg-slate-500 px-2 py-1 rounded-xl h-fit text-white shadow-xl w-fit mx-auto'>{passedUser.position? passedUser.position : '@Coach'}</p>
         </div>
       
-      <Select >
-        <SelectTrigger className="w-fit border-none">
-          <SelectValue placeholder="Follow" className={roboto.className} />
-        </SelectTrigger>
-         <SelectContent className={`${roboto.className} rounded-2xl border-none bg-slate-500 w-fit px-2 shadow-lg text-white text-center`}>
-          <SelectItem value="Following">Following</SelectItem>
-          <SelectItem value="Unfollow">Unfollow</SelectItem>
-          {/* <SelectItem value="system">System</SelectItem> */}
-        </SelectContent>
-      </Select>
+     <FollowComponent 
+        requiredUsersFriends = {requiredUsersFriends}
+        currentUserFriends = {currentUserFreinds}
+     />
       <div className={`${roboto.className} flex gap-3`}>
       <div className=' flex flex-col items-center'>
-          <p  className=' text-2xl' >{passedUser.follwers? passedUser.followers.length : 'x'}</p>
+          <p  className=' text-2xl' >{passedUser.followers? passedUser.followers.length : 'x'}</p>
           <p>followers</p>
       </div>
       <div className=' flex flex-col items-center'>
-          <p className=' text-2xl'>{passedUser.follwing? passedUser.following.length : 'x'}</p>
+          <p className=' text-2xl'>{passedUser.following? passedUser.following.length : 'x'}</p>
           <p>following</p>
       </div>
         </div>

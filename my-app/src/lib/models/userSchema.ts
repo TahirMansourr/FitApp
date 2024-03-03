@@ -69,6 +69,8 @@ const userSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'Challenges'
     }],
+    sport : String,
+    position : String
 
 
 })

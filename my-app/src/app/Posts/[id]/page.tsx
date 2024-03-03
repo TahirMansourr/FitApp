@@ -1,12 +1,17 @@
 import CommentComponent from "@/components/commentComponent/comment"
 import PostCard from "@/components/postComponents/postCard"
 import { getSinglePost } from "@/lib/actions/postActions/fetchSinglePost"
+import { fetchUser } from "@/lib/actions/userActions/fetchUser"
 import { currentUser } from "@clerk/nextjs"
 
 const SinglePost =  async ({params} : {params : {id : string}}) => {
    
     const fetchThatPost = await getSinglePost(params.id)
     console.log(fetchThatPost);
+    const user = await currentUser()
+    if(!user) return null
+    const mongoUser = await fetchUser({userId : user.id})
+    if(!mongoUser) return null
     if (!Array.isArray(fetchThatPost)) { // this is because sometime mongodb returns an array and just to make sure it's not
         // console.log(fetchThatPost);
         console.log(fetchThatPost?.children)
@@ -24,13 +29,12 @@ const SinglePost =  async ({params} : {params : {id : string}}) => {
             createdAt={ fetchThatPost.createdAt}
         />
         <CommentComponent
-            currentUserImage = {fetchThatPost.author.image}
+            currentUserImage = {mongoUser.image}
             currentPostId = {fetchThatPost._id as string}
-            currentUserId = {fetchThatPost.author._id as string}
+            currentUserId = {mongoUser._id as string}
         />
 
-//TODO finish the styling here
-        <section className=" w-[90%]  ">
+        <section className=" w-[90%]  pt-10 ">
             {fetchThatPost.children.length > 0 ? 
                 fetchThatPost.children.map(( item :any) => {
                     return( 

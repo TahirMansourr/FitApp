@@ -17,6 +17,7 @@ import {
 import { Textarea } from "../ui/textarea"
 import { createComment } from "@/lib/actions/postActions/createComment"
 import Image from "next/image"
+import { Input } from "../ui/input"
 
 const formSchema = z.object({
     comment: z.string().min(1, {
@@ -61,20 +62,20 @@ const CommentForm = ({
                 name="comment"
                 render={({ field }) => (
                     <FormItem>
-                    <div className="flex ">
+                    <div className="flex items-center gap-3 ">
                     <FormLabel>
                       <Image 
                       src={currentUserImage}
                       alt="user image"
-                      width={24}
-                      height={24}
-                      className=" rounded full"
+                      width={50}
+                      height={50}
+                      className=" rounded-full"
                       />
                     </FormLabel>
                     <FormControl>
-                        <Textarea
+                        <Input
                         placeholder="write comment here" 
-                        className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray text-black text-lg w-full " 
+                        className="rounded-2xl bg-white shadow-xl placeholder:text-gray text-black text-lg w-full h-fit " 
                         {...field}
                         />
                     </FormControl>
