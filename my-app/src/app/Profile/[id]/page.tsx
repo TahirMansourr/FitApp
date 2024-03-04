@@ -4,7 +4,6 @@ import profile from '../../../../public/assets/profile.svg'
 
 import { Roboto } from 'next/font/google'
 import { fetchUserWithMongoId } from '@/lib/actions/userActions/findMongoUser'
-import PostCard from '@/components/postComponents/postCard'
 import TabsComponent from '@/components/tabsComponent'
 import { currentUser } from '@clerk/nextjs'
 import { fetchUser } from '@/lib/actions/userActions/fetchUser'

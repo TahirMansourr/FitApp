@@ -15,6 +15,8 @@ import Link from "next/link"
 import { Button } from "../ui/button"
 import { DeletePost } from "@/lib/actions/postActions/deletePost"
 import DeleteButton from "./deleteButton"
+import {headers} from 'next/headers'
+// import { useState } from "react"
 // import logo from '../../../public/assets/logo.svg'
   
 interface Props{
@@ -27,15 +29,23 @@ interface Props{
     id : string
     children? : Object[]
     createdAt : Date,
-    shouldDelete? : boolean
+    shouldDelete? : boolean,
+    isComment? : boolean
 }
 
-const PostCard = ({author , text , id , children , createdAt , shouldDelete} : Props) => {
+const PostCard = ({author , text , id , children , createdAt , shouldDelete , isComment} : Props) => {
 
-    // async function handleDelete(){
-    //     await DeletePost(id)
+    // const [com , setCom] = useState<boolean>(false)
+
+    // function handleClick(){
+    //     setCom(!com)
     // }
 
+
+    // const headersList = headers();
+    // const activePath = headersList.get("x-invoke-path");
+    
+    
   return (
     <div className=" w-[90%]  p-6">
         <Card className=" w-full ">
@@ -66,7 +76,23 @@ const PostCard = ({author , text , id , children , createdAt , shouldDelete} : P
                        className=""
                     //    onClick={ add a todo here for the likes}
                     />
-                    <Link href={ `Posts/${id}`}  replace className="flex gap-1">
+                    {
+                        isComment ? 
+                        // so the thing i can do here if it is a comment i can render a component and other than that i can 
+                        // render the link
+                        // <Button onClick={handleClick}>
+                        //     <Image 
+                        //     src={reply}
+                        //     alt="reply"
+                        //     width={20}
+                        //     height={20}
+                        //     className=""
+                        //     />
+                        //  <p>{`${children?.length} comments`}</p>
+                        // </Button>
+                        <h1>hello</h1>
+                        : 
+                        <Link href={`Posts/${id}`} className="flex gap-1">
                         <Image 
                             src={reply}
                             alt="reply"
@@ -76,21 +102,8 @@ const PostCard = ({author , text , id , children , createdAt , shouldDelete} : P
                             />
                          <p>{`${children?.length} comments`}</p>
                     </Link>
-                     
-                   {/* <Image 
-                       src={}
-                       alt=""
-                       width={}
-                       height={}
-                       className=""
-                    />
-                    <Image 
-                       src={}
-                       alt=""
-                       width={}
-                       height={}
-                       className=""
-                    /> */}
+                    }
+                    
                     <p>{createdAt?.toDateString()}</p>
                     {shouldDelete && 
                     <DeleteButton id = {id as string}/>
@@ -98,7 +111,6 @@ const PostCard = ({author , text , id , children , createdAt , shouldDelete} : P
                 </footer>
             </CardFooter>
         </Card>
-
     </div>
   )
 }
