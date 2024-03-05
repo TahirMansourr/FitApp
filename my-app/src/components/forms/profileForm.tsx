@@ -35,7 +35,9 @@ const formSchema = z.object({
     ),
     weight : z.coerce.number(),
     height : z.coerce.number(),
-  
+    position : z.string(),
+    sport : z.string(),
+    bio : z.string()
   })
 
   interface Props{
@@ -89,11 +91,14 @@ const ProfileForm = ( {user} : Props)=>{
          profileImage :  values.profileImage,
          age : values.age,
          height : values.height,
-         weight : values.weight
+         weight : values.weight,
+         position : values.position,
+         sport : values.sport,
+         bio : values.bio
         }
         )
 
-        router.push('/userProfile')
+        router.replace('/userProfile')
 
         
       }
@@ -152,18 +157,6 @@ const ProfileForm = ( {user} : Props)=>{
                 }
               </FormLabel>
               <FormControl>
-              {/* <UploadButton
-                  endpoint="media"
-                  onClientUploadComplete={(res) => {
-                  
-                    console.log("Files: ", res);
-                    alert("Upload Completed");
-                  }}
-                  onUploadError={(error: Error) => {
-                    // Do something with the error.
-                    alert(`ERROR! ${error.message}`);
-                  }}
-                /> */}
                 <Input
                  placeholder="no fle "
                  className=" " 
@@ -204,9 +197,70 @@ const ProfileForm = ( {user} : Props)=>{
         </Button>
         </section>
        : null   }
-       {steps === 2 ? 
+       {steps === 3 ? 
        
        <section>
+
+        <h1 className=" text-center mb-10">Personal Information</h1>
+      
+        <FormField
+          control={form.control}
+          name="sport"
+          render={({ field }) => (
+            <FormItem>
+              <div className="  mb-2 flex items-center gap-8">
+              <FormLabel>What kind of sports are you interested in ?</FormLabel>
+              <FormControl>
+                <Input 
+                placeholder="Calithenics"  
+                className=" rounded-2xl bg-white shadow-sm text-black placeholder:text-gray w-30"
+                 {...field}
+                 />
+              </FormControl>
+              </div>
+              <FormMessage className=" text-red-600"/>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="position"
+          render={({ field }) => (
+            <FormItem>
+              <div className=" mb-2 flex items-center gap-3">
+              <FormLabel>Add another tag to show in your profile if you want. for example Coach</FormLabel>
+              <FormControl>
+                <Input 
+                placeholder="enthusiast" 
+                className=" m-0 rounded-2xl bg-white shadow-sm text-black placeholder:text-gray w-30" 
+                {...field}
+                />
+              </FormControl>
+              </div>
+              <FormMessage className=" text-red-600" />
+            </FormItem>
+          )}
+        />
+       
+        <div className=" flex justify-between items-center mt-5">
+        <Button 
+        className=" bg-green-300 rounded-xl px-7 text-center hover:bg-green-600 shadow-xl m-2 "
+        onClick={handlePrev}
+        >
+          Prev
+        </Button>
+        <Button 
+        className=" bg-white text-blue-700 rounded-2xl shadow-xl"
+        onClick={handleNext}
+        >
+          Next
+          </Button>
+        </div>
+        
+        </section> : null }
+        {
+          steps === 2 ?
+          <section>
 
         <h1 className=" text-center mb-10">Personal Information</h1>
       
@@ -275,10 +329,54 @@ const ProfileForm = ( {user} : Props)=>{
         >
           Prev
         </Button>
-        <Button className=" bg-white text-blue-700 rounded-2xl shadow-xl" type="submit">Submit</Button>
+        <Button 
+        className=" bg-white text-blue-700 rounded-2xl shadow-xl"
+        onClick={handleNext}
+        >Next
+        </Button>
         </div>
         
-        </section> : null }
+        </section> : null 
+        }
+        {
+          steps === 4 ? 
+          <section>
+               <FormField
+          control={form.control}
+          name="bio"
+          render={({ field }) => (
+            <FormItem>
+              <div className=" flex items-center gap-4">
+              <FormLabel>Bio</FormLabel>
+              <FormControl >
+                <textarea
+                placeholder="Enter Bio"
+                 className=" m-0 rounded-2xl bg-white shadow-sm text-black placeholder:text-gray w-full" 
+                 {...field} 
+                 />
+              </FormControl>
+              </div>
+              <FormMessage className=" text-red-600" />
+            </FormItem>
+          )}
+        />
+        <div className=" flex justify-between items-center mt-5">
+        <Button 
+        className=" bg-green-300 rounded-xl px-7 text-center hover:bg-green-600 shadow-xl m-2 "
+        onClick={handlePrev}
+        >
+          Prev
+        </Button>
+        <Button 
+        className=" bg-white text-blue-700 rounded-2xl shadow-xl"
+        type="submit"
+        >Submit
+        </Button>
+        </div>
+        
+          </section>
+          : null
+        }
       </form>
     </Form>
 

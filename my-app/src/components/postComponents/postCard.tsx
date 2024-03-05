@@ -35,17 +35,9 @@ interface Props{
 
 const PostCard = ({author , text , id , children , createdAt , shouldDelete , isComment} : Props) => {
 
-    // const [com , setCom] = useState<boolean>(false)
-
-    // function handleClick(){
-    //     setCom(!com)
-    // }
-
-
     // const headersList = headers();
     // const activePath = headersList.get("x-invoke-path");
-    
-    
+       
   return (
     <div className=" w-[90%]  p-6">
         <Card className=" w-full ">
@@ -74,25 +66,8 @@ const PostCard = ({author , text , id , children , createdAt , shouldDelete , is
                        width={20}
                        height={20}
                        className=""
-                    //    onClick={ add a todo here for the likes}
                     />
-                    {
-                        isComment ? 
-                        // so the thing i can do here if it is a comment i can render a component and other than that i can 
-                        // render the link
-                        // <Button onClick={handleClick}>
-                        //     <Image 
-                        //     src={reply}
-                        //     alt="reply"
-                        //     width={20}
-                        //     height={20}
-                        //     className=""
-                        //     />
-                        //  <p>{`${children?.length} comments`}</p>
-                        // </Button>
-                        <h1>hello</h1>
-                        : 
-                        <Link href={`Posts/${id}`} className="flex gap-1">
+                        <Link href={`/Posts/${id}`} className="flex gap-1">
                         <Image 
                             src={reply}
                             alt="reply"
@@ -101,9 +76,7 @@ const PostCard = ({author , text , id , children , createdAt , shouldDelete , is
                             className=""
                             />
                          <p>{`${children?.length} comments`}</p>
-                    </Link>
-                    }
-                    
+                    </Link>                   
                     <p>{createdAt?.toDateString()}</p>
                     {shouldDelete && 
                     <DeleteButton id = {id as string}/>

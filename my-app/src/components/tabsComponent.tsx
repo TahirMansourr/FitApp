@@ -7,12 +7,13 @@ import {
   } from "@/components/ui/tabs"
 import PostCard from './postComponents/postCard'
 import { currentUser } from '@clerk/nextjs'
+import PathnameComponent from './pathnameComponent'
 
 const TabsComponent = async ({passedUser , shouldDelete} : {passedUser : any , shouldDelete : boolean}) => {
 
   const user = await currentUser()
   if(!user) return null
-
+ 
   return (
     <div>
         <Tabs defaultValue="Posts">

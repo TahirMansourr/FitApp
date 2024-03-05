@@ -9,7 +9,10 @@ interface Props{
     age : number,
     height : number,
     weight : number,
-    profileImage : string
+    profileImage : string,
+    position : string,
+    bio : string,
+    sport : string
 }
 export async function updateUser({
     userId,
@@ -17,7 +20,10 @@ export async function updateUser({
     age,
     height,
     weight,
-    profileImage
+    profileImage,
+    position,
+    bio,
+    sport
 } : Props){
 
     connectToDB()
@@ -30,6 +36,9 @@ export async function updateUser({
             Height : height,
             Weight : weight,
             image : profileImage,
+            position,
+            bio,
+            sport,
             onBoarded : true
             
         },

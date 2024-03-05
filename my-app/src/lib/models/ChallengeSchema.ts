@@ -30,7 +30,8 @@ const challengeSchema = new Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'Comments'
     }
-   ]
+   ],
+   likes : Number
 })
 
 const Challenge = mongoose.models.Challenge || mongoose.model("Challenge" , challengeSchema)

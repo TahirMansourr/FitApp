@@ -61,8 +61,8 @@ const MyProfile = async ({params} : {params : {id : string}}) => {
      
       <div className=' flex items-center gap-3'>
         <div className=' flex flex-col gap-2'>
-            <p className=' bg-slate-500 px-2 py-1 rounded-xl h-fit text-white shadow-xl w-fit'>{passedUser.sport? passedUser.sport : '@BodyBuilding'}</p>
-            <p className=' bg-slate-500 px-2 py-1 rounded-xl h-fit text-white shadow-xl w-fit mx-auto'>{passedUser.position? passedUser.position : '@Coach'}</p>
+            <p className=' bg-slate-500 px-2 py-1 rounded-xl h-fit text-white shadow-xl w-fit'>@{passedUser.sport? passedUser.sport : 'BodyBuilding'}</p>
+            <p className=' bg-slate-500 px-2 py-1 rounded-xl h-fit text-white shadow-xl w-fit mx-auto'>@{passedUser.position? passedUser.position : 'Coach'}</p>
         </div>
       
      <FollowComponent 

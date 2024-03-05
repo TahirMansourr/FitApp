@@ -27,6 +27,7 @@ const postSchema = new mongoose.Schema({
           ref: "Post",
         },
     ],
+     likes : Number
 })
 
 const Post = mongoose.models.Post || mongoose.model("Post" , postSchema)

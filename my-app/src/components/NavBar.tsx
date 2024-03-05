@@ -56,7 +56,7 @@ const NavBar = async () => {
            </Link>
           </MenubarItem>
           <MenubarItem>
-          <Link href = {''}>
+          <Link href = {'/onBoarding'}>
               Manage my profile
           </Link>
           </MenubarItem>
