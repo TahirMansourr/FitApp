@@ -8,6 +8,7 @@ import {
 import PostCard from './postComponents/postCard'
 import { currentUser } from '@clerk/nextjs'
 import PathnameComponent from './pathnameComponent'
+import ChallengeCard from './challengesComponents/ChallengeCard'
 
 const TabsComponent = async ({passedUser , shouldDelete} : {passedUser : any , shouldDelete : boolean}) => {
 
@@ -43,7 +44,17 @@ const TabsComponent = async ({passedUser , shouldDelete} : {passedUser : any , s
                 }
             </div>
             </TabsContent>
-            <TabsContent value="CompletedChallenges">Change your password here.</TabsContent>
+            <TabsContent value="CompletedChallenges">
+              <div className=' grid grid-cols-3 gap-3 p-6'>
+              {
+                passedUser.completedChallenges.length > 0?
+                passedUser.completedChallenges.map((item : any) => (
+                  <ChallengeCard obj = {item}/>
+                )) : <h1>{passedUser.username} hasn't completed any challenges yet</h1>
+              }
+              </div>
+              
+            </TabsContent>
             <TabsContent value="createdChallenges">Change your password here.</TabsContent>
         </Tabs>
     </div>
