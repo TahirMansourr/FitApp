@@ -23,6 +23,8 @@ import BFC from '@/components/profileChallengeComponent';
 import { ObjectId } from 'mongoose';
 import { GetMyCreatedChallenges } from '@/lib/actions/ChallengeActions/getMyCreatedChallenges';
 import DeletehthisChallenge from '@/components/challengesComponents/deletebutton';
+import Image from 'next/image';
+import heart from '../../../public/assets/heart.svg'
 
 const MyChallenges = async () => {
 
@@ -62,7 +64,16 @@ const MyChallenges = async () => {
                                     <p>{obj.body.slice(0,50)} {obj.body.length > 50 ?' ...' : null}</p>
                                 </CardContent>
                                 <CardFooter className=" p-1 mb-2 mx-auto">
-                                    Created by :  {obj.createdBy.username}
+                                    <div>
+                                    Created by:  {obj.createdBy.username}
+                                    <Image
+                                    src = {heart}
+                                    alt = 'like image'
+                                    width = {24}
+                                    height = {24}
+                                    />
+                                    </div>
+                                   
                                 </CardFooter>
                             </Card>
                             </DialogTrigger>

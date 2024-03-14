@@ -23,6 +23,9 @@ import {
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { participateToChallenge } from "@/lib/actions/ChallengeActions/participateToChallenge";
+import Image from "next/image";
+import heart from '../../../my-app/public/assets/heart.svg'
+import { LikeChallenge } from "@/lib/actions/ChallengeActions/likeChallenge";
 
 
 export function ChallengeItem() {
@@ -49,6 +52,12 @@ export function ChallengeItem() {
         await participateToChallenge(param)
     }
 
+    async function handleLike(id : string){
+       await LikeChallenge(id)
+       console.log("challenge" + id + 'liked');
+       
+    }
+
     return (
         <>
         <Carousel className="w-full max-w-xs items-center rounded-lg  dark:shadow-lg mb-0 p-0">
@@ -70,7 +79,17 @@ export function ChallengeItem() {
                                     <p>{obj.body.slice(0,50)} {obj.body.length > 50 ?' ...' : null}</p>
                                 </CardContent>
                                 <CardFooter className=" p-1 mb-2 mx-auto">
+                                    <div>
                                     Created by :  {obj.createdBy.username}
+                                    <Image
+                                    src={heart}
+                                    alt="likes"
+                                    width={12}
+                                    height={12}
+                                    onClick={() => handleLike(obj._id)}
+                                    />
+                                    </div>
+                                   
                                 </CardFooter>
                             </Card>
                             </DialogTrigger>
