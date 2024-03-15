@@ -81,13 +81,7 @@ export function ChallengeItem() {
                                 <CardFooter className=" p-1 mb-2 mx-auto">
                                     <div>
                                     Created by :  {obj.createdBy.username}
-                                    <Image
-                                    src={heart}
-                                    alt="likes"
-                                    width={12}
-                                    height={12}
-                                    onClick={() => handleLike(obj._id)}
-                                    />
+                                   
                                     </div>
                                    
                                 </CardFooter>
@@ -99,12 +93,25 @@ export function ChallengeItem() {
                                        {obj.name}
                                     </DialogTitle>
                                     <div className=" pt-5 pb-3">
-                                        {obj.body}
+                                        {
+                                       obj.body.split('/n').map((item : string) =>(
+                                        <p>{item}</p>
+                                       ))
+                                        
+                                        }
                                     </div>
                                     <DialogDescription className="flex justify-between">
                                      <div>
                                      {obj.description}
                                     </div> 
+                                    <div>
+                                    <Image
+                                    src={heart}
+                                    alt="likes"
+                                    width={12}
+                                    height={12}
+                                    onClick={() => handleLike(obj._id)}
+                                    />
                                     <TooltipProvider>
                                         <Tooltip>
                                         <TooltipTrigger>
@@ -115,6 +122,8 @@ export function ChallengeItem() {
                                         </TooltipContent>
                                         </Tooltip>
                                     </TooltipProvider>
+                                    </div>
+                                    
                                       {` created by : ${obj.createdBy.username}`}
                                     </DialogDescription>
                                 </DialogHeader>

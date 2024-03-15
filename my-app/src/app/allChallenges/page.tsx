@@ -15,7 +15,12 @@ import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { participateToChallenge } from "@/lib/actions/ChallengeActions/participateToChallenge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-
+import Link from 'next/link';
+import Image from 'next/image';
+import heart from '../../../public/assets/heart.svg'
+import share from '../../../public/assets/share.svg'
+import { PiShareFatLight } from "react-icons/pi";
+import { GrUserAdd } from "react-icons/gr";
 
 
 const AllChallenges = () => {
@@ -56,10 +61,19 @@ const AllChallenges = () => {
                                     <CardDescription> {obj.description} </CardDescription>
                                 </CardHeader>
                                 <CardContent className=" mt-3 ">
-                                    <p>{obj.body.slice(0,50)} {obj.body.length > 50 ?' ...' : null}</p>
+                                    <p>{obj.body.slice(0,40)} {obj.body.length > 40 ?' ...' : null}</p>
                                 </CardContent>
-                                <CardFooter className=" p-1 mb-2 mx-auto">
-                                    Created by :  {obj.createdBy.username}
+                                <CardFooter className=" p-2 mb-2 text-left ">
+                                    <div className=' flex flex-col'>
+                                        <div>
+                                        Created by :  {obj.createdBy.username}
+                                        </div>
+                                    <div>
+                                    Participants : {obj.participants.length}
+                                    </div>
+                                     
+                                    </div>
+                                   
                                 </CardFooter>
                             </Card>
                             </DialogTrigger>
@@ -67,25 +81,56 @@ const AllChallenges = () => {
                                 <DialogHeader>
                                     <DialogTitle>
                                        {obj.name}
+
                                     </DialogTitle>
+                                    <div>
+                                     {obj.description}
+                                    </div> 
                                     <div className=" pt-5 pb-3">
                                         {obj.body}
                                     </div>
-                                    <DialogDescription className="flex justify-between">
-                                     <div>
-                                     {obj.description}
-                                    </div> 
+                                    <DialogDescription className="flex flex-col">
+                                    
+                                    <div>
+                                    <Link href={`/Profile/${obj.createdBy._id}`}>
+                                    {` created by : ${obj.createdBy.username}`}
+                                    </Link>
+                                    </div>
+                                    <div>
+                                    {`participants : ${obj.participants.length}`}
+                                    </div>
+                                    
+                                     
+                                     
+                                      <div className=' flex justify-between pt-4 items-center'>
+                                      <div className=' flex gap-3'>
+                                        <Image
+                                        src={heart}
+                                        alt='like'
+                                        width={20}
+                                        height={20}
+                                        className=' hover:cursor-pointer'
+                                        />
+                                       <PiShareFatLight size={25} />
+                                    </div>
+                                    <div>
                                     <TooltipProvider>
                                         <Tooltip>
                                         <TooltipTrigger>
-                                            <p onClick={() => handleClick(obj._id)}>+</p>
+                                            
+                                            <GrUserAdd 
+                                             onClick={() => handleClick(obj._id)}
+                                             size={25}/>
+                                            
                                         </TooltipTrigger>
-                                        <TooltipContent>
+                                        <TooltipContent arrowPadding={2} className=' rounded-xl border-none shadow-lg bg-slate-300 text-black'>
                                             <p>Participate to this challenge</p>
                                         </TooltipContent>
                                         </Tooltip>
                                     </TooltipProvider>
-                                      {` created by : ${obj.createdBy.username}`}
+                                    </div>
+                                   
+                                      </div>
                                     </DialogDescription>
                                 </DialogHeader>
                             </DialogContent>

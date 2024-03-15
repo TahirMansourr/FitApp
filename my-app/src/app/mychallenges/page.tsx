@@ -25,6 +25,8 @@ import { GetMyCreatedChallenges } from '@/lib/actions/ChallengeActions/getMyCrea
 import DeletehthisChallenge from '@/components/challengesComponents/deletebutton';
 import Image from 'next/image';
 import heart from '../../../public/assets/heart.svg'
+import { PiShareFatLight } from "react-icons/pi";
+
 
 const MyChallenges = async () => {
 
@@ -66,12 +68,7 @@ const MyChallenges = async () => {
                                 <CardFooter className=" p-1 mb-2 mx-auto">
                                     <div>
                                     Created by:  {obj.createdBy.username}
-                                    <Image
-                                    src = {heart}
-                                    alt = 'like image'
-                                    width = {24}
-                                    height = {24}
-                                    />
+                                   
                                     </div>
                                    
                                 </CardFooter>
@@ -82,15 +79,33 @@ const MyChallenges = async () => {
                                     <DialogTitle className=' text-center'>
                                     {obj.name}
                                     </DialogTitle>
+                                    <div>
+                                    {obj.description}
+                                    </div>
                                     <div className=" pt-5 pb-3">
                                         {obj.body}
                                     </div>
                                     <DialogDescription className="flex justify-between items-center">
+                                     <div className=' flex flex-col'>
+                                     {` created by : ${obj.createdBy.username}`}
+                                     <div className=' flex justify-between items-center w-full'>
+                                        <div className=' flex gap-3'>
+                                        <Image
+                                            src = {heart}
+                                            alt = 'like image'
+                                            width = {24}
+                                            height = {24}
+                                        />
+                                        <PiShareFatLight size={25} />
+                                        </div>
                                     <div>
-                                    {obj.description}
-                                    </div> 
                                     <BFC challengeId = {obj._id as ObjectId}/>
-                                    {` created by : ${obj.createdBy.username}`}
+                                    </div>
+                                    
+                                     </div>
+                                     </div>
+                                   
+                                   
                                     </DialogDescription>
                                 </DialogHeader>
                             </DialogContent>
