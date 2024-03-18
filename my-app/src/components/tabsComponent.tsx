@@ -46,12 +46,13 @@ const TabsComponent = async ({passedUser , shouldDelete} : {passedUser : any , s
             </TabsContent>
             <TabsContent value="CompletedChallenges">
               <div className=' grid grid-cols-3 gap-3 p-6'>
-              {
+                {/* this is causing a maximum call stack exceeded error */}
+              {/* {
                 passedUser.completedChallenges.length > 0?
                 passedUser.completedChallenges.map((item : any) => (
                   <ChallengeCard obj = {item}/>
                 )) : <h1>{passedUser.username} hasn't completed any challenges yet</h1>
-              }
+              } */}
               </div>
               
             </TabsContent>

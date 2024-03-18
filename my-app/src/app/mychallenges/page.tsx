@@ -26,6 +26,8 @@ import DeletehthisChallenge from '@/components/challengesComponents/deletebutton
 import Image from 'next/image';
 import heart from '../../../public/assets/heart.svg'
 import { PiShareFatLight } from "react-icons/pi";
+import Link from 'next/link';
+import ChallengeProgressComponent from '@/components/challengesComponents/challengeProgressComponent';
 
 
 const MyChallenges = async () => {
@@ -76,18 +78,30 @@ const MyChallenges = async () => {
                             </DialogTrigger>
                             <DialogContent className = 'rounded-2xl  bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white shadow-xl '>
                                 <DialogHeader>
-                                    <DialogTitle className=' text-center'>
+                                <DialogTitle className=' mx-auto text-center rounded-xl shadow-xl w-fit p-3 mb-0'>
                                     {obj.name}
                                     </DialogTitle>
                                     <div>
                                     {obj.description}
                                     </div>
-                                    <div className=" pt-5 pb-3">
+                                    <div className=" mt-6 mb-3 p-3 border bg-slate-800 rounded-xl whitespace-pre-line">
                                         {obj.body}
                                     </div>
                                     <DialogDescription className="flex justify-between items-center">
                                      <div className=' flex flex-col'>
-                                     {` created by : ${obj.createdBy.username}`}
+                                    
+                                     <Link href={`/Profile/${obj.createdBy._id}`}>
+                                        <div className=' flex flex-col mb-3'>
+                                            <div>
+                                            {` created by : ${obj.createdBy.username}`}
+                                            </div>
+                                            <div>
+                                            {` Participants : ${obj.participants.length}`}
+                                            </div>
+                                         
+                                        </div>
+                                    
+                                    </Link>
                                      <div className=' flex justify-between items-center w-full'>
                                         <div className=' flex gap-3'>
                                         <Image
@@ -100,6 +114,7 @@ const MyChallenges = async () => {
                                         </div>
                                     <div>
                                     <BFC challengeId = {obj._id as ObjectId}/>
+                                    <ChallengeProgressComponent/>
                                     </div>
                                     
                                      </div>

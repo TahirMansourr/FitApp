@@ -26,6 +26,7 @@ import { participateToChallenge } from "@/lib/actions/ChallengeActions/participa
 import Image from "next/image";
 import heart from '../../../my-app/public/assets/heart.svg'
 import { LikeChallenge } from "@/lib/actions/ChallengeActions/likeChallenge";
+import ChallengeCard from "./challengesComponents/ChallengeCard";
 
 
 export function ChallengeItem() {
@@ -61,14 +62,14 @@ export function ChallengeItem() {
     return (
         <>
         <Carousel className="w-full max-w-xs items-center rounded-lg  dark:shadow-lg mb-0 p-0">
-            <CarouselContent>
+            <CarouselContent className=" p-2">
             {challengeFromDb.length > 0 ? (
                 challengeFromDb.map((obj: any, index: number) => (
                     <CarouselItem
                     key={index}
-                    // className=" flex justify-center dark:shadow-lg w-full"
                     >
-                        <Dialog>
+                        <ChallengeCard obj = {obj}/>
+                        {/* <Dialog>
                             <DialogTrigger className=" w-full">
                             <Card key={index} className="shadow-xl bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white dark:shadow-md dark:shadow-white w-full h-fit">
                                 <CardHeader className=" text-center p-2">
@@ -129,10 +130,8 @@ export function ChallengeItem() {
                                 </DialogHeader>
                             </DialogContent>
                            
-                        </Dialog>
-                     
+                         </Dialog> */}
                     </CarouselItem >
-                    
                 ))
             ) : (
                 <CarouselItem>
