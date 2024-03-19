@@ -33,10 +33,10 @@ import ChallengeProgressComponent from '@/components/challengesComponents/challe
 const MyChallenges = async () => {
 
     const challenges = await GetMyChallenges()
-    console.log(challenges);
+    // console.log(challenges);
 
     const createdChallenges = await GetMyCreatedChallenges()
-    console.log(`createdChallenges : ${createdChallenges}`);
+    // console.log(`createdChallenges : ${createdChallenges}`);
     
 
     
@@ -61,15 +61,15 @@ const MyChallenges = async () => {
                             <DialogTrigger className=" ">
                             <Card key={index} className="shadow-xl bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white dark:shadow-md dark:shadow-white w-full h-fit max-w-[15rem]">
                                 <CardHeader className=" text-center p-2">
-                                    <CardTitle >{obj.name}</CardTitle>
-                                    <CardDescription> {obj.description} </CardDescription>
+                                    <CardTitle >{obj.theChallenge.name}</CardTitle>
+                                    <CardDescription> {obj.theChallenge.description}  </CardDescription>
                                 </CardHeader>
                                 <CardContent className=" mt-3 ">
-                                    <p>{obj.body.slice(0,50)} {obj.body.length > 50 ?' ...' : null}</p>
+                                    <p>{obj.theChallenge.body.slice(0,50)} {obj.theChallenge.body.length > 50 ?' ...' : null}</p>
                                 </CardContent>
                                 <CardFooter className=" p-1 mb-2 mx-auto">
                                     <div>
-                                    Created by:  {obj.createdBy.username}
+                                    Created by:  {obj.theChallenge.createdBy.username}
                                    
                                     </div>
                                    
@@ -79,24 +79,26 @@ const MyChallenges = async () => {
                             <DialogContent className = 'rounded-2xl  bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white shadow-xl '>
                                 <DialogHeader>
                                 <DialogTitle className=' mx-auto text-center rounded-xl shadow-xl w-fit p-3 mb-0'>
-                                    {obj.name}
+                                    {obj.theChallenge.name}
                                     </DialogTitle>
-                                    <div>
-                                    {obj.description}
+                                    <div className=' flex justify-between'>
+                                        <div>{obj.theChallenge.description}</div>
+                                        <div>Start Date: {format(obj.participatedAt , 'dd/MM/yyy  HH:mm')}</div>
+                                    
                                     </div>
                                     <div className=" mt-6 mb-3 p-3 border bg-slate-800 rounded-xl whitespace-pre-line">
-                                        {obj.body}
+                                        {obj.theChallenge.body}
                                     </div>
                                     <DialogDescription className="flex justify-between items-center">
                                      <div className=' flex flex-col w-full'>
                                     
-                                     <Link href={`/Profile/${obj.createdBy._id}`}>
+                                     <Link href={`/Profile/${obj.theChallenge.createdBy._id}`}>
                                         <div className=' flex flex-col mb-3'>
                                             <div>
-                                            {` created by : ${obj.createdBy.username}`}
+                                            {` created by : ${obj.theChallenge.createdBy.username}`}
                                             </div>
                                             <div>
-                                            {` Participants : ${obj.participants.length}`}
+                                            {` Participants : ${obj.theChallenge.participants.length}`}
                                             </div>
                                          
                                         </div>

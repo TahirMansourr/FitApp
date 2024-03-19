@@ -24,8 +24,14 @@ const userSchema = new mongoose.Schema({
         }
     ],
     challenges : [{
+
+          theChallenge :  {
             type : mongoose.Schema.Types.ObjectId,
             ref : 'Challenges'
+        },
+          participatedAt : {
+           type : Date
+          }
     }],
     trophies : [{
         type :mongoose.Schema.Types.ObjectId,
@@ -66,8 +72,13 @@ const userSchema = new mongoose.Schema({
         ref : 'User'
     }],
     completedChallenges : [{
+        theChallenge :{
         type : mongoose.Schema.Types.ObjectId,
         ref : 'Challenges'
+        },
+        completedAt : {
+            type : Date
+        }
     }],
     sport : String,
     position : String

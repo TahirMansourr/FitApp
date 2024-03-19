@@ -15,7 +15,10 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "../ui/textarea"
 import { createChallenge } from "@/lib/actions/ChallengeActions/createChallenge"
-import { currentUser } from "@clerk/nextjs"
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
+import { useState } from "react"
+
 
 
 const formSchema = z.object({
@@ -23,12 +26,15 @@ const formSchema = z.object({
     message: "Challenge name must be at least 2 characters.",
   }),
     body : z.string(),
-    description : z.string()
+    description : z.string(),
+    duration : z.union([z.literal('free') , z.coerce.number()])
 })
 
 
 
 const CreateChallengeForm = () => {
+
+  const [switchState , setSwitchState] = useState<boolean>(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,7 +53,8 @@ const CreateChallengeForm = () => {
      
       name : values.name,
       body : values.body,
-      description : values.description
+      description : values.description,
+      duration : switchState ? values.duration : 'free'
     })
   }
   
@@ -74,6 +81,31 @@ const CreateChallengeForm = () => {
             </FormItem>
           )}
         />
+        <div className="flex items-center space-x-2">
+                
+                <Label>Is your Challenge Time Limited ?</Label>
+                <Switch checked={switchState} onCheckedChange={()=>setSwitchState(!switchState)}/>
+              </div>
+      {switchState ? <FormField
+          control={form.control}
+          name="duration"
+          render={({ field }) => (
+            <FormItem>
+              <div className="">
+              <FormLabel>Challenge duration</FormLabel>
+              <FormControl>
+                <Input 
+                type="number"
+                placeholder="Challenge Duration" 
+                className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray text-black text-lg " 
+                {...field}
+                />
+              </FormControl>
+              </div>
+              <FormMessage className=" text-red-600" />
+            </FormItem>
+          )}
+      /> : null}
       <FormField
           control={form.control}
           name="description"

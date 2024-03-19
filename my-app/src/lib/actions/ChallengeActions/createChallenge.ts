@@ -10,10 +10,11 @@ interface Props {
     
     name : string,
     body : string,
-    description : string
+    description : string,
+    duration : number | 'free'
 }
 
-export async function createChallenge ({ name  , body ,description} : Props){
+export async function createChallenge ({ name  , body ,description , duration} : Props){
   connectToDB()
   try {
 
@@ -28,7 +29,8 @@ export async function createChallenge ({ name  , body ,description} : Props){
         createdBy : userObjectId._id,
         name,
         body,
-       description
+        description,
+        duration
     })
     
     await newChallenge.save()

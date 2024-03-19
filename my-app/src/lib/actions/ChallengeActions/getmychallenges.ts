@@ -14,7 +14,7 @@ export async function GetMyChallenges() {
         if(!mongoUser) throw new Error('mongoUser not found in getmyChallenges.ts')
 
         const populatedUser = await mongoUser.populate({
-            path : "challenges",
+            path : "challenges.theChallenge",
             model : Challenge ,
             populate : {
                 path : 'createdBy',
@@ -24,7 +24,7 @@ export async function GetMyChallenges() {
 
         await populatedUser.toObject()
 
-        console.log(populatedUser.challenges);
+        console.log(`this is wwhat you are logging : ${populatedUser.challenges}`);
         
 
         

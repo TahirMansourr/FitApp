@@ -40,7 +40,6 @@ const ChallengeProgressComponent = () => {
       <CardContent>
         <form>
           <div className="grid w-full items-center gap-4">
-        
             <div className="flex flex-col space-y-1.5">
              this is me
             </div>

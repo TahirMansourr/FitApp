@@ -21,7 +21,10 @@ export async function participateToChallenge(param : string) {
         console.log(ChallengeIneed)
         await ChallengeIneed.participants.push(mongoUser._id)
         await ChallengeIneed.save()
-        await mongoUser.challenges.push(param)
+        await mongoUser.challenges.push({
+            theChallenge : param,
+            participatedAt : new Date()
+        })
         await mongoUser.save()
         console.log(mongoUser.challenges)
 

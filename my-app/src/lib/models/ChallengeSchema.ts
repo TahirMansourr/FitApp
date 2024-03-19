@@ -38,6 +38,12 @@ const challengeSchema = new Schema({
       return typeof value === "number" || typeof value === 'string'
     },
     message : 'Duration must be either free or a nubmer'
+  },
+  participatedAt : {
+    type : Date
+  },
+  completedAt :{
+    type : Date
   }
 })
 
