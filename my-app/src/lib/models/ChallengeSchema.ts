@@ -31,7 +31,14 @@ const challengeSchema = new Schema({
         ref : 'Comments'
     }
    ],
-   likes : Number
+   likes : Number,
+   duration : {
+    type : mongoose.Schema.Types.Mixed ,
+    validate : function(value : number | string){
+      return typeof value === "number" || typeof value === 'string'
+    },
+    message : 'Duration must be either free or a nubmer'
+  }
 })
 
 const Challenge = mongoose.models.Challenge || mongoose.model("Challenge" , challengeSchema)

@@ -24,11 +24,11 @@ const UserProfile = (userId : string) => {
   // for the motion library
   const [isOpen , setIsOpen] = useState<boolean>(false)
   const variants = {
-    open : {x : 50  },
+    open : {x : 100  },
     closed : {x : 0 , y : 0}
   }
   
-  const trophyArray = [transparent ,transparent ,transparent  ]
+  const trophyArray = [transparent ,transparent ,transparent ]
   const [isBlurred , setIsBlurred] = useState<boolean>(false)
 
   return ( 

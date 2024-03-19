@@ -88,7 +88,7 @@ const MyChallenges = async () => {
                                         {obj.body}
                                     </div>
                                     <DialogDescription className="flex justify-between items-center">
-                                     <div className=' flex flex-col'>
+                                     <div className=' flex flex-col w-full'>
                                     
                                      <Link href={`/Profile/${obj.createdBy._id}`}>
                                         <div className=' flex flex-col mb-3'>
@@ -103,6 +103,10 @@ const MyChallenges = async () => {
                                     
                                     </Link>
                                      <div className=' flex justify-between items-center w-full'>
+                                     <div className=' flex'>
+                                    {/* <BFC challengeId = {obj._id as ObjectId}/> */}
+                                    <ChallengeProgressComponent/>
+                                    </div>
                                         <div className=' flex gap-3'>
                                         <Image
                                             src = {heart}
@@ -112,10 +116,7 @@ const MyChallenges = async () => {
                                         />
                                         <PiShareFatLight size={25} />
                                         </div>
-                                    <div>
-                                    <BFC challengeId = {obj._id as ObjectId}/>
-                                    <ChallengeProgressComponent/>
-                                    </div>
+                                   
                                     
                                      </div>
                                      </div>
