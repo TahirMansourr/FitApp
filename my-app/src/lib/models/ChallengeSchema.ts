@@ -19,11 +19,13 @@ const challengeSchema = new Schema({
     type : mongoose.Schema.Types.ObjectId,
     ref : 'User'
    },
-   participants : [
-    {
+   participants : [{
+    userId :{
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User'
-    }
+    },
+    progress : {type : Number , default : 0}
+  }
    ],
    comments : [
     {
@@ -37,14 +39,9 @@ const challengeSchema = new Schema({
     validate : function(value : number | string){
       return typeof value === "number" || typeof value === 'string'
     },
-    message : 'Duration must be either free or a nubmer'
+    message : 'Duration must be either free or a number'
   },
-  participatedAt : {
-    type : Date
-  },
-  completedAt :{
-    type : Date
-  }
+ 
 })
 
 const Challenge = mongoose.models.Challenge || mongoose.model("Challenge" , challengeSchema)

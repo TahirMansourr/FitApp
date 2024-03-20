@@ -28,12 +28,18 @@ import heart from '../../../public/assets/heart.svg'
 import { PiShareFatLight } from "react-icons/pi";
 import Link from 'next/link';
 import ChallengeProgressComponent from '@/components/challengesComponents/challengeProgressComponent';
+import { currentUser } from '@clerk/nextjs';
+import { fetchUser } from '@/lib/actions/userActions/fetchUser';
 
 
 const MyChallenges = async () => {
 
+    const user = await currentUser()
+    if(!user) return null
+    const mongoUser = await fetchUser({userId : user.id})
+
     const challenges = await GetMyChallenges()
-    // console.log(challenges);
+    //  console.log(`these are the challenges ${challenges}`);
 
     const createdChallenges = await GetMyCreatedChallenges()
     // console.log(`createdChallenges : ${createdChallenges}`);
@@ -107,7 +113,11 @@ const MyChallenges = async () => {
                                      <div className=' flex justify-between items-center w-full'>
                                      <div className=' flex'>
                                     {/* <BFC challengeId = {obj._id as ObjectId}/> */}
-                                    <ChallengeProgressComponent/>
+                                    <ChallengeProgressComponent 
+                                    challengeId = {obj.theChallenge._id}
+                                    userId = {mongoUser._id}
+                                  
+                                    />
                                     </div>
                                         <div className=' flex gap-3'>
                                         <Image

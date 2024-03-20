@@ -19,7 +19,7 @@ export async function participateToChallenge(param : string) {
 
         const ChallengeIneed = await Challenge.findOne({ _id : param})
         console.log(ChallengeIneed)
-        await ChallengeIneed.participants.push(mongoUser._id)
+        await ChallengeIneed.participants.push({userId :mongoUser._id , progress : 0})
         await ChallengeIneed.save()
         await mongoUser.challenges.push({
             theChallenge : param,
