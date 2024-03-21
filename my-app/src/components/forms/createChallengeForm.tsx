@@ -18,6 +18,7 @@ import { createChallenge } from "@/lib/actions/ChallengeActions/createChallenge"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { useState } from "react"
+import { Value } from "@radix-ui/react-select"
 
 
 
@@ -27,7 +28,7 @@ const formSchema = z.object({
   }),
     body : z.string(),
     description : z.string(),
-    duration : z.union([z.literal('free') , z.coerce.number()])
+    duration : z.union([z.literal('free') , z.coerce.number() ])
 })
 
 
@@ -36,25 +37,29 @@ const CreateChallengeForm = () => {
 
   const [switchState , setSwitchState] = useState<boolean>(false)
 
+  const defaultValues = {
+    duration: "free", // Set the default value for duration
+  };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues
   })
+
+
 
  async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("Form Data:", values);
     console.log(values)
 
-    // const user = await currentUser()
-    // if(!user) {
-    //   console.log('no user found'); 
-    //   return null}
-    
+    const durationValue = switchState ? values.duration : 'free';
+
     await createChallenge({
      
       name : values.name,
       body : values.body,
       description : values.description,
-      duration : switchState ? values.duration : 'free'
+      duration : durationValue
     })
   }
   
@@ -86,7 +91,8 @@ const CreateChallengeForm = () => {
                 <Label>Is your Challenge Time Limited ?</Label>
                 <Switch checked={switchState} onCheckedChange={()=>setSwitchState(!switchState)}/>
               </div>
-      {switchState ? <FormField
+      {switchState ? 
+        <FormField
           control={form.control}
           name="duration"
           render={({ field }) => (
@@ -95,17 +101,19 @@ const CreateChallengeForm = () => {
               <FormLabel>Challenge duration</FormLabel>
               <FormControl>
                 <Input 
+                value={field.value ? field.value :  'free'}
                 type="number"
                 placeholder="Challenge Duration" 
                 className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray text-black text-lg " 
-                {...field}
+                onChange={field.onChange}
                 />
               </FormControl>
               </div>
               <FormMessage className=" text-red-600" />
             </FormItem>
           )}
-      /> : null}
+      /> : null
+      }
       <FormField
           control={form.control}
           name="description"

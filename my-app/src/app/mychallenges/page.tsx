@@ -30,6 +30,8 @@ import Link from 'next/link';
 import ChallengeProgressComponent from '@/components/challengesComponents/challengeProgressComponent';
 import { currentUser } from '@clerk/nextjs';
 import { fetchUser } from '@/lib/actions/userActions/fetchUser';
+import { ScrollArea } from "@/components/ui/scroll-area"
+
 
 
 const MyChallenges = async () => {
@@ -82,8 +84,10 @@ const MyChallenges = async () => {
                                 </CardFooter>
                             </Card>
                             </DialogTrigger>
-                            <DialogContent className = 'rounded-2xl  bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white shadow-xl '>
-                                <DialogHeader>
+                            
+                            <DialogContent className = 'rounded-2xl  bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white shadow-xl max-h-[90%]  '>
+                               <ScrollArea className=' '>
+                               <DialogHeader>
                                 <DialogTitle className=' mx-auto text-center rounded-xl shadow-xl w-fit p-3 mb-0'>
                                     {obj.theChallenge.name}
                                     </DialogTitle>
@@ -136,6 +140,8 @@ const MyChallenges = async () => {
                                    
                                     </DialogDescription>
                                 </DialogHeader>
+                               </ScrollArea>
+                                
                             </DialogContent>
                         
                         </Dialog>

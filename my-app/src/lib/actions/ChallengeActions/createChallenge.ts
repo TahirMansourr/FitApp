@@ -11,7 +11,7 @@ interface Props {
     name : string,
     body : string,
     description : string,
-    duration : number | 'free'
+    duration : number | string
 }
 
 export async function createChallenge ({ name  , body ,description , duration} : Props){
