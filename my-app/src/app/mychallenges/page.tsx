@@ -85,8 +85,8 @@ const MyChallenges = async () => {
                             </Card>
                             </DialogTrigger>
                             
-                            <DialogContent className = 'rounded-2xl  bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white shadow-xl max-h-[90%]  '>
-                               <ScrollArea className=' '>
+                            <DialogContent className = 'rounded-2xl  bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white shadow-xl  '>
+                               <ScrollArea className=' max-h-[29rem]'>
                                <DialogHeader>
                                 <DialogTitle className=' mx-auto text-center rounded-xl shadow-xl w-fit p-3 mb-0'>
                                     {obj.theChallenge.name}

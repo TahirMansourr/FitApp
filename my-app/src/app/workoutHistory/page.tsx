@@ -41,11 +41,10 @@ const WorkOutHistory = () => {
     async function doAtStart(){
         const res =   await getworkout()
         const sortedResponse = res.sort((a : any, b : any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        console.log(sortedResponse);
+        console.log(` this is your sortedRespnse : ${sortedResponse}`);
+        if(!sortedResponse) return;
          setResponse(sortedResponse)
-         console.log(`this is workouts : ${response}`);
-         
-         
+         console.log(`this is workouts : ${response}`);                  
      }
      doAtStart()
 
@@ -124,7 +123,7 @@ const WorkOutHistory = () => {
                 <DrawerDescription>Keep up the hard work</DrawerDescription>
                 </DrawerHeader>
                      <div className=' flex justify-center items-center'>
-                <RenderBarChart/>
+                <RenderBarChart response = {response as any[]}/>
                 </div>
                 <DrawerFooter>
                 <Button>Submit</Button>

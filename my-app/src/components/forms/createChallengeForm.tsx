@@ -38,12 +38,12 @@ const CreateChallengeForm = () => {
   const [switchState , setSwitchState] = useState<boolean>(false)
 
   const defaultValues = {
-    duration: "free", // Set the default value for duration
-  };
+    duration: 'free', // Set the default value for duration
+    };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues
+    defaultValues 
   })
 
 
@@ -54,8 +54,7 @@ const CreateChallengeForm = () => {
 
     const durationValue = switchState ? values.duration : 'free';
 
-    await createChallenge({
-     
+    await createChallenge({     
       name : values.name,
       body : values.body,
       description : values.description,
