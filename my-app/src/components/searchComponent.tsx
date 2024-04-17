@@ -20,14 +20,21 @@ import {
   } from "@/components/ui/card"
 import Image from 'next/image';
 import Link from 'next/link';
+import LoadingComponent from './LoadingComponent';
   
-  
+interface User {
+    _id: string;
+    username: string;
+    image: string;
+    // Add other properties if necessary
+}
 
 const Search = ({userId} : {userId : string}) => {
 
     const [search , setSearch] = useState<string>('')
-    const [result , setResult] = useState<any[]>([])
+    const [result , setResult] = useState<any[] | undefined>([])
     const [loading , setLoading] = useState<boolean>(false)
+    const [isDialogOpen , setIsDialogOpen] = useState<boolean>()
    
     const handleSearch = async (userId : string)=>{
       
@@ -40,16 +47,25 @@ const Search = ({userId} : {userId : string}) => {
             searchParam : search
         })
 
-        if(foundUsers.length > 0) {
-            setResult(foundUsers)
-            setLoading(false)
+        if(foundUsers === undefined){
+            setLoading(false);
+            return null
+        } else if (foundUsers.status === 'success'){
+            setResult(foundUsers.users);
+            setLoading(false);
             console.log(result);
+        } else {
+            setLoading(false);
+           return null
         }
     }
+    const handleCloseDialog = () => {
+        setIsDialogOpen(!isDialogOpen);
+    };
 
   return (
     <div className=' flex items-center gap-2'>
-        <Dialog>
+        <Dialog open={isDialogOpen} onOpenChange={()=>handleCloseDialog()} >
             <DialogTrigger>
                 <IoIosSearch />
             </DialogTrigger>
@@ -75,11 +91,10 @@ const Search = ({userId} : {userId : string}) => {
                                 <CardTitle>
                                     {loading === true ?
                                      <div className="space-y-2">
-                                     <Skeleton className="h-4 w-[250px]" />
-                                     <Skeleton className="h-4 w-[200px]" />
+                                    <LoadingComponent LoadingText='Searching for user...'/>
                                  </div> 
                                  :
-                                        result.length > 0 ? result.map((item) => (
+                                      result && result.length > 0 ? result?.map((item : User) => (
                                             <div className=' flex gap-3 items-center m-2'>
                                                 <Image src={item.image}
                                                  alt = 'profile image'
@@ -88,7 +103,7 @@ const Search = ({userId} : {userId : string}) => {
                                                  className=' rounded-full'
                                                 />
                                                 <Link href={`/Profile/${item._id}`}>
-                                                <h1> {item.username} </h1>
+                                                <h1 onClick={handleCloseDialog}> {item.username} </h1>
                                                 </Link>
                                                 
                                             </div>

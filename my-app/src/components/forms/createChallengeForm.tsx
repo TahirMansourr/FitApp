@@ -19,6 +19,8 @@ import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { useState } from "react"
 import { Value } from "@radix-ui/react-select"
+import LoadingComponent from "../LoadingComponent"
+import { FcApproval } from "react-icons/fc";
 
 
 
@@ -28,17 +30,22 @@ const formSchema = z.object({
   }),
     body : z.string(),
     description : z.string(),
-    duration : z.union([z.literal('free') , z.coerce.number() ])
+    duration : z.union([z.literal('free') , z.coerce.number(),z.coerce.string() ])
 })
 
-
+interface res{
+  status : string,
+  message : string
+}
 
 const CreateChallengeForm = () => {
 
   const [switchState , setSwitchState] = useState<boolean>(false)
+  const [loading , setloading] = useState<boolean>(false)
+  const [response , setresponse] = useState<res>()
 
   const defaultValues = {
-    duration: 'free', // Set the default value for duration
+    duration: 'free', 
     };
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -46,11 +53,10 @@ const CreateChallengeForm = () => {
     defaultValues 
   })
 
-
-
  async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("Form Data:", values);
-    console.log(values)
+    setloading(true)
+    // console.log("Form Data:", values);
+    // console.log(values)
 
     const durationValue = switchState ? values.duration : 'free';
 
@@ -59,12 +65,19 @@ const CreateChallengeForm = () => {
       body : values.body,
       description : values.description,
       duration : durationValue
-    })
-  }
+    }).then((res) => setresponse(res))
+
+    
+
+    setloading(false)
+  }    
   
   return (
     <div>
-      <Form {...form}>
+     { !response ?(
+     loading ? 
+      <LoadingComponent LoadingText="Creating Challenge ..."/>       
+     : <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
       <FormField
           control={form.control}
@@ -72,21 +85,22 @@ const CreateChallengeForm = () => {
           render={({ field }) => (
             <FormItem>
               <div className="">
-              <FormLabel>Challenge Name</FormLabel>
-              <FormControl>
-                <Input 
-                placeholder="shadcn" 
-                className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray text-black text-lg " 
-                {...field}
-                />
-              </FormControl>
+                <FormLabel>
+                  Challenge Name
+                </FormLabel>
+                  <FormControl>
+                    <Input 
+                    placeholder="shadcn" 
+                    className="mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray text-black text-lg" 
+                    {...field}
+                    />
+                  </FormControl>
               </div>
               <FormMessage className=" text-red-600" />
-            </FormItem>
+      </FormItem>
           )}
         />
-        <div className="flex items-center space-x-2">
-                
+        <div className="flex items-center space-x-2">               
                 <Label>Is your Challenge Time Limited ?</Label>
                 <Switch checked={switchState} onCheckedChange={()=>setSwitchState(!switchState)}/>
               </div>
@@ -160,7 +174,16 @@ const CreateChallengeForm = () => {
         className=" bg-green-700 w-full rounded-xl"
         > Create Challenge</Button>
       </form>
-      </Form>
+      </Form>) :  response.status === 'success'?
+      <div className="flex items-center gap-3">
+        <FcApproval size={30} /> 
+        <div>
+        {response.message}
+        </div>
+        
+      </div>
+      : response.message
+       }
     </div>
   )
 }

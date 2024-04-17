@@ -2,10 +2,7 @@
 
 import User from "@/lib/models/userSchema"
 import { connectToDB } from "@/lib/mongoose"
-import { currentUser } from "@clerk/nextjs"
 import { FilterQuery } from "mongoose"
-import { fetchUser } from "./fetchUser"
-import { log } from "console"
 
 interface Props{
     pageNumber : number, 
@@ -32,12 +29,14 @@ export async function SearchUser({pageNumber , pageSize ,searchParam = '', userI
         const userQuery = User.find(query)
         .skip(skipAmount)
         .limit(pageSize)
+        .lean()
 
         const users = await userQuery.exec()
         console.log(users);
         
-        return users
+        return {status : 'success' , users : users}
     } catch (error: any) {
-        throw new Error(`Error at SearchUser.ts : ${error}`)
+        return { status : 'failed' , message : "This user doesn't seem to exist"}
+        // throw new Error(`Error at SearchUser.ts : ${error}`)
     }
 }

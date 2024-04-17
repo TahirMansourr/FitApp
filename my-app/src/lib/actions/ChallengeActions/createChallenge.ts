@@ -19,12 +19,14 @@ export async function createChallenge ({ name  , body ,description , duration} :
   try {
 
     const user = await currentUser()
+
     if(!user){
         console.log('cannot find user');
-        return null
+        return {status : 'failed' , message : "Cannot find User"}
         
     }
     const userObjectId = await fetchUser({userId : user.id})
+
     const newChallenge = await Challenge.create({
         createdBy : userObjectId._id,
         name,
@@ -37,7 +39,9 @@ export async function createChallenge ({ name  , body ,description , duration} :
     await userObjectId.createdChallenges.push(newChallenge._id)
     await userObjectId.save()
     
+    return {status : 'success' , message : 'Your challenge has been created successfully!'}
   } catch (error : any) {
-    throw new Error(`Error at creating Challenge in createChallenge.ts : ${error.message}`)
+    return {status : 'failed'  , message : error.message}
+    // throw new Error(`Error at creating Challenge in createChallenge.ts : ${error.message}`)
   }
 }

@@ -19,7 +19,7 @@ const CreateChallenge = ({children} : {children : any}) => {
             <DialogContent className = 'rounded-2xl border border-emerald-50 bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white shadow-xl '>
                 <DialogHeader>
                     <DialogTitle>
-                        Create Challenge
+                        Create a new Challenge
                     </DialogTitle>
                     <div className=" pt-5 pb-3">
                         <CreateChallengeForm />
