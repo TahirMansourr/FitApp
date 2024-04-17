@@ -2,7 +2,7 @@ import React from 'react'
 
 const LoadingComponent = ({LoadingText} : {LoadingText : string}) => {
   return (
-    <div className=" flex gap-2">
+    <div className=" flex gap-2 items-center">
         <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
         <circle
           className="opacity-25"

@@ -41,10 +41,10 @@ const MyChallenges = async () => {
     const mongoUser = await fetchUser({userId : user.id})
 
     const challenges = await GetMyChallenges()
-    //  console.log(`these are the challenges ${challenges}`);
+      console.log(`these are the challenges ${challenges}`);
 
     const createdChallenges = await GetMyCreatedChallenges()
-    // console.log(`createdChallenges : ${createdChallenges}`);
+     console.log(`createdChallenges : ${createdChallenges}`);
     
 
     

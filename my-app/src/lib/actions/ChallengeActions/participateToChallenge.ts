@@ -27,6 +27,8 @@ export async function participateToChallenge(param : string) {
         })
         await mongoUser.save()
         console.log(mongoUser.challenges)
+        console.log('you have successfully participated');
+        
 
         return 'success'
     } catch (error: any) {

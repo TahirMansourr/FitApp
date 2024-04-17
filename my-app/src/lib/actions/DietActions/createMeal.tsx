@@ -30,9 +30,10 @@ export async function createMeal (mealsArray : Props[]) {
         $push: { diet: newMeal._id }
     }, { new: true })
      await userToUpdate.save()
-      
+      return{status : "success" , message : "Great! your meal has been saved."}
     } catch (error : any) {
-        throw new Error(`Error at createMeal.tsx : ${error}`)
+        return{error : error.message}
+        // throw new Error(`Error at createMeal.tsx : ${error}`)
     }
     
 }

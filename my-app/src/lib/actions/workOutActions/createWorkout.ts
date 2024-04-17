@@ -46,7 +46,10 @@ export async function createMyWorkout({running , workout , caloriesBurnt , runni
         }
         userToPushWorkOutTo.workouts.push(savedWorkout._id)
         await userToPushWorkOutTo.save()
+
+        return {message :"Great Job! workout saved successfully." , status : "success"}
     } catch (error: any) {
-        throw new Error(`Error at createWorkout.ts : ${error}`)
+        return  {Error : error.message}
+        // throw new Error(`Error at createWorkout.ts : ${error}`)
     }
 }

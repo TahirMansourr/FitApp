@@ -66,9 +66,6 @@ const CreateChallengeForm = () => {
       description : values.description,
       duration : durationValue
     }).then((res) => setresponse(res))
-
-    
-
     setloading(false)
   }    
   

@@ -108,7 +108,7 @@ const Search = ({userId} : {userId : string}) => {
                                                 
                                             </div>
                                         ))
-                                        : <h1> No user :( </h1>
+                                        : <h1> No user provided :( </h1>
                                     }
                                 </CardTitle>
                             </CardHeader>

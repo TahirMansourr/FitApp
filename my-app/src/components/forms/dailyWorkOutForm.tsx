@@ -38,6 +38,8 @@ import {format} from 'date-fns'
 import { createMyWorkout } from "@/lib/actions/workOutActions/createWorkout"
 import { currentUser } from "@clerk/nextjs"
 import { fetchUser } from "@/lib/actions/userActions/fetchUser"
+import LoadingComponent from "../LoadingComponent"
+import { FcApproval } from "react-icons/fc"
   
   type props = {
     dailyWorkoutFormState : boolean,
@@ -49,6 +51,8 @@ import { fetchUser } from "@/lib/actions/userActions/fetchUser"
 
     const [value, setValue] = React.useState('');
     const [open, setOpen] = React.useState(false)
+    const [loading , setloading] = React.useState(false)
+    const [response , setResponse] = React.useState<void | { message: string; status: string; Error?: undefined; } | { Error: any; message?: undefined; status?: undefined; }>()
     const date = new Date()
 
     type useformfields = {
@@ -82,6 +86,7 @@ import { fetchUser } from "@/lib/actions/userActions/fetchUser"
 
      
     const onSubmit= async (values : any) => {
+        setloading(true)
         console.log(values);
         TrainingHistory.push(values)
         console.log(TrainingHistory);
@@ -92,8 +97,8 @@ import { fetchUser } from "@/lib/actions/userActions/fetchUser"
           workout : values.todayWorkout,
           runningDistance : values.runningDistance,
           runningDuration : values.runningDuration,
-        })
-        
+        }).then((res) => setResponse(res))
+        setloading(false)
       };
     
     const handleDelete = ( indextodelete : number) => {
@@ -114,7 +119,7 @@ import { fetchUser } from "@/lib/actions/userActions/fetchUser"
       return (
         <div className="">
           <div className=" text-center">Today's Workout</div>
-    
+       { !response ?
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
@@ -230,7 +235,7 @@ import { fetchUser } from "@/lib/actions/userActions/fetchUser"
                           <CommandItem
                             key={framework}
                             value={framework}
-                            onSelect={(currentValue) => {
+                            onSelect={(currentValue : any) => {
                               setValue(currentValue === value ? "" : currentValue)
                               handleSelectChange(currentValue)
                              
@@ -258,10 +263,14 @@ import { fetchUser } from "@/lib/actions/userActions/fetchUser"
                   distance = {form.getValues('runningDistance')}
                   calories = {form.getValues('caloriesBurnt')} 
                   />
-              <Button variant={"secondary"} type="submit" className=" flex">Submit</Button>
+              <Button type="submit"className=' mx-auto rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950   bg-gradient-to-br from-[#161A30] to-[#232e6c] '>
+                {loading? <LoadingComponent LoadingText="Saving your exercise"/> : "Save Exercise"}</Button>
             </form>
           </Form>
-         
+         : <div className=" flex gap-3 items-center">
+             <FcApproval size={30}/>
+            <div>{response.message}</div>
+           </div>}
         </div>
       );
   };

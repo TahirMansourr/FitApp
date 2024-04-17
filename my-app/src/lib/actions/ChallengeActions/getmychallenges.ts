@@ -25,9 +25,6 @@ export async function GetMyChallenges() {
         await populatedUser.toObject()
 
         // console.log(`this is wwhat you are logging : ${populatedUser.challenges}`);
-        
-
-        
 
          return populatedUser.challenges
     } catch (error: any) {
