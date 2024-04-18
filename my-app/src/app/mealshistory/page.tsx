@@ -9,15 +9,20 @@ import {
     AccordionItem,
     AccordionTrigger,
   } from "@/components/ui/accordion"
-   
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Calendar } from "@/components/ui/calendar"
 
 const MealHistory = () => {
     const [meals, setMeals] = useState<any[]>([]);
+    const [selectedDay , setSelectedDay] = useState<{meal : string , time : Date ,calories:number}[]>()
+    const [date, setDate] = React.useState<Date | undefined>(new Date())
+    const [sortedMeals , setSortedMeals] = useState<Map<any , any>>()
 
     useEffect(() => {
         async function fetchData() {
             const res = await GetMyMeals();
             setMeals(res);
+            console.log(res);          
         }
         fetchData();
     }, []);
@@ -31,45 +36,54 @@ const MealHistory = () => {
                 if (!groupedMeals.has(date)) {
                     groupedMeals.set(date, []);
                 }
-                groupedMeals.get(date).push(meal);
+                groupedMeals.get(date).push(meal);              
+                //  console.log('this is your grouped meals ', groupedMeals) ;
             });
         });
+        //setSortedMeals(groupedMeals)
         return groupedMeals;
     };
 
-    return (
-        <div className="flex items-center justify-center p-10 pt-20">
-            <Suspense fallback={<Loading />}>
+    const getMealsForSelectedDate = (date : Date | undefined) => {
+        console.log(groupMealsByDate());
+         const requiredDay = groupMealsByDate().get(date?.toDateString()) 
+         console.log(requiredDay);
+         
+         if(!requiredDay) console.log('no records for this day');
+         
+         
+         setSelectedDay(requiredDay)
+         console.log('this is the selected day' , selectedDay);
+        
+    }
 
-                <Table>
-                    <TableCaption>A list containing all your meals.</TableCaption>
-                    <TableHeader className="r">
-                        <TableRow>
-                            {/* <TableHead className="w-[100px]">Date</TableHead> */}
-                            <TableHead>Time</TableHead>
-                            <TableHead>Meal</TableHead>
-                            <TableHead className="">Calories</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
+    return (
+        <div className="pt-28  flex justify-around items-center">
+            <div className="flex flex-col ">
+                <ScrollArea className=" h-96">
+                <Suspense fallback={<Loading />}>
                         {meals.length === 0 ? (
-                            <TableRow>
-                                <TableCell className="font-medium">wait</TableCell>
-                                <TableCell>for</TableCell>
-                                <TableCell>it</TableCell>
-                                <TableCell className="">please</TableCell>
-                            </TableRow>
+                           ' you consumed nothing on this day hahaha'
                         ) : (
                             // Render meals grouped by date
                             Array.from(groupMealsByDate()).map(([date, mealGroup]) => (
                                 <React.Fragment key={date} >
-                                    <TableRow className=" w-full">
-                                    <Accordion type="single" collapsible className="w-full">
-                                    <AccordionItem value="item-1" className=" w-full">
+                                    <Accordion type="single" collapsible className=" w-60">
+                                    <AccordionItem value="item-1" className=" w-full border-none">
                                         <AccordionTrigger>
-                                        <TableCell colSpan={8} className="font-medium bg-slate-500 rounded-lg text-center text-white shadow-lg w-full">{date}</TableCell>
+                                        <TableCell colSpan={8} className="font-medium bg-gradient-to-r from-[#161A30] to-[#232e6c] rounded-2xl text-center text-white shadow-lg w-full">{date}</TableCell>
                                         </AccordionTrigger>
                                         <AccordionContent className=" w-full">
+                                        <Table>
+                                        <TableHeader className="r">
+                                            <TableRow>
+                                                {/* <TableHead className="w-[100px]">Date</TableHead> */}
+                                                <TableHead>Time</TableHead>
+                                                <TableHead>Meal</TableHead>
+                                                <TableHead>Calories</TableHead>
+                                            </TableRow>
+                                        </TableHeader>
+                                        <TableBody>
                                         {mealGroup.map((meal : any) => (
                                         <TableRow key={meal._id}>
                                             <TableCell>{meal.time.toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: '2-digit' })}</TableCell>
@@ -77,17 +91,67 @@ const MealHistory = () => {
                                             <TableCell>{meal.calories}</TableCell>
                                         </TableRow>
                                     ))}
+                                        </TableBody>
+                                        </Table>
                                         </AccordionContent>
                                     </AccordionItem>
                                     </Accordion>
-                                    </TableRow>
-                                   
                                 </React.Fragment>
                             ))
                         )}
-                    </TableBody>
-                </Table>
             </Suspense>
+                </ScrollArea>
+           
+            </div>
+            {   selectedDay ?  <div>
+                <ScrollArea className=" h-96">
+                <Accordion type="single" collapsible className=" w-60">
+                                    <AccordionItem value="item-1" className=" w-full border-none">
+                                        <AccordionTrigger>
+                                        <TableCell colSpan={8} className="font-medium bg-gradient-to-r from-[#161A30] to-[#232e6c] rounded-2xl text-center text-white shadow-lg w-full">
+                                            {selectedDay[0].time.toDateString()}
+                                        </TableCell>
+                                        </AccordionTrigger>
+                                        <AccordionContent className=" w-full">
+                                        <Table>
+                                        <TableHeader className="r">
+                                            <TableRow>
+                                                {/* <TableHead className="w-[100px]">Date</TableHead> */}
+                                                <TableHead>Time</TableHead>
+                                                <TableHead>Meal</TableHead>
+                                                <TableHead>Calories</TableHead>
+                                            </TableRow>
+                                        </TableHeader>
+                                        <TableBody>
+                                        {selectedDay?.map((meal : any) => (
+                                        <TableRow key={meal._id}>
+                                            <TableCell>{meal. time ? meal.time.toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: '2-digit' }) : 'No records for this day'}</TableCell>
+                                            <TableCell>{meal.meal}</TableCell>
+                                            <TableCell>{meal.calories}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                        </TableBody>
+                                        </Table>
+                                        </AccordionContent>
+                                    </AccordionItem>
+              </Accordion>
+                </ScrollArea>
+             
+              </div> : 
+              <div className="font-medium bg-gradient-to-r from-[#161A30] to-[#232e6c] rounded-2xl text-center text-white shadow-lg p-4">
+                No recorded meals for this day
+              </div> }
+            <div>
+            <Calendar
+               mode="single"
+               selected={date}
+               onSelect = {(selectedDate) => {
+                setDate(selectedDate); // Set the selected date
+                getMealsForSelectedDate(selectedDate); // Fetch meals for the selected date
+            }}
+               className="rounded-xl bg bg-gradient-to-r from-[#161A30] to-[#232e6c] text-white "
+             /> 
+            </div>          
         </div>
     );
 };

@@ -102,7 +102,7 @@ const UserProfile = (userId : string) => {
                {/* <Link href = '/workoutHistory' > */}
                <CreateChallenge>
                <Button 
-                    className='  rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
+                    className='rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
                  > 
                  Create A new Challenge
                  </Button>
