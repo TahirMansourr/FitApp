@@ -1,10 +1,11 @@
+
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 import {format} from 'date-fns'
 
 const RenderBarChart = ({response} : {response : any[]}) => {
 
   const dataforChart = response.map((item : any , index) =>({
-     name : `${format(item.createdAt, 'EEEE')} ${format(item.createdAt, 'dd/MM')}`,
+     name : ` ${format(item.createdAt, 'dd/MM')}`,
      CalsBurnt : item.caloriesBurnt ,
      calsIn : 200}))
 

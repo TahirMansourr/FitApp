@@ -141,7 +141,8 @@ const MealHistory = () => {
               <div className="font-medium bg-gradient-to-r from-[#161A30] to-[#232e6c] rounded-2xl text-center text-white shadow-lg p-4">
                 No recorded meals for this day
               </div> }
-            <div>
+            <div className="flex flex-col gap-2 font-bold">
+                <div className=" pl-2">Pick a day</div>
             <Calendar
                mode="single"
                selected={date}

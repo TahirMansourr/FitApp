@@ -35,16 +35,23 @@ const WorkOutHistory = () => {
     setIsBlurred(!isBlurred); // Toggle blur effect when drawer is opened/closed
   }
 
+  //so im thinking of returning the user along with the response on the function below and then seeing the calories taken 
+  // in on those dates or maybe i can just return the user from the back poupulated with the diet, sort it and then
+  //do the calories in .   so the function that sorts ive been working on it in the mealshisory page
+  // i can make it a global function and then use it in both places
+
   useEffect( ()=> {
     setWeekDays(getDaysOfTheWeek())
 
     async function doAtStart(){
         const res =   await getworkout()
-        const sortedResponse = res.sort((a : any, b : any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        console.log(res)
+        const sortedResponse = res?.workout.sort((a : any, b : any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         console.log(` this is your sortedRespnse : ${sortedResponse}`);
-        if(!sortedResponse) return;
-         setResponse(sortedResponse)
-         console.log(`this is workouts : ${response}`);                  
+        // if(!sortedResponse) return;
+        const diet = res?.diet
+        console.log(diet);       
+        setResponse(sortedResponse)                  
      }
      doAtStart()
 
