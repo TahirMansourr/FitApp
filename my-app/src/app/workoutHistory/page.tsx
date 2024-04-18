@@ -21,7 +21,14 @@ import { TrainingHistory } from '@/DTO'
 import { areDatesEqual } from './dateComponent'
 import { getworkout } from '@/lib/actions/workOutActions/getworkouts'
 
-
+interface diet{
+    id : string,
+    meals : {
+        meal : string,
+        time : Date,
+        calories : number
+    }[]
+}
 const WorkOutHistory = () => {
 
     const [response , setResponse] = useState<any[]>()
@@ -29,6 +36,8 @@ const WorkOutHistory = () => {
     const [isDrawer , setIsDrawer] = useState(false)
     const [isBlurred, setIsBlurred] = useState(false); // State to manage blur effect
     const [weekDays , setWeekDays] = useState<Date[]>([])
+    const [requiredDiet , setRequiredDiet] = useState<diet[]>()
+    const [groupedMeals , setGroupedMeals] = useState<Map<Date , number>>()
    
   const toggleDrawer = () => {
     setIsDrawer(!isDrawer);
@@ -44,18 +53,53 @@ const WorkOutHistory = () => {
     setWeekDays(getDaysOfTheWeek())
 
     async function doAtStart(){
-        const res =   await getworkout()
+        const res = await getworkout()
         console.log(res)
         const sortedResponse = res?.workout.sort((a : any, b : any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         console.log(` this is your sortedRespnse : ${sortedResponse}`);
         // if(!sortedResponse) return;
         const diet = res?.diet
+        setRequiredDiet(diet)
         console.log(diet);       
         setResponse(sortedResponse)                  
      }
      doAtStart()
-
+    
   } , [])
+
+  useEffect(()=>{
+     
+    const groupMealsByDate = () => {
+        console.log('first thing first' , requiredDiet)
+        const groupedMeals = new Map();
+        requiredDiet?.forEach((item : any) => {
+            item.meals.forEach((meal : any) => {
+                const date = meal.time.toDateString();
+                if (!groupedMeals.has(date)) {
+                    groupedMeals.set(date, []);
+                }
+                groupedMeals.get(date).push(meal);              
+                //  console.log('this is your grouped meals ', groupedMeals) ;
+            });
+        });
+
+        const sumOfCaloriesForDay =() =>{ 
+            const newSummedCalories = new Map()
+            groupedMeals.forEach((value, key) => { 
+            let sum : number = 0;
+            value.forEach((item : any) => sum += item.calories)
+            console.log(sum);
+            newSummedCalories.set(key , sum)     
+        })
+        return newSummedCalories
+        }
+        console.log("here you go" , sumOfCaloriesForDay());
+        setGroupedMeals(sumOfCaloriesForDay())
+    };
+    groupMealsByDate()
+  } ,[requiredDiet])
+
+ 
 
   return (
     <div className={ isBlurred ? 'blur-xl flex justify-around items-center pt-20 p-5' 
