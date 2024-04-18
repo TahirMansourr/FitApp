@@ -174,7 +174,7 @@ const WorkOutHistory = () => {
                 <DrawerDescription>Keep up the hard work</DrawerDescription>
                 </DrawerHeader>
                      <div className=' flex justify-center items-center'>
-                <RenderBarChart response = {response as any[]}/>
+                <RenderBarChart response = {response as any[]} groupedmeals = {groupedMeals as Map<Date , number>}/>
                 </div>
                 <DrawerFooter>
                 <Button>Submit</Button>
