@@ -67,8 +67,7 @@ const WorkOutHistory = () => {
     
   } , [])
 
-  useEffect(()=>{
-     
+  useEffect(()=>{    
     const groupMealsByDate = () => {
         console.log('first thing first' , requiredDiet)
         const groupedMeals = new Map();
@@ -97,9 +96,28 @@ const WorkOutHistory = () => {
         setGroupedMeals(sumOfCaloriesForDay())
     };
     groupMealsByDate()
+    groupCaloriesForExerciseByDate()
   } ,[requiredDiet])
 
- 
+  const groupCaloriesForExerciseByDate = () =>{
+    const mapCaloriesToDay = new Map()
+    response?.forEach((resItem : any) => {
+        const date = resItem.createdAt.toDateString()
+        if(!mapCaloriesToDay.has(date)){
+            mapCaloriesToDay.set(date , [])
+        }
+        mapCaloriesToDay.get(date).push(resItem.caloriesBurnt)
+    })
+
+    const summedBurntCalories = new Map()
+    mapCaloriesToDay.forEach((value , key) =>{
+        const sum : number = value.reduce((acc : number, curr : number) => acc + curr, 0)
+        summedBurntCalories.set(key, sum)
+    })
+    console.log("calculated calories" , summedBurntCalories);
+    console.log("calculated calories" , mapCaloriesToDay);
+    return summedBurntCalories
+  }
 
   return (
     <div className={ isBlurred ? 'blur-xl flex justify-around items-center pt-20 p-5' 
