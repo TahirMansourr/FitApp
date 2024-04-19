@@ -45,15 +45,12 @@ const MealHistory = () => {
     };
 
     const getMealsForSelectedDate = (date : Date | undefined) => {
-        console.log(groupMealsByDate());
+        // console.log(groupMealsByDate());
          const requiredDay = groupMealsByDate().get(date?.toDateString()) 
-         console.log(requiredDay);
-         
+        //  console.log(requiredDay); 
          if(!requiredDay) console.log('no records for this day');
-         
-         
          setSelectedDay(requiredDay)
-         console.log('this is the selected day' , selectedDay);
+        //  console.log('this is the selected day' , selectedDay);
         
     }
 
