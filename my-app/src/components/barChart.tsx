@@ -2,14 +2,17 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, CartesianGrid } from 'recharts';
 import {format} from 'date-fns'
 
-const RenderBarChart = ({response , groupedmeals} : {response : any[] , groupedmeals : Map<Date , number>}) => {
+const RenderBarChart = ({
+  response , groupedmeals
+} : {
+  response : Map<Date , number> ,
+  groupedmeals : Map<Date , number>
+}) => {
 
-  
-
-  const dataforChart = response.map((item: any) => ({
-    name: ` ${format(item.createdAt, 'dd/MM')}`,
-    CalsBurnt: item.caloriesBurnt,
-}));
+  const dataforChart =Array.from(response ,([date , calories]) => ({
+    name: format(date, 'dd/MM'),
+    CalsBurnt: calories,
+  }));
 
 const dataFromGroupedMeals = Array.from(groupedmeals, ([date, calories]) => ({
     name: format(date, 'dd/MM'),
@@ -17,32 +20,44 @@ const dataFromGroupedMeals = Array.from(groupedmeals, ([date, calories]) => ({
 }));
 
 // Merge data for matching dates
-const mergedData: { name: string; CalsBurnt?: number; calsIn?: number }[] = [];
+const mergedDataMap = new Map();
 
-dataforChart.forEach((responseItem) => {
-    const matchingGroupedMeal = dataFromGroupedMeals.find((groupedMealItem) => groupedMealItem.name === responseItem.name);
-    if (matchingGroupedMeal) {
-        mergedData.push({ ...responseItem, ...matchingGroupedMeal });
+// Merge data from dataforChart
+dataforChart.forEach(({ name, CalsBurnt }) => {
+    const date = name
+    if (mergedDataMap.has(date)) {
+        // Date already exists, merge the calories
+        const existingData = mergedDataMap.get(date);
+        mergedDataMap.set(date, { ...existingData, CalsBurnt });
     } else {
-        mergedData.push(responseItem);
+        // Date doesn't exist, add a new entry
+        mergedDataMap.set(date, { name, CalsBurnt });
     }
 });
 
-dataFromGroupedMeals.forEach((groupedMealItem) => {
-    const matchingResponse = dataforChart.find((responseItem) => responseItem.name === groupedMealItem.name);
-    if (!matchingResponse) {
-        mergedData.push(groupedMealItem);
+// Merge data from dataFromGroupedMeals
+dataFromGroupedMeals.forEach(({ name, calsIn }) => {
+    const date = name // Extract day from the name
+    if (mergedDataMap.has(date)) {
+        // Date already exists, merge the calories
+        const existingData = mergedDataMap.get(date);
+        mergedDataMap.set(date, { ...existingData, calsIn });
+    } else {
+        // Date doesn't exist, add a new entry
+        mergedDataMap.set(date, { name, calsIn });
     }
 });
 
-console.log(mergedData);
+// Convert merged map to array
+const mergedDataArray = Array.from(mergedDataMap.values()).reverse();
 
+console.log(mergedDataArray);
   
   // const realdata  = [...dataforChart , ...dataFromGroupedMeals]
   // console.log(dataforChart);
   
   return(
-  <BarChart width={600} height={200} data={mergedData} className=''>
+  <BarChart width={600} height={200} data={mergedDataArray} className=''>
     <XAxis dataKey="name" stroke="white" />
     <YAxis stroke='white' />
     <Tooltip wrapperStyle={{ width: 150, backgroundColor: 'blue', color : 'red' }} />
