@@ -12,6 +12,7 @@ import transparent from '../.././../public/transparent.jpg'
 import {motion} from 'framer-motion'
 import { Button } from '@/components/ui/button';
 import CreateChallenge from '@/components/challengesComponents/createChallenge';
+import CalorieTracker from '@/components/calorieTracker';
 
 
 const UserProfile = (userId : string) => {
@@ -158,7 +159,8 @@ const UserProfile = (userId : string) => {
               </div>
           <div className={ isBlurred ? ' blur-xl flex flex-col items-center gap-5 justify-center '  : 
                                        ' flex flex-col items-center gap-5 justify-center mt-3 '}>
-          <PersonalRecordsComponent/>
+          <CalorieTracker/>
+          {/* <PersonalRecordsComponent/> */}
           <ChallengesComponent  />
           </div>
         </div>
