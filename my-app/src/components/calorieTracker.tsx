@@ -1,5 +1,6 @@
 'use client'
 import React , {useState , useEffect} from 'react'
+import CountUp from 'react-countup';
 import {
     Dialog,
     DialogContent,
@@ -29,7 +30,8 @@ const CalorieTracker = () => {
     const [requiredDiet , setRequiredDiet] = useState<diet[]>()
     const [response , setResponse] = useState<any[]>()
     const [weekDays , setWeekDays] = useState<Date[]>([])
-    const [todaysCals , setTodaysCals] = useState()
+    const [burntCals , setBurntCals] = useState()
+    const [inCals , setInCals] = useState()
 
     useEffect( ()=> {
         setWeekDays(getDaysOfTheWeek())    
@@ -43,13 +45,36 @@ const CalorieTracker = () => {
             setRequiredDiet(diet)
             console.log(diet);       
             setResponse(sortedResponse)  
+            
             const something = sortedResponse?.filter((item : any) => new Date(item.createdAt).toDateString() === new Date().toDateString());
+            
             const totalSum = something.reduce((total: number, item: any) => {
-                // Add the value of the field you want to sum to the total
                 return total + item.caloriesBurnt;
             }, 0);
-            console.log('Total sum:', totalSum);
-            console.log('this is your whatever', something);                
+            
+            setBurntCals(totalSum)
+            
+            const dietsomething = diet.map((item : any)=>item.meals.filter((item : any) => new Date(item.time).toDateString() === new Date().toDateString())).filter((arr : any) => arr.length >0)
+            
+            const dietsomethingToObject = dietsomething.map((item : any) => (
+                item.reduce((acc:any , currVal:any , index : number) => {
+                acc[index] = currVal
+                return acc
+            },{})))
+            
+            const totalinCal = dietsomethingToObject.reduce((total : number , item : any) => {
+                Object.values(item).forEach((meal: any) => {
+                    // Add the calories of the current meal to the total
+                    total += meal.calories;
+                });
+                return total;
+            }, 0)
+            setInCals(totalinCal)
+
+            console.log('this is your diet something' , dietsomething);
+            console.log('Total sum:', dietsomethingToObject);
+            console.log('this is your whatever', something);
+            console.log('this is your totalinCal' , totalinCal)                
          }
          doAtStart()       
 
@@ -60,7 +85,7 @@ const CalorieTracker = () => {
   return (
     <div>
      <Dialog>
-        <DialogTrigger className='flex'>     
+        <DialogTrigger className='flex w-full'>     
             <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1.5 }}
@@ -69,10 +94,18 @@ const CalorieTracker = () => {
                 delay: 0.5,
                 ease: [0, 0.71, 0.2, 1.01]
             }}
-            className='flex items-center'
+                className='flex flex-col items-center border shadow-lg rounded-xl w-full'
             >
-                    <HiOutlineArrowSmUp size={50} color='red' />
-                    <BsFire size={30} color='red' />
+                <div className='flex items-center'>
+                <HiOutlineArrowSmUp size={50} color='red' />
+                <CountUp start={0} end={inCals} duration={2.5} delay={1} />
+                </div>
+                <div className='flex items-center'>
+                <BsFire size={30} color='red' />
+                <CountUp start={0} end={burntCals} duration={2.5} delay={1} />
+                </div>
+                    
+                    
             </motion.div>
         </DialogTrigger>
         <DialogContent>
