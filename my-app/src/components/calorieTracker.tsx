@@ -14,7 +14,19 @@ import {
   import { BsFire } from "react-icons/bs";
   import { motion } from "framer-motion";
   import { getworkout } from '@/lib/actions/workOutActions/getworkouts';
-import { getDaysOfTheWeek } from '@/app/workoutHistory/dateComponent';
+  import { getDaysOfTheWeek } from '@/app/workoutHistory/dateComponent';
+  import { Progress } from "@/components/ui/progress"
+
+
+  import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+  } from "@/components/ui/tooltip"
+import { setGoals } from '@/lib/actions/GoalActions';
+import Goalform from './forms/setGoalsForm';
+  
 
   interface diet{
     id : string,
@@ -32,19 +44,22 @@ const CalorieTracker = () => {
     const [weekDays , setWeekDays] = useState<Date[]>([])
     const [burntCals , setBurntCals] = useState()
     const [inCals , setInCals] = useState()
+    const [progress, setProgress] = React.useState(0)
+    const [localGoals , setLocalGoals] = useState<{caloriesIn : number , caloriesBurnt : number}>({caloriesIn : 0 , caloriesBurnt : 0})
 
     useEffect( ()=> {
         setWeekDays(getDaysOfTheWeek())    
         async function doAtStart(){
             const res = await getworkout()
-            console.log(res)
+            // console.log(res)
             const sortedResponse = res?.workout.sort((a : any, b : any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-            console.log(` this is your sortedRespnse : ${sortedResponse}`);
-            // if(!sortedResponse) return;
+            // console.log(` this is your sortedRespnse : ${sortedResponse}`);
             const diet = res?.diet
             setRequiredDiet(diet)
-            console.log(diet);       
-            setResponse(sortedResponse)  
+            // console.log(diet);       
+            setResponse(sortedResponse) 
+            
+            
             
             const something = sortedResponse?.filter((item : any) => new Date(item.createdAt).toDateString() === new Date().toDateString());
             
@@ -64,28 +79,33 @@ const CalorieTracker = () => {
             
             const totalinCal = dietsomethingToObject.reduce((total : number , item : any) => {
                 Object.values(item).forEach((meal: any) => {
-                    // Add the calories of the current meal to the total
                     total += meal.calories;
                 });
                 return total;
             }, 0)
             setInCals(totalinCal)
-
-            console.log('this is your diet something' , dietsomething);
-            console.log('Total sum:', dietsomethingToObject);
-            console.log('this is your whatever', something);
-            console.log('this is your totalinCal' , totalinCal)                
+            
+            // this is for setting the goals to {0,0 } at the beggining of the day
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(now.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            const timeUntilMidnight = tomorrow.getTime() - now.getTime();
+            setTimeout(() => {
+                setGoals({ caloriesIn: 0, caloriesBurnt: 0 });
+            }, timeUntilMidnight);
+            
+            // const timer = setTimeout(() => setProgress(66), 500)
+            // console.log('this is your diet something' , dietsomething);
+            // console.log('Total sum:', dietsomethingToObject);
+            // console.log('this is your whatever', something);
+            // console.log('this is your totalinCal' , totalinCal)                
          }
          doAtStart()       
-
-        //  const something = response?.find((item) => new Date(item.createdAt).toDateString() === new Date().toDateString())
-        //  console.log('this is your whatever' , something)
     } , [])
 
   return (
-    <div>
-     <Dialog>
-        <DialogTrigger className='flex w-full'>     
+    <div>   
             <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1.5 }}
@@ -94,30 +114,57 @@ const CalorieTracker = () => {
                 delay: 0.5,
                 ease: [0, 0.71, 0.2, 1.01]
             }}
-                className='flex flex-col items-center border shadow-lg rounded-xl w-full'
+                className='flex flex-col border justify-center items-center shadow-lg rounded-xl w-[12rem] py-2  border-blue-500 m-4 text-sm'
             >
-                <div className='flex items-center'>
-                <HiOutlineArrowSmUp size={50} color='red' />
-                <CountUp start={0} end={inCals} duration={2.5} delay={1} />
-                </div>
-                <div className='flex items-center'>
-                <BsFire size={30} color='red' />
-                <CountUp start={0} end={burntCals} duration={2.5} delay={1} />
-                </div>
+                 <Dialog>
+                    <DialogTrigger className=' hover:scale-10 rounded-xl pb-2'>
+                    <div className=' text-sm flex flex-col justify-center items-center'>
+                    <div className=' '>Today's Goal</div>
+                    <div className='flex justify-center items-center text-xs gap-1'>
+                    <div className=' flex items-center'>
+                         <HiOutlineArrowSmUp size={15} color='red' />
+                         <p className=''>400</p>
+                     </div>
+                    <div className=' flex items-center  mx-auto'>
+                        <BsFire size={10} color='red' />
+                        <div className=''>1200</div>
+                    </div>
                     
-                    
+                    </div>
+                </div>
+                    </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                            <DialogTitle>Are you absolutely sure?</DialogTitle>
+                            <DialogDescription>
+                                This action cannot be undone.
+                            </DialogDescription>
+                            </DialogHeader>
+                            <Goalform/>
+                        </DialogContent>
+                 </Dialog>
+                
+                <div className=' left-1'>Current Process</div>
+                <div className='flex flex-col items-center justify-center'>
+                <div className='flex items-center text-xs'>
+                <HiOutlineArrowSmUp size={18} color='red' />
+                <div className='flex gap-1'>
+                    <CountUp start={0} end={inCals} duration={2.5} delay={1} /> 
+                    <div>KCal</div>
+                </div>
+                </div>
+                <div className='flex items-center gap-1 pl-1'>
+                    <BsFire size={10} color='red' />
+                    <div className='flex gap-1 text-xs'> 
+                    <CountUp start={0} end={burntCals} duration={2.5} delay={1} />
+                    <div> KCal</div>
+                </div>
+               
+                </div>
+                </div>
+                                  
             </motion.div>
-        </DialogTrigger>
-        <DialogContent>
-            <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
-            <DialogDescription>
-                This action cannot be undone. This will permanently delete your account
-                and remove your data from our servers.
-            </DialogDescription>
-            </DialogHeader>
-        </DialogContent>
-     </Dialog>
+           
 
     </div>
   )
