@@ -118,11 +118,11 @@ const CalorieTracker = () => {
                     <div className='flex justify-center items-center text-xs gap-1'>
                     <div className=' flex items-center'>
                          <HiOutlineArrowSmUp size={15} color='red' />
-                         <p className=''>{localGoals.caloriesIn}</p>
+                         <p className=''>{localGoals ? localGoals.caloriesIn : '0'}</p>
                      </div>
                     <div className=' flex items-center  mx-auto'>
                         <BsFire size={10} color='red' />
-                        <div className=''>{localGoals.caloriesBurnt}</div>
+                        <div className=''>{localGoals? localGoals.caloriesBurnt : '0'}</div>
                     </div>
                     
                     </div>

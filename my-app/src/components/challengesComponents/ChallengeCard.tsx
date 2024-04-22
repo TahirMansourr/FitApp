@@ -11,19 +11,8 @@ import {
     DialogTrigger 
    } from "@/components/ui/dialog"
    import { MdDone } from "react-icons/md";
-   import {
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger,
-  } from "@/components/ui/tabs"
-  import { TooltipProvider } from "@radix-ui/react-tooltip";
-
-import { completeChallenge } from '@/lib/actions/ChallengeActions/completeChallenge';
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 import BFC from '@/components/profileChallengeComponent';
-import { ObjectId } from 'mongoose';
-import { GetMyCreatedChallenges } from '@/lib/actions/ChallengeActions/getMyCreatedChallenges';
-import DeletehthisChallenge from '@/components/challengesComponents/deletebutton';
 import { participateToChallenge } from '@/lib/actions/ChallengeActions/participateToChallenge';
 import { LikeChallenge } from '@/lib/actions/ChallengeActions/likeChallenge';
 import heart from '../../../public/assets/heart.svg'
@@ -36,9 +25,9 @@ import LoadingComponent from '../LoadingComponent';
 
 
 const ChallengeCard = ({obj} : {obj : any}) => {
-    console.log('this is your createdBy' +obj.createdBy)
+    console.log('this is your obj' + obj.participants)
 
-    const [response , setResponse] = useState<"success" | { error: any; }>()
+    const [response , setResponse] = useState<"success" | {error: any}>()
     const [loading , setLoading] = useState<boolean>(false)
 
     async function handleClick(param : string){
