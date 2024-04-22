@@ -32,6 +32,7 @@ export async function participateToChallenge(param : string) {
 
         return 'success'
     } catch (error: any) {
+        return {error}
         throw new Error(`Error at participateToChallenge.ts : ${error}`)
     }
 }

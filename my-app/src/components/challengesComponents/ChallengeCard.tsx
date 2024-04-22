@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
     Dialog,
@@ -10,6 +10,7 @@ import {
     DialogTitle,
     DialogTrigger 
    } from "@/components/ui/dialog"
+   import { MdDone } from "react-icons/md";
    import {
     Tabs,
     TabsContent,
@@ -31,13 +32,19 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
 import { PiShareFatLight } from "react-icons/pi";
 import { GrUserAdd } from "react-icons/gr";
 import Link from 'next/link';
+import LoadingComponent from '../LoadingComponent';
 
 
 const ChallengeCard = ({obj} : {obj : any}) => {
     console.log('this is your createdBy' +obj.createdBy)
 
+    const [response , setResponse] = useState<"success" | { error: any; }>()
+    const [loading , setLoading] = useState<boolean>(false)
+
     async function handleClick(param : string){
-        await participateToChallenge(param)
+        setLoading(true)
+        await participateToChallenge(param).then(res => setResponse(res))
+        setLoading(false)
     }
 
     async function handleLike(id : string){
@@ -106,20 +113,23 @@ const ChallengeCard = ({obj} : {obj : any}) => {
                                        <PiShareFatLight size={25} />
                                     </div>
                                     <div>
+                                   {   !response ?  
                                     <TooltipProvider>
                                         <Tooltip>
                                         <TooltipTrigger>
-                                            
+                                           { !loading?
                                             <GrUserAdd 
                                              onClick={() => handleClick(obj._id)}
                                              size={25}/>
-                                            
+                                           : <LoadingComponent LoadingText='participating...'/> }
                                         </TooltipTrigger>
                                         <TooltipContent  className=' rounded-xl border-none shadow-lg bg-slate-300 text-black'>
                                             <p>Participate to this challenge</p>
                                         </TooltipContent>
                                         </Tooltip>
                                     </TooltipProvider>
+                                     : response === "success" ? <MdDone color='green' size={30}/> 
+                                     : <div>refresh and try again</div> }
                                     </div>                                   
                                  </div>
                     </DialogDescription>

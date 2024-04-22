@@ -6,15 +6,14 @@ import { fetchUser } from "../userActions/fetchUser"
 import User from "@/lib/models/userSchema"
 import { currentUser } from "@clerk/nextjs"
 
-interface Props {
-    
+interface Props {    
     name : string,
     body : string,
     description : string,
     duration : number | string
 }
 
-export async function createChallenge ({ name  , body ,description , duration} : Props){
+export async function createChallenge ({name,body,description,duration} : Props){
   connectToDB()
   try {
 
@@ -26,6 +25,18 @@ export async function createChallenge ({ name  , body ,description , duration} :
         
     }
     const userObjectId = await fetchUser({userId : user.id})
+
+    const existingChallenge = await Challenge.findOne({ name });
+        if (existingChallenge) {
+            console.log('Challenge with the same name already exists');
+            return { status: 'failed', message: "A challenge with the same name already exists" };
+        }
+    const existingChallenge2 = await Challenge.findOne({ body });
+        if (existingChallenge2) {
+            console.log('Challenge with the same name already exists');
+            return { status: 'failed', message: "This Challenge already exists" };
+        }
+
 
     const newChallenge = await Challenge.create({
         createdBy : userObjectId._id,

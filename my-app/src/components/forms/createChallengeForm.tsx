@@ -158,10 +158,6 @@ const CreateChallengeForm = () => {
                 />
               </FormControl>
               </div>
-              
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage className=" text-red-600" />
             </FormItem>
           )}
@@ -179,8 +175,102 @@ const CreateChallengeForm = () => {
         </div>
         
       </div>
-      : response.message
+      :  <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <div className="">
+                <FormLabel>
+                  Challenge Name
+                </FormLabel>
+                  <FormControl>
+                    <Input 
+                    placeholder="shadcn" 
+                    className="mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray text-black text-lg" 
+                    {...field}
+                    />
+                  </FormControl>
+              </div>
+              <FormMessage className=" text-red-600" />
+      </FormItem>
+          )}
+        />
+        <div className="flex items-center space-x-2">               
+                <Label>Is your Challenge Time Limited ?</Label>
+                <Switch checked={switchState} onCheckedChange={()=>setSwitchState(!switchState)}/>
+              </div>
+      {switchState ? 
+        <FormField
+          control={form.control}
+          name="duration"
+          render={({ field }) => (
+            <FormItem>
+              <div className="">
+              <FormLabel>Challenge duration</FormLabel>
+              <FormControl>
+                <Input 
+                value={field.value ? field.value :  'free'}
+                type="number"
+                placeholder="Challenge Duration" 
+                className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray text-black text-lg " 
+                onChange={field.onChange}
+                />
+              </FormControl>
+              </div>
+              <FormMessage className=" text-red-600" />
+            </FormItem>
+          )}
+      /> : null
+      }
+      <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <div className="">
+              <FormLabel>Challenge Description</FormLabel>
+              <FormControl>
+                <Input 
+                placeholder="Example : Core Challenge or Chest any Shoulders Challenge" 
+                className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray text-black text-lg " 
+                {...field}
+                />
+              </FormControl>
+              </div>
+              <FormMessage className=" text-red-600" />
+            </FormItem>
+          )}
+        />
+      <FormField
+          control={form.control}
+          name="body"
+          render={({ field }) => (
+            <FormItem>
+              <div className=" ">
+              <FormLabel>Challenge Body</FormLabel>
+              <FormControl>
+                <Textarea
+                placeholder="Describe your challenge here" 
+                className=" mt-2 rounded-2xl bg-white shadow-sm placeholder:text-gray text-black text-lg" 
+                {...field}
+                />
+              </FormControl>
+              </div>
+              <FormMessage className=" text-red-600" />
+            </FormItem>
+          )}
+        />
+        <Button 
+        type="submit"
+        className=" bg-green-700 w-full rounded-xl"
+        > Create Challenge</Button>
+      </form>
+      </Form>
        }
+       <p className=" mx-auto"> {response?.message} </p>
     </div>
   )
 }
