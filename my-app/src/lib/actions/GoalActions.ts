@@ -5,6 +5,7 @@ import { connectToDB } from "../mongoose"
 import { fetchUser } from "./userActions/fetchUser"
 import User from "../models/userSchema"
 import { fetchUserWithMongoId } from "./userActions/findMongoUser"
+import Goal from "../models/GoalsSchema"
 
 interface goal{
     caloriesIn : number,
@@ -21,13 +22,21 @@ export async function setGoals(params: goal) {
     const mongoUser = await fetchUser({userId : user.id})
     if(!mongoUser) throw new Error(`Error at createMeal.tsx at getting clerk mongoUser : ${Error}`)
 
-    const updatedUser = await User.findOneAndUpdate(
+    const todaysGoal = new Goal({
+        caloriesIn : params.caloriesIn,
+        caloriesBurnt : params.caloriesBurnt
+    })
+
+    const updatedUser =  await User.findOneAndUpdate(
         { _id: mongoUser._id }, 
-        { $set: { Goal: params } }, 
+        { $set: { goals: params } }, 
         { new: true } 
     );
 
-    return {status : "ok" , updatedUser} 
+    await updatedUser.save()
+        console.log(updatedUser.goals);
+
+    return {status : "ok" , message : 'You have successfully set todays goals!'} 
     } catch (error : any) {
         throw new Error(`Error at GoalActions.ts : ${error}`)
     }

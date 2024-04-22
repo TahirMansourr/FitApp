@@ -1,6 +1,7 @@
 'use server'
 
 import Diet from "@/lib/models/DietSchema"
+import Goal from "@/lib/models/GoalsSchema"
 import WorkOut from "@/lib/models/WorkoutSchema"
 import User from "@/lib/models/userSchema"
 import { connectToDB } from "@/lib/mongoose"
@@ -19,12 +20,19 @@ export async function getworkout() {
         }).populate({
             path : 'diet',
             model : Diet
+        }).populate({
+            path : 'goals',
+            model : Goal
         }).lean()
         if(!workout) throw new Error(`Error at getworkouts.tsx at getting  mongoUser`)
         console.log(workout)
         if (!Array.isArray(workout)) { 
         
-        return {workout : workout.workouts , diet : workout.diet}
+        return {
+             workout : workout.workouts ,
+             diet : workout.diet,
+             goals : workout.goals
+            }
         }
     } catch (error: any) {
         throw new Error(`error at getworkouts.ts : ${error}`)

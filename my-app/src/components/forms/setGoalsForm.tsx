@@ -16,6 +16,10 @@ import {
 
 import { Textarea } from "../ui/textarea"
 import { Input } from "../ui/input"
+import { setGoals } from "@/lib/actions/GoalActions"
+import { useState } from "react"
+
+
 
 const formSchema = z.object({
     caloriesIn : z.coerce.number(),
@@ -24,12 +28,24 @@ const formSchema = z.object({
 
  const Goalform = () => {
 
+    const [loading ,setLoading] = useState<boolean>(false)
+    const [message , setMessage] = useState('')
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
       })
 
       async function onSubmit(values: z.infer<typeof formSchema>) {
-        
+
+        setLoading(true)
+        await setGoals({
+            caloriesIn : values.caloriesIn,
+            caloriesBurnt : values.caloriesBurnt
+        }).then(res =>{
+            if(res.status === 'ok'){
+                setLoading(false)
+            }
+       } )
       }
 
       return(
@@ -82,10 +98,10 @@ const formSchema = z.object({
              />
                 </div>
            
-                    <Button 
+                   {!loading ? <Button 
                     type="submit"
                     className=" to-blue-600  rounded-xl"
-                    > Set Today's Goals</Button>
+                    > Set Today's Goals</Button> : <h1>Loading...</h1>}
             </form>
         </Form>
     </div>

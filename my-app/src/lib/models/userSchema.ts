@@ -83,8 +83,8 @@ const userSchema = new mongoose.Schema({
     sport : String,
     position : String,
     goals : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : 'Goal'
+        caloriesIn : Number,
+        caloriesBurnt : Number
     }
 
 

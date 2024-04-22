@@ -16,17 +16,9 @@ import {
   import { getworkout } from '@/lib/actions/workOutActions/getworkouts';
   import { getDaysOfTheWeek } from '@/app/workoutHistory/dateComponent';
   import { Progress } from "@/components/ui/progress"
+  import { setGoals } from '@/lib/actions/GoalActions';
+  import Goalform from './forms/setGoalsForm';
 
-
-  import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-  } from "@/components/ui/tooltip"
-import { setGoals } from '@/lib/actions/GoalActions';
-import Goalform from './forms/setGoalsForm';
-  
 
   interface diet{
     id : string,
@@ -49,17 +41,16 @@ const CalorieTracker = () => {
 
     useEffect( ()=> {
         setWeekDays(getDaysOfTheWeek())    
-        async function doAtStart(){
-            const res = await getworkout()
-            // console.log(res)
-            const sortedResponse = res?.workout.sort((a : any, b : any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-            // console.log(` this is your sortedRespnse : ${sortedResponse}`);
-            const diet = res?.diet
-            setRequiredDiet(diet)
-            // console.log(diet);       
-            setResponse(sortedResponse) 
-            
-            
+       
+            async function doAtStart(){
+                const res = await getworkout()
+                // console.log(res)
+                const sortedResponse = res?.workout.sort((a : any, b : any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+                // console.log(` this is your sortedRespnse : ${sortedResponse}`);
+                const diet = res?.diet
+                setRequiredDiet(diet)
+                // console.log(diet);       
+                setResponse(sortedResponse) 
             
             const something = sortedResponse?.filter((item : any) => new Date(item.createdAt).toDateString() === new Date().toDateString());
             
@@ -84,6 +75,10 @@ const CalorieTracker = () => {
                 return total;
             }, 0)
             setInCals(totalinCal)
+            
+            const myGoalsForToday = res?.goals
+            setLocalGoals(myGoalsForToday)
+            console.log('here is  your goals' , myGoalsForToday);
             
             // this is for setting the goals to {0,0 } at the beggining of the day
             const now = new Date();
@@ -123,11 +118,11 @@ const CalorieTracker = () => {
                     <div className='flex justify-center items-center text-xs gap-1'>
                     <div className=' flex items-center'>
                          <HiOutlineArrowSmUp size={15} color='red' />
-                         <p className=''>400</p>
+                         <p className=''>{localGoals.caloriesIn}</p>
                      </div>
                     <div className=' flex items-center  mx-auto'>
                         <BsFire size={10} color='red' />
-                        <div className=''>1200</div>
+                        <div className=''>{localGoals.caloriesBurnt}</div>
                     </div>
                     
                     </div>
