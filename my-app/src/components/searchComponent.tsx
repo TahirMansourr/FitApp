@@ -94,8 +94,8 @@ const Search = ({userId} : {userId : string}) => {
                                     <LoadingComponent LoadingText='Searching for user...'/>
                                  </div> 
                                  :
-                                      result && result.length > 0 ? result?.map((item : User) => (
-                                            <div className=' flex gap-3 items-center m-2'>
+                                      result && result.length > 0 ? result?.map((item : User , index : number) => (
+                                            <div className=' flex gap-3 items-center m-2' key={index}>
                                                 <Image src={item.image}
                                                  alt = 'profile image'
                                                  width={30}

@@ -32,7 +32,7 @@ const AllChallenges = () => {
         async function fetchChallenges() {
             try {
                 const fetching = await getAllChallenges();
-                setChallengeFromDb(fetching);
+                setChallengeFromDb(fetching.challenges as any[]);
                 console.log("Challenges fetched:", fetching);
             } catch (error) {
                 console.error("Error fetching challenges:", error);
@@ -53,7 +53,7 @@ const AllChallenges = () => {
     <div className=' p-5 pt-28 grid grid-cols-3 gap-4'>
          {challengeFromDb.length > 0 ? (
                 challengeFromDb.map((obj: any, index: number) => (
-                        <Dialog>
+                        <Dialog key={index}>
                             <DialogTrigger className=" w-full hover:scale-105">
                             <Card key={index} className="shadow-xl bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white dark:shadow-md dark:shadow-white w-full h-fit">
                                 <CardHeader className=" text-center p-2">

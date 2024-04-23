@@ -114,7 +114,7 @@ const CalorieTracker = () => {
                  <Dialog>
                     <DialogTrigger className=' hover:scale-10 rounded-xl pb-2'>
                     <div className=' text-sm flex flex-col justify-center items-center'>
-                    <div className=' '>Today's Goal</div>
+                    <div className=' '>{`Today's Goal`}</div>
                     <div className='flex justify-center items-center text-xs gap-1'>
                     <div className=' flex items-center'>
                          <HiOutlineArrowSmUp size={15} color='red' />

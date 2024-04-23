@@ -127,8 +127,8 @@ const ComForcom = ({author , text , id , children , createdAt , currentUserId , 
             { children && comArr.length > 0 ?
 
                 <CardContent>
-               { comArr.map((item : any) => (
-                <div className=" rounded-2xl shadow-lg m-3 p-2 bg-opacity-10">
+               { comArr.map((item : any , index : number) => (
+                <div className=" rounded-2xl shadow-lg m-3 p-2 bg-opacity-10" key={index}>
                      <div className=" flex gap-3">
                         <Image
                         src={item.author.image}

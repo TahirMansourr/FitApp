@@ -23,7 +23,7 @@ const DailyWorkOut = ({dailyWorkoutFormState , setDailyWorkoutFormState , setIsB
                         setIsBlurred(true)
                         setIsOpen(true)                 
         }}
-      > Enter today's workout</Button>
+      > {`Enter today's workout`}</Button>
      
    
     

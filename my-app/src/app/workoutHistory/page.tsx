@@ -134,7 +134,7 @@ const WorkOutHistory = () => {
             <div className=' h-96 w-96  rounded-xl grid grid-cols-2 gap-2 '>
             { 
              allWorkouts ? response?.length === 0 ? <h1>loading...</h1> : response?.slice(0,8).map(( day , index) => (                
-                <Dialog>
+                <Dialog key={index}>
                 <DialogTrigger >
                 <div className="p-1">
                 <Card className=' hover:scale-110 hover:shadow-2xl bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white dark:shadow-md dark:shadow-white'>
@@ -158,7 +158,7 @@ const WorkOutHistory = () => {
                            <h1 className=' pb-1 underline'>Exercises : </h1>
                            <ol>
                             {
-                                day.workout.map((item : string) => <li>{item}</li>)
+                                day.workout.map((item : string , index: number) => <li key={index}>{item}</li>)
                             }
                            </ol>
                            <h1 className=' pt-3'>{`Calories Burnt : ${day.caloriesBurnt}`}</h1>
@@ -173,7 +173,7 @@ const WorkOutHistory = () => {
             )) :
             
            theSelectedWorkout?.map(( day , index) => (                
-                <Dialog>
+                <Dialog key={index}>
                 <DialogTrigger >
                 <div className="p-1">
                 <Card className=' hover:scale-110 hover:shadow-2xl bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white dark:shadow-md dark:shadow-white'>
@@ -197,7 +197,7 @@ const WorkOutHistory = () => {
                            <h1 className=' pb-1 underline'>Exercises : </h1>
                            <ol>
                             {
-                                day.workout.map((item : string) => <li>{item}</li>)
+                                day.workout.map((item : string , index : number) => <li key={index}>{item}</li>)
                             }
                            </ol>
                            <h1 className=' pt-3'>{`Calories Burnt : ${day.caloriesBurnt}`}</h1>

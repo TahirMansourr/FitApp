@@ -118,7 +118,7 @@ import { FcApproval } from "react-icons/fc"
     
       return (
         <div className="">
-          <div className=" text-center">Today's Workout</div>
+          <div className=" text-center">{`Today's Workout`}</div>
        { !response ?
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

@@ -30,8 +30,9 @@ const TabsComponent = async ({passedUser , shouldDelete} : {passedUser : any , s
             <div className=' mx-auto'>
                 {
                 passedUser.Posts.length > 0 ? 
-                passedUser.Posts.map((item : any) => (
+                passedUser.Posts.map((item : any , index :number) => (
                     <PostCard
+                    key={index}
                     author = {passedUser}
                     text = {item.text}
                     children = {item.children}
@@ -40,7 +41,7 @@ const TabsComponent = async ({passedUser , shouldDelete} : {passedUser : any , s
                     shouldDelete = { shouldDelete}
                     />
                 ))
-                : <h1>{passedUser.username} hasn't posted anything yet </h1>
+                : <h1>{passedUser.username} {`hasn't posted anything yet`} </h1>
                 }
             </div>
             </TabsContent>

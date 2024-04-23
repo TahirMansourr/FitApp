@@ -23,7 +23,7 @@ import { isBase64Image } from "@/lib/utils"
 import { useRouter } from "next/navigation"
 import { useFormContext } from "@/components/multiStepForm/formContext"
 
-const formcontext = useFormContext()
+
 
 const formSchema = z.object({
     username: z.string().min(2, {
@@ -31,7 +31,7 @@ const formSchema = z.object({
     }),
     profileImage : z.string().url()
   })
-
+  const formcontext = useFormContext()
 
 const FirstStep = () => {
 

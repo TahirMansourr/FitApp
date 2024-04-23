@@ -65,7 +65,7 @@ const MyChallenges = async () => {
                 <div className=' grid grid-cols-3 gap-3 ml-2'>
                     {
                         challenges && challenges.map((obj : any , index : number) => (
-                            <Dialog>
+                            <Dialog key={index}>
                             <DialogTrigger className=" ">
                             <Card key={index} className="shadow-xl bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white dark:shadow-md dark:shadow-white w-full h-fit max-w-[15rem]">
                                 <CardHeader className=" text-center p-2">
@@ -158,7 +158,7 @@ const MyChallenges = async () => {
                 <div>
                 {
             createdChallenges && createdChallenges.map((obj : any , index : number) => (
-                <Dialog>
+                <Dialog key={index}>
                 <DialogTrigger className=" ">
                 <Card key={index} className="shadow-xl bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white dark:shadow-md dark:shadow-white w-full h-fit max-w-[15rem]">
                     <CardHeader className=" text-center p-2">

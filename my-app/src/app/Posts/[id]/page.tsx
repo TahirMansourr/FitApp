@@ -37,9 +37,10 @@ const SinglePost =  async ({params} : {params : {id : string}}) => {
 
         <section className=" w-[90%]  pt-10 ">
             {fetchThatPost.children.length > 0 ? 
-                fetchThatPost.children.map(( item :any) => {
+                fetchThatPost.children.map(( item :any , index : number) => {
                     return(
-                        <ComForcom                          
+                        <ComForcom    
+                             key={index}                      
                              author={item.author}
                              text = {item.text}
                              id = {item.id}
