@@ -15,8 +15,6 @@ import Link from "next/link"
 import { Button } from "../ui/button"
 import { DeletePost } from "@/lib/actions/postActions/deletePost"
 import DeleteButton from "./deleteButton"
-import {headers} from 'next/headers'
-// import { useState } from "react"
 // import logo from '../../../public/assets/logo.svg'
   
 interface Props{
@@ -35,12 +33,9 @@ interface Props{
 
 const PostCard = ({author , text , id , children , createdAt , shouldDelete , isComment} : Props) => {
 
-    // const headersList = headers();
-    // const activePath = headersList.get("x-invoke-path");
-       
   return (
-    <div className=" w-[90%]  p-6">
-        <Card className=" w-full ">
+    <div className=" w-[70%] pt-6 ">
+        <Card className=" w-full shadow-md rounded-s-none rounded-e-none ">
             <CardContent>
                 <div>
                     <section className="flex item-center gap-3 mb-3">

@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import {dark} from "@clerk/themes"
@@ -7,6 +8,7 @@ import { cn } from "@/lib/utils"
 import { ClerkProvider } from '@clerk/nextjs'
 import NavBar from '@/components/NavBar'
 import { ThemeProvider } from "@/components/themeProvider"
+
  
  
 export const fontSans = FontSans({
@@ -26,6 +28,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <ClerkProvider
       appearance={{

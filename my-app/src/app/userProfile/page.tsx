@@ -135,7 +135,7 @@ const UserProfile = (userId : string) => {
                />
             </div>
             : dailyDietState ? 
-            <div className='   bg-gradient-to-br from-gray to-slate-400 p-5 shadow-lg rounded-xl w-96  '>
+            <div className='   bg-gradient-to-br from-gray to-slate-400 p-5 shadow-lg rounded-xl w-96 text-white '>
               
               {dailyDietState ? 
               <div 

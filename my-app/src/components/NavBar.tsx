@@ -2,6 +2,7 @@ import { UserButton, currentUser } from '@clerk/nextjs'
 import  Link  from 'next/link'
 import React from 'react'
 import { ModeToggle } from './themeTogller'
+import logo_transparent from '../../public/mylogo/logo_transparent.png'
 
 import {
   Menubar,
@@ -12,6 +13,7 @@ import {
 } from "@/components/ui/menubar"
 import { fetchUser } from '@/lib/actions/userActions/fetchUser'
 import Search from './searchComponent'
+import Image from 'next/image'
  
 const NavBar = async () => {
 
@@ -19,6 +21,7 @@ const NavBar = async () => {
   if(!user) return null
   const mongoUser = await fetchUser({userId : user.id})
   if(!mongoUser) return null
+
   return (
    <div className=' fixed top-0 left-0  w-[95%] z-50 flex justify-between px-6 pt-5 pb-3 
    align-baseline ml-6 shadow-md rounded-2xl mt-3 
@@ -27,9 +30,15 @@ const NavBar = async () => {
     dark:shadow-slate-500 dark:shadow-md '>
       {/* <div class=" from-blue-500 to-blue-400 rounded-full py-2 px-4 text-white hover:bg-gradient-to-l">Shiny Button</div> */}
 
+    {/* <Image
+    src={logo_transparent}
+    alt='logo'
+    width={30}
+    height={30}
+    /> */}
     <div className=' text-xl'>
         FITNESS APP
-    </div>
+    </div>         
     <div className=' flex justify-between gap-6  '>
     <Menubar className=' border-none'>
       <MenubarMenu >

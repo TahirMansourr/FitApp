@@ -6,9 +6,9 @@ let isConnected = false;
 export const connectToDB = async () => {
     // mongoose.set("strictQuery" , true)
 
-    // if (!process.env.MONGODB_URL) {
-    //     return console.log('Missing MongoDB URL');
-    // }
+    if (!process.env.MONGODB_URL) {
+        return console.log('Missing MongoDB URL');
+    }
 
     if (isConnected){ 
          console.log("Connection already established");
@@ -16,7 +16,7 @@ export const connectToDB = async () => {
         }
 
     try {
-        await mongoose.connect("mongodb+srv://tahirelmag:auENAPfIqrMxcuaP@cluster0.umwgazw.mongodb.net")
+        await mongoose.connect(process.env.MONGODB_URL)
         isConnected = true;
         console.log('MongoDb connected');
         
