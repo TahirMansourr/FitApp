@@ -29,7 +29,7 @@ interface Props{
     },
     text : string,
     id : string
-    children? : Object[]
+    childCom? : Object[]
     createdAt : Date,
     shouldDelete? : boolean,
     isComment? : boolean,
@@ -38,7 +38,7 @@ interface Props{
     currentPostId  : string
 }
 // ok so the idea here is to make something like the post card but for comments
-const ComForcom = ({author , text , id , children , createdAt , currentUserId , currentUserImage ,currentPostId} : Props) => {
+const ComForcom = ({author , text , id , childCom , createdAt , currentUserId , currentUserImage ,currentPostId} : Props) => {
 
     const [com , setCom] = useState<boolean>(false)
     const [comArr , setComArr] = useState<any[]>([])
@@ -46,20 +46,20 @@ const ComForcom = ({author , text , id , children , createdAt , currentUserId , 
     useEffect(() => {
         async function fetchComments() {
             const comments = [];
-            for (const item of children || []) {
+            for (const item of childCom || []) {
                 const singleItem = await getSinglePost(item as string);
                 comments.push(singleItem);
             }
             setComArr(comments);
         }
         fetchComments();
-    }, [children]);
+    }, [childCom]);
     
 
     const handleClick = ()=>{
         setCom(!com)
     }
-    console.log('this is what you want :' + children);
+    console.log('this is what you want :' + childCom);
     
 
   return (
@@ -103,7 +103,7 @@ const ComForcom = ({author , text , id , children , createdAt , currentUserId , 
                             height={20}
                             className=""
                             />
-                         <p>{`${children?.length} comments`}</p>
+                         <p>{`${childCom?.length} comments`}</p>
                         </Button>
                        
                     {/* </Link> */}
@@ -124,7 +124,7 @@ const ComForcom = ({author , text , id , children , createdAt , currentUserId , 
             currentUserImage={currentUserImage}
             currentPostId={currentPostId}
             />
-            { children && comArr.length > 0 ?
+            { childCom && comArr.length > 0 ?
 
                 <CardContent>
                { comArr.map((item : any , index : number) => (
@@ -148,7 +148,7 @@ const ComForcom = ({author , text , id , children , createdAt , currentUserId , 
                 //    // imageUrl= { fetchThatPost.author}
                 //    text= {item.text}
                 //    id = {item._id as string}
-                //    children= {item.children}
+                //    childCom= {item.childCom}
                 //    createdAt={ item.createdAt}
                 //    />
                    )) }

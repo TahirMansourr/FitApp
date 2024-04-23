@@ -15,7 +15,7 @@ async function Posts(){
             key={index}
             author={item.author}
             text={item.text}
-            children = {item.children}
+            childCom = {item.children}
             id = {item._id as string}
             createdAt={item.createdAt}
           />

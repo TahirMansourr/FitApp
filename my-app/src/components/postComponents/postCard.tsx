@@ -25,13 +25,13 @@ interface Props{
     },
     text : string,
     id : string
-    children? : Object[]
+    childCom? : Object[]
     createdAt : Date,
     shouldDelete? : boolean,
     isComment? : boolean
 }
 
-const PostCard = ({author , text , id , children , createdAt , shouldDelete , isComment} : Props) => {
+const PostCard = ({author , text , id , childCom , createdAt , shouldDelete , isComment} : Props) => {
 
   return (
     <div className=" w-[70%] pt-6 ">
@@ -70,7 +70,7 @@ const PostCard = ({author , text , id , children , createdAt , shouldDelete , is
                             height={20}
                             className=""
                             />
-                         <p>{`${children?.length} comments`}</p>
+                         <p>{`${childCom?.length} comments`}</p>
                     </Link>                   
                     <p>{createdAt?.toDateString()}</p>
                     {shouldDelete && 

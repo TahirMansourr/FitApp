@@ -31,10 +31,10 @@ const formSchema = z.object({
     }),
     profileImage : z.string().url()
   })
-  const formcontext = useFormContext()
+  
 
 const FirstStep = () => {
-
+  const formcontext = useFormContext()
     const[files , setFiles] =useState<File[]>([])
 
     const form = useForm<z.infer<typeof formSchema>>({

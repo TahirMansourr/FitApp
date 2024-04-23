@@ -26,7 +26,7 @@ const SinglePost =  async ({params} : {params : {id : string}}) => {
             // imageUrl= { fetchThatPost.author}
             text= {fetchThatPost.text}
             id = {fetchThatPost._id as string}
-            children= {fetchThatPost.children}
+            childCom= {fetchThatPost.children}
             createdAt={ fetchThatPost.createdAt}
         />
         <CommentComponent
@@ -44,7 +44,7 @@ const SinglePost =  async ({params} : {params : {id : string}}) => {
                              author={item.author}
                              text = {item.text}
                              id = {item.id}
-                             children={item.children}
+                             childCom={item.children}
                              createdAt={item.createdAt}
                              currentUserImage = {mongoUser.image}
                              currentUserId = {mongoUser._id as string}
