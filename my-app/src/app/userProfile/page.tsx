@@ -170,4 +170,4 @@ const UserProfile = (userId : string) => {
   )
 }
 
-export default UserProfile
+export default UserProfile;
