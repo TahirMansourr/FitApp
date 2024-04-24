@@ -1,6 +1,6 @@
 'use client'
 import React , {useState , useEffect} from 'react'
-// import CountUp from 'react-countup';
+import CountUp from 'react-countup';
 import {
     Dialog,
     DialogContent,
@@ -144,14 +144,14 @@ const CalorieTracker = () => {
                 <div className='flex items-center text-xs'>
                 <HiOutlineArrowSmUp size={18} color='red' />
                 <div className='flex gap-1'>
-                    {/* <CountUp start={0} end={inCals} duration={2.5} delay={1} />  */}
+                    <CountUp start={0} end={inCals} duration={2.5} delay={1} /> 
                     <div>KCal</div>
                 </div>
                 </div>
                 <div className='flex items-center gap-1 pl-1'>
                     <BsFire size={10} color='red' />
                     <div className='flex gap-1 text-xs'> 
-                    {/* <CountUp start={0} end={burntCals} duration={2.5} delay={1} /> */}
+                    <CountUp start={0} end={burntCals} duration={2.5} delay={1} />
                     <div> KCal</div>
                 </div>
                
