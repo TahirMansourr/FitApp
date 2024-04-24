@@ -81,7 +81,7 @@ const CommentForm = ({
                     </FormControl>
                     <Button 
                     type="submit"
-                    className=" to-blue-600  rounded-xl"
+                    className="className=' mx-auto rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950   bg-gradient-to-br from-[#161A30] to-[#232e6c] '"
                     > Reply</Button>
                     </div>
                     <FormMessage className=" text-red-600" />

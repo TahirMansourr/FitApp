@@ -121,7 +121,6 @@ const DailyDiet = ({setIsBlurred} : {setIsBlurred : Function}) => {
         
         <div>
         <Table>
-            <TableCaption>A list of your recent invoices.</TableCaption>
             <TableHeader>
                 <TableRow>
                 <TableHead className="w-[100px]">Meal</TableHead>
@@ -145,7 +144,7 @@ const DailyDiet = ({setIsBlurred} : {setIsBlurred : Function}) => {
             </Table>
         </div>
         <div>
-        <Button type="submit" className=" flex mx-auto">
+        <Button type="submit" className=' mx-auto rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950   bg-gradient-to-br from-[#161A30] to-[#232e6c] '>
           {loading ? <LoadingComponent LoadingText='Saving your meal'/> : "Save Meal"}
           </Button>
         </div>       
