@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ChallengesComponent from '@/components/cardComponent';
 import DailyWorkOut from '@/components/dailyWorkOut';
 import Diet from '@/components/diet';
@@ -13,6 +13,8 @@ import {motion} from 'framer-motion'
 import { Button } from '@/components/ui/button';
 import CreateChallenge from '@/components/challengesComponents/createChallenge';
 import CalorieTracker from '@/components/calorieTracker';
+import { getcurrentUser } from '@/lib/actions/userActions/getcurrentUser';
+import { redirect } from 'next/navigation';
 
 
 const UserProfile = (userId : string) => {
@@ -31,6 +33,17 @@ const UserProfile = (userId : string) => {
   
   const trophyArray = [transparent ,transparent ,transparent ]
   const [isBlurred , setIsBlurred] = useState<boolean>(false)
+
+  useEffect(()=>{
+    async function getonBoarding(){
+      await getcurrentUser().then((res : any) =>{
+        if(res.onBoarding = false){
+          redirect('/onBoarding')
+        }
+      })
+    }
+    getonBoarding()
+  })
 
   return ( 
     <div className={isBlurred ?' backdrop-blur-2xl flex flex-col justify-center pt-20' : ' flex flex-col justify-center z-50 pt-32 scale-110 '}>

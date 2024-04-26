@@ -2,6 +2,6 @@
 
 import { currentUser } from "@clerk/nextjs"
 
-async function getcurrentUser(){
+export async function getcurrentUser(){
     return await currentUser()
 }

@@ -13,7 +13,7 @@ export default function Home() {
       <div className="flex justify-end items-center h-screen">
         <div className="flex flex-col text-2xl pr-6 items-center justify-center text-white">
         <h1 > Your one step away From reaching your goal!</h1>
-        <Link href={'/onBoarding'}>
+        <Link href={'/userProfile'}>
         <Button className=" text-2xl px-8 py-3 hover:bg-blue-600 rounded-xl bg-blue-400 mt-4 text-white">Start my App</Button>
         </Link>
         
