@@ -50,6 +50,7 @@ export default function RootLayout({
            <NavBar/>
           </ThemeProvider>
           {children}
+          <footer className='absolute bottom-0 w-full bg-orange-300 text-center'>This is just an mvp please share your thoughts with me , and thank you in advance for any feedback</footer>
         </body>
        </html>
     </ClerkProvider>
