@@ -24,7 +24,8 @@ const challengeSchema = new Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User'
     },
-    progress : {type : Number , default : 0}
+    progress : {type : Number , default : 0},
+    lastUpdate : Date
   }
    ],
    comments : [

@@ -20,16 +20,36 @@ export async function Progress(challengeId : string) {
         throw new Error(`something wrong with fetching the challenge in progressforuser.ts`)
         }
         
-        const participantIndex = challenge.participants.findIndex((participant : any) => participant.userId.equals(mongoUser._id));
-        if (participantIndex === -1) throw new Error('User is not a participant in this challenge');
+        const participant = challenge.participants.find((participant: any) => participant.userId.equals(mongoUser._id));
+        if (!participant) {
+            throw new Error('User is not a participant in this challenge');
+        }
+
+        // const participantIndex = challenge.participants.findIndex((participant : any) => participant.userId.equals(mongoUser._id));
+        // if (participantIndex === -1) throw new Error('User is not a participant in this challenge');
+        if (!participant.lastUpdate) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1); // Subtract 1 day
+            participant.lastUpdate = yesterday;
+        }
+
+        const today = new Date().toDateString(); 
+        if (participant.lastUpdate && participant.lastUpdate.toDateString() === today) {
+            return {message : 'Progress already updated today'};
+        } 
         
         // Increment the progress of the participant
-        challenge.participants[participantIndex].progress += 1;
+        participant.progress += 1;
+        // Update the last update timestamp to today
+        participant.lastUpdate = new Date();
+        
+        // Increment the progress of the participant
+        // challenge.participants[participantIndex].progress += 1;
         
         // Update the challenge document in the database
         await Challenge.updateOne({ _id: challenge._id }, { participants: challenge.participants });
         
-        console.log('Progress updated successfully');
+       return {message : 'successfully updated'}
     } catch (error:any) {
         throw new Error(`Error at progressforuser.tsx : ${error}`)
     }

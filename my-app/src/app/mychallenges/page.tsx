@@ -115,15 +115,15 @@ const MyChallenges = async () => {
                                     
                                     </Link>
                                      <div className=' flex justify-between items-center w-full'>
-                                     <div className=' flex'>
+                                     <div className=' flex w-full'>
                                     {/* <BFC challengeId = {obj._id as ObjectId}/> */}
                                     <ChallengeProgressComponent 
                                     challengeId = {obj.theChallenge._id}
                                     userId = {mongoUser._id}
                                   
                                     />
-                                    </div>
-                                        <div className=' flex gap-3'>
+                                       </div>
+                                        {/* <div className=' flex gap-3'>
                                         <Image
                                             src = {heart}
                                             alt = 'like image'
@@ -131,7 +131,7 @@ const MyChallenges = async () => {
                                             height = {24}
                                         />
                                         <PiShareFatLight size={25} />
-                                        </div>
+                                        </div> */}
                                    
                                     
                                      </div>
