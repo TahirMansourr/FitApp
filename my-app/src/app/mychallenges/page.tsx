@@ -123,20 +123,9 @@ const MyChallenges = async () => {
                                   
                                     />
                                        </div>
-                                        {/* <div className=' flex gap-3'>
-                                        <Image
-                                            src = {heart}
-                                            alt = 'like image'
-                                            width = {24}
-                                            height = {24}
-                                        />
-                                        <PiShareFatLight size={25} />
-                                        </div> */}
-                                   
-                                    
                                      </div>
-                                     </div>
-                                   
+                                 </div>
+                                
                                    
                                     </DialogDescription>
                                
@@ -155,7 +144,8 @@ const MyChallenges = async () => {
                 
             </TabsContent>
             <TabsContent value="random">
-                <div>
+               
+                <div className=' mx-auto grid grid-cols-3 gap-3 ml-2'>
                 {
             createdChallenges && createdChallenges.map((obj : any , index : number) => (
                 <Dialog key={index}>
