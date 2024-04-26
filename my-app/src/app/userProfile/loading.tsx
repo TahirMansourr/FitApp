@@ -1,23 +1,14 @@
 import React from 'react'
-import { MotionConfig } from 'framer-motion'
 import { motion } from "framer-motion"
+import LoadingComponent from '@/components/LoadingComponent'
 
-const Loading = () => {
-  const icon = {
-    hidden: {
-      pathLength: 0,
-      fill: "rgba(255, 255, 255, 0)"
-    },
-    visible: {
-      pathLength: 1,
-      fill: "rgba(255, 255, 255, 1)"
-    }
-  }
+
+const loading = () => {
   return (
-    <div className=' flex justify-center items-center'>
-    kia
+    <div className=' flex items-center justify-center mt-52 scale-110'>
+      <LoadingComponent LoadingText= 'Please bare with me, this might take a few seconds'/>
     </div>
   )
 }
 
-export default Loading
+export default loading
