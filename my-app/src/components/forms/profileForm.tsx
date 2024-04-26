@@ -351,7 +351,7 @@ const ProfileForm = ( {user} : Props)=>{
               <FormControl >
                 <textarea
                 placeholder="Enter Bio"
-                 className=" m-0 rounded-2xl bg-white shadow-sm text-black placeholder:text-gray w-full" 
+                 className=" m-0 rounded-2xl bg-white shadow-sm text-black placeholder:text-gray w-full p-2" 
                  {...field} 
                  />
               </FormControl>

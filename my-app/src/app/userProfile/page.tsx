@@ -15,6 +15,7 @@ import CreateChallenge from '@/components/challengesComponents/createChallenge';
 import CalorieTracker from '@/components/calorieTracker';
 import { getcurrentUser } from '@/lib/actions/userActions/getcurrentUser';
 import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation'
 
 
 const UserProfile = (userId : string) => {
@@ -22,7 +23,7 @@ const UserProfile = (userId : string) => {
   const [dailyWorkOutFormState , setDailyWorkOutFormState] = useState<boolean>(false)
   const [dailyDietState , setDailyDietState] = useState<boolean>(false)
   const [theUserId , setUserId] = useState<string>('')
-
+  const router = useRouter()
 
   // for the motion library
   const [isOpen , setIsOpen] = useState<boolean>(false)
@@ -31,19 +32,19 @@ const UserProfile = (userId : string) => {
     closed : {x : 0 , y : 0}
   }
   
-  const trophyArray = [transparent ,transparent ,transparent ]
   const [isBlurred , setIsBlurred] = useState<boolean>(false)
 
   useEffect(()=>{
     async function getonBoarding(){
       await getcurrentUser().then((res : any) =>{
-        if(res.onBoarding === false){
-          redirect('/onBoarding')
+        if(res === false){
+          console.log(res)
+          router.push('/onBoarding')
         }
       })
     }
     getonBoarding()
-  })
+  } ,[])
 
   return ( 
     <div className={isBlurred ?' backdrop-blur-2xl flex flex-col justify-center pt-20' : ' flex flex-col justify-center z-50 pt-32 scale-110 '}>
@@ -145,7 +146,7 @@ const UserProfile = (userId : string) => {
               </motion.div>
               </div>
           <div className={ isBlurred ? ' blur-xl flex flex-col items-center gap-5 justify-center '  : 
-                                       ' flex flex-col items-center gap-5 justify-center mt-3 '}>
+                                       ' flex flex-col items-center gap-5 justify-center mt-8 '}>
            <CalorieTracker/>
           <ChallengesComponent  />
           </div>
