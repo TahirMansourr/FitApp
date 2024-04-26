@@ -86,8 +86,8 @@ const MyChallenges = async () => {
                             </DialogTrigger>
                             
                             <DialogContent className = 'rounded-2xl  bg-gradient-to-br from-[#161A30] to-[#232e6c] text-white shadow-xl  '>
-                               <ScrollArea className=' max-h-[29rem]'>
-                               <DialogHeader>
+                               <ScrollArea className=' max-h-[39rem]'>
+                               
                                 <DialogTitle className=' mx-auto text-center rounded-xl shadow-xl w-fit p-3 mb-0'>
                                     {obj.theChallenge.name}
                                     </DialogTitle>
@@ -139,7 +139,7 @@ const MyChallenges = async () => {
                                    
                                    
                                     </DialogDescription>
-                                </DialogHeader>
+                               
                                </ScrollArea>
                                 
                             </DialogContent>

@@ -33,21 +33,7 @@ const UserProfile = (userId : string) => {
   const [isBlurred , setIsBlurred] = useState<boolean>(false)
 
   return ( 
-    <div className={isBlurred ?' backdrop-blur-2xl flex flex-col justify-center pt-20' : ' flex flex-col justify-center z-50 pt-20 '}>
-
-      {/* <div className=' flex  '>
-
-      {trophyArray.map ( (obj , index) => (
-
-      <div className={ isBlurred ? ' blur-xl mx-auto flex justify-between items-center shadow-xl rounded-2xl mt-3 hover:scale-110 transition ease-in-out duration-100 bg-transparent dark:shadow-slate-500 dark:shadow-md' : 'mx-auto flex justify-between items-center shadow-xl rounded-2xl mt-3 hover:scale-110 transition ease-in-out duration-100 bg-transparent dark:shadow-slate-500 dark:shadow-md' }>
-          <Image src={obj} alt = 'Our trophies' height={100} width={100} key={index} className='bg-none'/>
-        </div>
-
-      ))}
-
-
-      </div> */}
-     
+    <div className={isBlurred ?' backdrop-blur-2xl flex flex-col justify-center pt-20' : ' flex flex-col justify-center z-50 pt-32 scale-110 '}>
 
           <div className='flex justify-around items-center mt-5'>
           <div className='flex flex-col -mt-3'>
@@ -56,9 +42,7 @@ const UserProfile = (userId : string) => {
                animate = {isOpen ? 'open' : 'closed'}
                variants={variants}
             >
-             
-
-              
+                          
            { !dailyWorkOutFormState && !dailyDietState ? <div className=' grid grid-cols-2 gap-4'>
               <DailyWorkOut 
               dailyWorkoutFormState = {dailyWorkOutFormState}
@@ -72,18 +56,13 @@ const UserProfile = (userId : string) => {
               setIsBlurred={setIsBlurred}
               setIsOpen = {setIsOpen}
               />
-                {/* <div className='  bg-gradient-to-br from-gray to-slate-400  p-3 rounded-xl shadow-lg mt-3 h-fit flex flex-col items-center'> */}
                 <Link href = '/workoutHistory' >
-                <Button 
-                      className='  rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
-                 > 
-                 See Training History
-                 </Button>
-     
-                  </Link> 
-                {/* <WorkOutHistory/> */}
-                {/* </div> */}
-                {/* <div className='  bg-gradient-to-br from-gray to-slate-400  p-3 rounded-xl shadow-lg mt-3 h-fit flex flex-col items-center'> */}
+                  <Button 
+                        className='  rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
+                  > 
+                  See Training History
+                  </Button>     
+                </Link> 
                 <Link href = '/mychallenges' >
                 <Button 
                     className='  rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
@@ -100,7 +79,6 @@ const UserProfile = (userId : string) => {
                  See My Meals History
                  </Button>
                 </Link> 
-               {/* <Link href = '/workoutHistory' > */}
                <CreateChallenge>
                <Button 
                     className='rounded-xl mt-3 text-white hover:scale-105 shadow-xl hover:bg-blue-950 h-[8rem] w-[12rem] bg-gradient-to-br from-[#161A30] to-[#232e6c] '
@@ -108,11 +86,7 @@ const UserProfile = (userId : string) => {
                  Create A new Challenge
                  </Button>
                </CreateChallenge>
-                
-                {/* </Link>  */}
-                {/* <WorkOutHistory/> */}
-                {/* </div> */}
-           
+              
             </div>
              : dailyWorkOutFormState ?
             <div className=' text-white bg-gradient-to-br from-gray to-slate-400  p-3 rounded-xl shadow-lg mt-3 h-fit flex flex-col items-center'>
@@ -159,8 +133,7 @@ const UserProfile = (userId : string) => {
               </div>
           <div className={ isBlurred ? ' blur-xl flex flex-col items-center gap-5 justify-center '  : 
                                        ' flex flex-col items-center gap-5 justify-center mt-3 '}>
-          <CalorieTracker/>
-          {/* <PersonalRecordsComponent/> */}
+           <CalorieTracker/>
           <ChallengesComponent  />
           </div>
         </div>

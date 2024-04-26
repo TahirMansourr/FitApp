@@ -34,8 +34,8 @@ const CalorieTracker = () => {
     const [requiredDiet , setRequiredDiet] = useState<diet[]>()
     const [response , setResponse] = useState<any[]>()
     const [weekDays , setWeekDays] = useState<Date[]>([])
-    const [burntCals , setBurntCals] = useState()
-    const [inCals , setInCals] = useState()
+    const [burntCals , setBurntCals] = useState(0)
+    const [inCals , setInCals] = useState(0)
     const [progress, setProgress] = React.useState(0)
     const [localGoals , setLocalGoals] = useState<{caloriesIn : number , caloriesBurnt : number}>({caloriesIn : 0 , caloriesBurnt : 0})
 
