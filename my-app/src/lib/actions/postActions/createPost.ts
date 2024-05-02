@@ -18,8 +18,10 @@ export async function createPost({text , author} : Params) {
             author
         })
         
-        await User.findByIdAndUpdate( author , { $push : {Posts : createPost._id}}) // this one isn't working yet
+        await User.findByIdAndUpdate( author , { $push : {Posts : createPost._id}}) 
+        return {status : "success"}
     } catch (error:any) {
+        return {stautus : 'error'}
         throw new Error(`Error at createPost.ts : ${error}`)
     }
 }

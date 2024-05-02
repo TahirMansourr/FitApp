@@ -34,6 +34,8 @@ import { Textarea } from "../ui/textarea"
 import logo from '../../../public/assets/logo.svg'
 import { LuSend } from "react-icons/lu";
 import { createPost } from "@/lib/actions/postActions/createPost"
+import LoadingComponent from "../LoadingComponent"
+import { useRouter } from "next/navigation"
 
 
 const formSchema = z.object({
@@ -49,6 +51,9 @@ const formSchema = z.object({
   }
 const CreateFormPost = ({userId , imageUrl , username} : Props) => {
 
+  const [loading , setLoading] = useState<boolean>(false)
+  const [response ,setResponse] = useState<string>()
+  const router = useRouter()
     
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,9 +61,15 @@ const CreateFormPost = ({userId , imageUrl , username} : Props) => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("Form Data:", values);
+    setLoading(true)
     await createPost({
         text : values.post,
         author : userId
+    }).then((res) => {
+      if(res.status === "success"){
+        setLoading(false)
+        router.push('/Posts')
+      }
     })
     
   }
@@ -93,12 +104,14 @@ const CreateFormPost = ({userId , imageUrl , username} : Props) => {
                                     {...field}
                                     />
                                 </FormControl>
+                                {  !loading?
                                 <LuSend 
                                  color="blue" 
                                  className="absolute bottom-[1%] right-4 transform -translate-y-1/2 cursor-pointer"
                                  size={24} // Set the size of the icon
                                  onClick={() => form.handleSubmit(onSubmit)()}
                                  />
+                                : <LoadingComponent LoadingText=" "/> }
                                 </div>
                                 <FormMessage className=" text-red-600" />
                                 </FormItem>

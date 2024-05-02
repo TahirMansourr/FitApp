@@ -1,3 +1,4 @@
+import LoadingComponent from "@/components/LoadingComponent";
 import PostCard from "@/components/postComponents/postCard"
 import { fetchAllPosts } from "@/lib/actions/postActions/fetchAllPosts"
 
@@ -9,8 +10,8 @@ async function Posts(){
   
   return (
     <div className="flex flex-col justify-center items-center align-middle mt-20 ">
-      {result.posts.length === 0 ? <h1>loading...</h1> : (
-        result.posts.map((item , index) => (
+      {result.posts.length === 0 ? <LoadingComponent LoadingText="Just a moment please" /> : (
+        result.posts.reverse().map((item , index) => (
           <PostCard
             key={index}
             author={item.author}

@@ -50,7 +50,7 @@ const PostCard = ({author , text , id , childCom , createdAt , shouldDelete , is
                                  <p  className=" font-bold text-xl font-serif">{author.username}</p>
                             </Link>
                     </section>
-                    <section> {text} </section>
+                    <section className=" whitespace-pre-line"> {text} </section>
                 </div>
             </CardContent>
             <CardFooter>
