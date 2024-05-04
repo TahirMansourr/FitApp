@@ -128,8 +128,8 @@ const WorkOutHistory = () => {
 }
 
   return (
-    <div className={ isBlurred ? 'blur-xl flex justify-around items-center pt-20 p-3' 
-    : 'flex justify-around items-center  pt-24 p-3 '}>
+    <div className={ isBlurred ? 'blur-xl flex justify-around items-center pt-20 p-3  bg-white dark:bg-black dark:text-white min-h-screen' 
+    : 'flex justify-around items-center  pt-24 p-3 bg-white dark:bg-black dark:text-white min-h-screen '}>
         <div className=' flex justify-center bg-opacity-10'>
             <div className=' h-96 w-96  rounded-xl grid grid-cols-2 gap-2 '>
             { 

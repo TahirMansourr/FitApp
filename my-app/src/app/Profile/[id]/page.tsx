@@ -43,7 +43,7 @@ const MyProfile = async ({params} : {params : {id : string}}) => {
   
     
   return (
-    <div className=' pt-20' >
+    <div className=' pt-20 min-h-screen bg-white dark:bg-black dark:text-white' >
       <div className=' flex p-5 justify-around'>
         <div className=' flex gap-5'>
             <Image
