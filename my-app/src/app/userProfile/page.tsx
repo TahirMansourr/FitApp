@@ -39,7 +39,7 @@ const UserProfile = (userId : string) => {
       await getcurrentUser().then((res : any) =>{
         if(res === false){
           console.log(res)
-          router.push('/onBoarding')
+          // router.push('/onBoarding')
         }
       })
     }
