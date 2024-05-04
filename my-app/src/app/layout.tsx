@@ -43,14 +43,15 @@ export default function RootLayout({
             
             <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >
            <NavBar/>
-          </ThemeProvider>
-          {children}
+           {children}
           <footer className='fixed bottom-0 w-full bg-orange-300 text-center'>This is just an mvp please share your thoughts with me , and thank you in advance for any feedback</footer>
+          </ThemeProvider>
+          
         </body>
        </html>
     </ClerkProvider>
