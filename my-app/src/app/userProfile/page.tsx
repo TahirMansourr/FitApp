@@ -47,7 +47,7 @@ const UserProfile = (userId : string) => {
   } ,[])
 
   return ( 
-    <div className={isBlurred ?' backdrop-blur-2xl flex flex-col justify-center pt-20  bg-white dark:bg-black dark:text-white min-h-screen' : 'min-h-screen bg-white dark:bg-black dark:text-white flex flex-col justify-center z-50 pt-32 scale-110 '}>
+    <div className={isBlurred ?' backdrop-blur-2xl flex flex-col justify-center pt-20  bg-white dark:bg-black dark:text-white min-h-screen' : 'min-h-screen bg-white dark:bg-black dark:text-white flex flex-col justify-center z-50 pt-20 scale-110 '}>
 
           <div className='flex justify-around items-center mt-5'>
           <div className='flex flex-col -mt-3'>
