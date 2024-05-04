@@ -20,7 +20,7 @@ const SinglePost =  async ({params} : {params : {id : string}}) => {
     
 
   return (
-    <div className=" flex flex-col justify-center items-center pt-20">
+    <div className=" flex flex-col justify-center items-center pt-20 bg-white dark:bg-black dark:text-white min-h-screen">
         <PostCard
             author = {fetchThatPost.author}
             // imageUrl= { fetchThatPost.author}

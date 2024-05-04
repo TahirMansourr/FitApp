@@ -9,7 +9,7 @@ async function Posts(){
   
   
   return (
-    <div className="flex flex-col justify-center items-center align-middle mt-20 ">
+    <div className="flex flex-col justify-center items-center align-middle mt-20 bg-white dark:bg-black dark:text-white min-h-screen ">
       {result.posts.length === 0 ? <LoadingComponent LoadingText="Just a moment please" /> : (
         result.posts.reverse().map((item , index) => (
           <PostCard

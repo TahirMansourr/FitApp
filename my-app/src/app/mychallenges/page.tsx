@@ -49,7 +49,7 @@ const MyChallenges = async () => {
 
     
   return (
-    <div className='flex flex-col p-10 pt-24 gap-7'>
+    <div className='flex flex-col p-10 pt-24 gap-7 bg-white dark:bg-black dark:text-white min-h-screen'>
          <div>
         <Tabs defaultValue="myChallenges">
             <div className="mx-auto w-fit">

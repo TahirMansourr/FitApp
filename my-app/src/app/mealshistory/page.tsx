@@ -55,7 +55,7 @@ const MealHistory = () => {
     }
 
     return (
-        <div className="pt-28  flex justify-around items-center">
+        <div className="pt-28  flex justify-around items-center bg-white dark:bg-black dark:text-white min-h-screen">
             <div className="flex flex-col ">
                 <ScrollArea className=" h-96">
                 <Suspense fallback={<Loading />}>

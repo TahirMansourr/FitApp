@@ -50,7 +50,7 @@ const AllChallenges = () => {
 
 
   return (
-    <div className=' p-5 pt-28 grid grid-cols-3 gap-4'>
+    <div className=' p-5 pt-28 grid grid-cols-3 gap-4 bg-white dark:bg-black dark:text-white min-h-screen'>
          {challengeFromDb.length > 0 ? (
                 challengeFromDb.map((obj: any, index: number) => (
                         <Dialog key={index}>

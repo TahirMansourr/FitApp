@@ -11,7 +11,7 @@ async function CreatePost () {
     const userInfo = await fetchUser({userId : user.id})
 
   return (
-    <div className=' p-10 pt-28'>
+    <div className=' p-10 pt-28 bg-white dark:bg-black dark:text-white min-h-screen'>
         <CreateFormPost 
         userId={userInfo._id}
         username = {userInfo.username}
