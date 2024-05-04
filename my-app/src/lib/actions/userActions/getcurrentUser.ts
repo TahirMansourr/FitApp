@@ -9,5 +9,5 @@ export async function getcurrentUser(){
     // console.log(user)
     const mongoUser = await fetchUser({userId : user.id})
     if(!mongoUser) return console.log('no user found');
-    return mongoUser.onBoarding
+    return {onBoarding : false}
 }

@@ -37,9 +37,9 @@ const UserProfile = (userId : string) => {
   useEffect(()=>{
     async function getonBoarding(){
       await getcurrentUser().then((res : any) =>{
-        if(res === false){
+        if(res.onBoarding === false){
           console.log(res)
-          // router.push('/onBoarding')
+           router.push('/onBoarding')
         }
       })
     }
