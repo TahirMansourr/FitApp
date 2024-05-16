@@ -20,7 +20,7 @@ export function ChallengeItem() {
             try {
                 const fetching = await getAllChallenges().then((res : any) => {
                     console.log("this is the user Id",res.userId)
-                   const filteredChallenges = res.challenges.filter((item : any) => item.participants.userId === res.userId || item.participants.length == 0)
+                   const filteredChallenges = res.challenges.filter((item : any) => item.participants.userId)
                    return filteredChallenges
                 });
                 setChallengeFromDb(fetching);
