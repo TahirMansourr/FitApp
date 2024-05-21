@@ -1,4 +1,3 @@
-
 import ProfileForm from "@/components/forms/profileForm"
 
 import { getCurrentUser } from "@/lib/utils"
